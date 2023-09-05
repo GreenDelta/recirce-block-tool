@@ -1,0 +1,9 @@
+
+target/
+node_modules/
+
+.idea/
+*.iml
+.vscode
+
+static/main.js*
