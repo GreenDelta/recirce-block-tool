@@ -59,7 +59,7 @@ func main() {
 		r.HandleFunc("/api/epds/export/docx/{id}", s.handleDocxExport()).Methods("GET")
 	*/
 
-	r.PathPrefix("/ui/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		html, err := os.ReadFile(filepath.Join(args.staticDir, "index.html"))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -72,7 +72,7 @@ func main() {
 	r.PathPrefix("/").Handler(NoCache(fs)) // TODO: NoCache only in dev-mode
 
 	log.Println("Register shutdown routines")
-	ossignals := make(chan os.Signal)
+	ossignals := make(chan os.Signal, 1)
 	signal.Notify(ossignals, syscall.SIGTERM)
 	signal.Notify(ossignals, syscall.SIGINT)
 	go func() {
@@ -113,7 +113,7 @@ func initCookieStore(args *args) *sessions.CookieStore {
 }
 
 func initDB(dir string) *DB {
-	db, err := newDB(dir)
+	db, err := openDB(dir)
 	if err != nil {
 		log.Println("ERROR: failed to init database:", err)
 		os.Exit(1)

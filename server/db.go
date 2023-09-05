@@ -22,7 +22,7 @@ type DB struct {
 	db *bbolt.DB
 }
 
-func newDB(dir string) (*DB, error) {
+func openDB(dir string) (*DB, error) {
 	path := filepath.Join(dir, "db.data")
 	db, err := bbolt.Open(path, 0600, nil)
 	if err != nil {
@@ -95,7 +95,7 @@ func (db *DB) Load(bucket BucketName, id string, e interface{}) error {
 		return err
 	}
 	if data == nil {
-		return errors.New("Not found")
+		return errors.New("not found")
 	}
 	return json.Unmarshal(data, e)
 }

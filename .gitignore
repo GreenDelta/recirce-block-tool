@@ -9,3 +9,4 @@ node_modules/
 static/main.js*
 
 server/recirce*
+data/

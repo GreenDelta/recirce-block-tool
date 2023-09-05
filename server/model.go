@@ -5,13 +5,6 @@ type Entity interface {
 	Key() []byte
 }
 
-// An EntityRelation describes the relation of one entity (e.g. an user) to
-// another one entity (e.g. an organization).
-type EntityRelation struct {
-	ID   string `json:"id"`
-	Role string `json:"role"`
-}
-
 // BaseEntity is a thing that is stored in the database. It should at least have
 // an ID.
 type BaseEntity struct {
