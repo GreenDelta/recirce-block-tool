@@ -86,7 +86,9 @@ func main() {
 	}()
 
 	log.Println("Starting server at port:", args.port)
-	http.ListenAndServe(":"+args.port, r)
+	if err := http.ListenAndServe(":"+args.port, r); err != nil {
+		log.Println("ERROR: failed to start server;", err)
+	}
 }
 
 func initCookieStore(args *args) *sessions.CookieStore {

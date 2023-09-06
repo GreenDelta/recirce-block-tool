@@ -5,7 +5,7 @@ export const MainMenu = () => {
   const menu =
     <nav>
       <ul>
-        <li><Link to="/"><img src="logo.png"></img></Link></li>
+        <li><Link to="/"><img src="/logo.png"></img></Link></li>
         <li></li>
         <li><Link to="/analyses">Analyses</Link></li>
         <li><Link to="/products">Products</Link></li>
