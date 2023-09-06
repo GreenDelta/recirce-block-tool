@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { MainMenu } from "./ui/menu";
-import { Component, Product } from "./ui/model";
+import { MainMenu } from "./menu";
+import { Component, Product } from "./model";
+import * as api from "./api";
 
 export const ProductsOverview = () => {
 
@@ -24,12 +25,22 @@ export const ProductsOverview = () => {
 
 export const ProductEditor = () => {
   const [product, setProduct] = React.useState<Product>({
-    id: "abc",
+    id: "",
     name: "New product",
     mass: 1,
     components: [],
     materials: [],
   });
+
+  React.useEffect(() => {
+    api.getNextId().then(id => {
+      setProduct({ ...product, id });
+    });
+  }, []);
+
+  if (!product.id) {
+    return <div>Loading ...</div>;
+  }
 
   return <>
     <MainMenu />
@@ -43,8 +54,11 @@ export const ProductEditor = () => {
     <p>
       Please define the product composition below.
     </p>
+    <p>{product.id}</p>
 
-    <ComponentPanel component={product} onChanged={() => setProduct({...product})} />
+    <ComponentPanel
+      component={product}
+      onChanged={() => setProduct({ ...product })} />
 
   </>;
 
@@ -69,21 +83,21 @@ const ComponentPanel = ({ component, onChanged }: {
   };
 
   return <>
-    <article style={{margin: "3px", paddingBottom: "15px"}}>
-      <header style={{ padding: "15px", marginBottom: "15px"}}>
+    <article style={{ margin: "3px", paddingBottom: "15px" }}>
+      <header style={{ padding: "15px", marginBottom: "15px" }}>
         <div className="grid">
           <label>
             Product
-            <input type="text" value={component.name}/>
+            <input type="text" value={component.name} />
           </label>
           <label>
             Mass [kg]
-            <input type="number" value={component.mass}/>
+            <input type="number" value={component.mass} />
           </label>
         </div>
       </header>
       {subs}
-      <a onClick={() => onAdd()} style={{cursor: "pointer"}}>+ Add a component</a>
+      <a onClick={() => onAdd()} style={{ cursor: "pointer" }}>+ Add a component</a>
     </article>
   </>;
 }

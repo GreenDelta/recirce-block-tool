@@ -4,7 +4,7 @@ import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
 import { MainMenu } from "./menu";
 import { LoginPage } from "./login";
-import { ProductEditor, ProductsOverview } from "../products";
+import { ProductEditor, ProductsOverview } from "./products";
 
 const ErrorPage = () => {
   return <div>

@@ -120,7 +120,7 @@ func (s *server) handleSignUp() http.HandlerFunc {
 			Email: email,
 			Hash:  hash,
 		}
-		user.ID = xid.New().String()
+		user.ID = nextId()
 		if err = s.db.Put(AccountBucket, user); err != nil {
 			http.Error(w, "server error", http.StatusInternalServerError)
 			return

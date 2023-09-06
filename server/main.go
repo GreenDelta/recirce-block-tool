@@ -49,6 +49,8 @@ func main() {
 	// self regisration will be enabled later
 	// r.HandleFunc("/api/users/signup", s.handleSignUp()).Methods("POST")
 
+	r.HandleFunc("/api/next-id", s.getNextId()).Methods("GET")
+
 	// EPD routes
 	/*
 		r.HandleFunc("/api/epds", s.handleGetEPDs()).Methods("GET")
