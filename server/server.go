@@ -1,12 +1,47 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
+	"syscall"
+
+	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
 )
 
-func (s *server) mountRoutes() {
+type Server struct {
+	args    *Args
+	db      *DB
+	cookies *sessions.CookieStore
+	router  *mux.Router
+}
+
+func (s *Server) Serve() error {
+	s.mountRoutes()
+	s.addShutdownHook()
+	args := s.args
+	log.Println("starting server at port:", args.port)
+	return http.ListenAndServe(":"+args.port, s.router)
+}
+
+func (s *Server) addShutdownHook() {
+	ossignals := make(chan os.Signal, 1)
+	signal.Notify(ossignals, syscall.SIGTERM)
+	signal.Notify(ossignals, syscall.SIGINT)
+	go func() {
+		<-ossignals
+		log.Println("shutdown server")
+		if err := s.db.Close(); err != nil {
+			log.Fatal("Failed to close database", err)
+		}
+		os.Exit(0)
+	}()
+}
+
+func (s *Server) mountRoutes() {
 	r := s.router
 
 	// user routes (account management)

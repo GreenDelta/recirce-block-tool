@@ -11,7 +11,7 @@ func nextId() string {
 	return xid.NewWithTime(time.Now()).String()
 }
 
-func (s *server) getNextId() http.HandlerFunc {
+func (s *Server) getNextId() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id := nextId()
 		w.Header().Set("Content-Type", "text/plain")

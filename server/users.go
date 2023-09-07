@@ -31,7 +31,7 @@ func isValidPassword(w http.ResponseWriter, password string) bool {
 
 // Checks if the given email can be registered for a user. When this is not the
 // case, the corresponding error is written to the response and false is returned.
-func canRegisterEmail(w http.ResponseWriter, s *server, email string) bool {
+func canRegisterEmail(w http.ResponseWriter, s *Server, email string) bool {
 	if len(email) < 4 || !strings.Contains(email, "@") {
 		http.Error(w, "invalid email", http.StatusBadRequest)
 		return false
@@ -65,7 +65,7 @@ func findUser(db *DB, email string) *User {
 	return user
 }
 
-func (s *server) getSessionUser(r *http.Request) *User {
+func (s *Server) getSessionUser(r *http.Request) *User {
 	session, err := s.cookies.Get(r, "easyepd-session")
 	if err != nil {
 		log.Println("ERROR: failed to read session cookie", err)
@@ -84,7 +84,7 @@ func (s *server) getSessionUser(r *http.Request) *User {
 	return &user
 }
 
-func (s *server) handleSignUp() http.HandlerFunc {
+func (s *Server) handleSignUp() http.HandlerFunc {
 
 	type request struct {
 		Email    string `json:"email"`
@@ -140,7 +140,7 @@ func (s *server) handleSignUp() http.HandlerFunc {
 	}
 }
 
-func (s *server) handleLogin() http.HandlerFunc {
+func (s *Server) handleLogin() http.HandlerFunc {
 
 	type request struct {
 		Email    string `json:"email"`
@@ -182,7 +182,7 @@ func (s *server) handleLogin() http.HandlerFunc {
 	}
 }
 
-func (s *server) handleLogout() http.HandlerFunc {
+func (s *Server) handleLogout() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		session, _ := s.cookies.Get(r, "easyepd-session")
@@ -191,7 +191,7 @@ func (s *server) handleLogout() http.HandlerFunc {
 	}
 }
 
-func (s *server) handleGetCurrentUser() http.HandlerFunc {
+func (s *Server) handleGetCurrentUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(r)
@@ -204,7 +204,7 @@ func (s *server) handleGetCurrentUser() http.HandlerFunc {
 	}
 }
 
-func (s *server) handleGetUsers() http.HandlerFunc {
+func (s *Server) handleGetUsers() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -235,7 +235,7 @@ func (s *server) handleGetUsers() http.HandlerFunc {
 	}
 }
 
-func (s *server) handleGetUser() http.HandlerFunc {
+func (s *Server) handleGetUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -256,7 +256,7 @@ func (s *server) handleGetUser() http.HandlerFunc {
 	}
 }
 
-func (s *server) handlePostUser() http.HandlerFunc {
+func (s *Server) handlePostUser() http.HandlerFunc {
 
 	type request struct {
 		User
