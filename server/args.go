@@ -5,9 +5,9 @@ import (
 	"strings"
 )
 
-// args contains the command line arguments of the server application. All
+// Args contains the command line arguments of the server application. All
 // arguments are optional and should have reasonable default values.
-type args struct {
+type Args struct {
 
 	// A path to a folder that contains matrices and meta-data files.
 	dataDir string
@@ -20,8 +20,8 @@ type args struct {
 	port string
 }
 
-func readArgs() *args {
-	args := args{
+func ReadArgs() *Args {
+	args := Args{
 		dataDir:   "data",
 		staticDir: "static",
 		port:      "8080"}

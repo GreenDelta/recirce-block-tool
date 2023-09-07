@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"path/filepath"
+	"log"
 
 	"go.etcd.io/bbolt"
 )
@@ -13,8 +13,9 @@ type BucketName string
 
 // Enumeration of the database buckets
 const (
-	AccountBucket BucketName = "accounts"
-	ProductBucket BucketName = "products"
+	AccountBucket  BucketName = "accounts"
+	MaterialBucket BucketName = "materials"
+	ProductBucket  BucketName = "products"
 )
 
 // DB provides the database methods of the application.
@@ -22,8 +23,8 @@ type DB struct {
 	db *bbolt.DB
 }
 
-func openDB(dir string) (*DB, error) {
-	path := filepath.Join(dir, "database")
+func OpenDB(path string) (*DB, error) {
+	log.Println("open database:", path)
 	db, err := bbolt.Open(path, 0600, nil)
 	if err != nil {
 		return nil, err
@@ -32,6 +33,7 @@ func openDB(dir string) (*DB, error) {
 	// initialize the data buckets
 	buckets := []BucketName{
 		AccountBucket,
+		MaterialBucket,
 		ProductBucket,
 	}
 	err = db.Update(func(tx *bbolt.Tx) error {
