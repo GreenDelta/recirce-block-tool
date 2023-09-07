@@ -1,0 +1,262 @@
+Carbon,
+Carbon Black,Carbon
+Carbon Fiber/Carbon Fibre,Carbon
+Diamond,Carbon
+Graphite,Carbon
+Ceramic,
+Aerogel,Ceramic
+Boride,Ceramic
+Carbide,Ceramic
+Ceramic Matrix Composite,Ceramic
+Clay,Ceramic
+Concrete,Ceramic
+Glass,Ceramic
+Glass Ceramic,Glass
+Glass Fiber,Glass
+Optical,Ceramic
+Filter,Optical
+Halide,Optical
+Hydride,Optical
+Machinable Ceramic,Optical
+Nitride,Optical
+Oxide,Ceramic
+Aluminum Oxide,Oxide
+Magnesium Oxide,Oxide
+Silicon Oxide,Oxide
+Titanium Oxide,Oxide
+Zirconium Oxide,Oxide
+Phosphide/Pnictide,Oxide
+Piezoelectric,Oxide
+Sulfide/Chalcogenide,Oxide
+Fluid,
+Lubricant,Fluid
+Alkylated Naphthalene (AN),Lubricant
+Aluminum Gellant,Lubricant
+Calcium Gellant,Lubricant
+Clay Gellant,Lubricant
+Fluoropolymer Base,Lubricant
+Lithium Gellant,Lubricant
+Multiply-Alkylated Cyclopentane (MAC),Lubricant
+Organic Soap Gellant,Lubricant
+Perfluoropolyether (PFPE),Lubricant
+Polyalphaolefin (PAO),Lubricant
+Polyglycol,Lubricant
+Polyphenylether (PPE) Base,Lubricant
+PTFE Gellant,Lubricant
+Silica Gellant,Lubricant
+Silicone Base,Lubricant
+Synthetic Ether Base,Lubricant
+Urea Gellant,Lubricant
+White Mineral Oil (WMO),Lubricant
+Zinc Oxide Gellant,Lubricant
+Quenchant,Lubricant
+Solvent,Lubricant
+Metal,
+Electronic/Magnetic Alloy,Metal
+Ferrous Metal,Metal
+Alloy Steel,Metal
+AISI 4000 Series Steel,Alloy Steel
+AISI 5000 Series Steel,Alloy Steel
+AISI 6000 Series Steel,Alloy Steel
+AISI 8000 Series Steel,Alloy Steel
+AISI 9000 Series Steel,Alloy Steel
+Low Alloy Steel,Alloy Steel
+Medium Alloy Steel,Alloy Steel
+ASTM Steel,Alloy Steel
+Carbon Steel,Metal
+AISI 1000 Series Steel,Carbon Steel
+High Carbon Steel,Carbon Steel
+Low Carbon Steel,Carbon Steel
+Medium Carbon Steel,Carbon Steel
+Cast Iron,Metal
+Alloy Cast Iron,Cast Iron
+Ductile Iron,Cast Iron
+Gray Cast Iron,Cast Iron
+Malleable Iron,Cast Iron
+White Cast Iron,Cast Iron
+Chrome-moly Steel,Cast Iron
+Duplex,Cast Iron
+Maraging Steel,Cast Iron
+Pressure Vessel Steel,Cast Iron
+Special-Purpose Steel,Cast Iron
+Stainless Steel,Metal
+Cast Stainless Steel,Stainless Steel
+Precipitation Hardening Stainless,Stainless Steel
+T 300 Series Stainless Steel,Stainless Steel
+T 400 Series Stainless Steel,Stainless Steel
+T 600 Series Stainless Steel,Stainless Steel
+T S10000 Series Stainless Steel,Stainless Steel
+Tool Steel,Metal
+Air-Hardening Steel,Tool Steel
+Cold Work Steel,Tool Steel
+Hot Work Steel,Tool Steel
+Mold Steel,Tool Steel
+Oil-Hardening Steel,Tool Steel
+Shock-Resisting Steel,Tool Steel
+Water-Hardening Steel,Tool Steel
+Intermetallic,Tool Steel
+"Metal Foam, Mesh, or Honeycomb",Tool Steel
+Metal Matrix Composite,Tool Steel
+Nonferrous Metal,Metal
+Aluminum Alloy,Metal
+1000 Series Aluminum,Aluminum Alloy
+2000 Series Aluminum Alloy,Aluminum Alloy
+3000 Series Aluminum Alloy,Aluminum Alloy
+4000 Series Aluminum Alloy,Aluminum Alloy
+5000 Series Aluminum Alloy,Aluminum Alloy
+6000 Series Aluminum Alloy,Aluminum Alloy
+7000 Series Aluminum Alloy,Aluminum Alloy
+Aluminum Casting Alloy,Aluminum Alloy
+Other Wrought Al Alloy,Aluminum Alloy
+Beryllium Alloy,Aluminum Alloy
+Bismuth Alloy,Aluminum Alloy
+Cobalt Alloy,Aluminum Alloy
+Copper Alloy,Metal
+Brass,Copper Alloy
+Bronze,Copper Alloy
+Copper Casting Alloy,Copper Alloy
+Indium Alloy,Copper Alloy
+Lead Alloy,Copper Alloy
+Magnesium Alloy,Copper Alloy
+Molybdenum Alloy,Copper Alloy
+Nickel Alloy,Copper Alloy
+Niobium Alloy,Copper Alloy
+Precious Metal,Metal
+Gold Alloy,Precious Metal
+Palladium Alloy,Precious Metal
+Platinum Alloy,Precious Metal
+Silver Alloy,Precious Metal
+Refractory Metal,Precious Metal
+Solder/Braze Alloy,Precious Metal
+Tin Alloy,Precious Metal
+Titanium Alloy,Metal
+Alpha/Beta Titanium Alloy,Titanium Alloy
+Alpha/Near Alpha Titanium Alloy,Titanium Alloy
+Beta Titanium Alloy,Titanium Alloy
+Unalloyed/Modified Titanium,Titanium Alloy
+Tungsten Alloy,Titanium Alloy
+Zinc Alloy,Titanium Alloy
+Zirconium Alloy,Titanium Alloy
+Other Engineering Material,
+Additive/Filler for Polymer,Other Engineering Material
+Catalyst/Initiator,Other Engineering Material
+Ceramic/Metallic Coating,Other Engineering Material
+Composite Core Material,Other Engineering Material
+Composite Fibers,Other Engineering Material
+Semiconductor,Other Engineering Material
+Polymer,
+Adhesive,Polymer
+Film,Polymer
+Rapid Prototyping Polymer,Polymer
+Renewable/Recycled Polymer,Polymer
+Tape,Polymer
+Thermoplastic,Polymer
+ABS Polymer,Thermoplastic
+"Acetal (Polyoxymethylene, POM)",Thermoplastic
+Acrylic (PMMA),Thermoplastic
+AES Polymer,Thermoplastic
+ASA Polymer,Thermoplastic
+Cellulosic,Thermoplastic
+Cyclo Olefin Polymer,Thermoplastic
+"Elastomer, TPE",Polymer
+Olefinic TPE,"Elastomer, TPE"
+Polyester TPE,"Elastomer, TPE"
+Polyurethane TPE,"Elastomer, TPE"
+Styrenic TPE,"Elastomer, TPE"
+Thermoplastic Vulcanizate Elastomer (TPV),"Elastomer, TPE"
+EMAAA Terpolymer,"Elastomer, TPE"
+Ethylene Acrylic Acid,"Elastomer, TPE"
+Ethylene Butyl Acrylate,"Elastomer, TPE"
+Ethylene Methyl Acrylate,"Elastomer, TPE"
+Ethylene Vinyl Acetate,"Elastomer, TPE"
+Ethylene Vinyl Alcohol (EVOH),"Elastomer, TPE"
+Fluoropolymer,Polymer
+ETFE/ECTFE,Fluoropolymer
+Fluorinated Ethylene Propylene (FEP),Fluoropolymer
+Perfluoroalkoxy (PFA),Fluoropolymer
+Polytetrafluoroethylene (PTFE),Fluoropolymer
+Polyvinylidene Fluoride (PVDF),Fluoropolymer
+Ionomer,Fluoropolymer
+Liquid Crystal Polymer (LCP),Fluoropolymer
+Nylon (Polyamide PA),Polymer
+Amorphous Nylon,Nylon (Polyamide PA)
+Nylon 11 (PA11),Nylon (Polyamide PA)
+Nylon 12 (PA12),Nylon (Polyamide PA)
+Nylon 46 (PA46),Nylon (Polyamide PA)
+Nylon 6 (PA6),Nylon (Polyamide PA)
+Nylon 6-3 (PA63),Nylon (Polyamide PA)
+Nylon 6/66,Nylon (Polyamide PA)
+Nylon 610 (PA610),Nylon (Polyamide PA)
+Nylon 612 (PA612),Nylon (Polyamide PA)
+Nylon 66 (PA66),Nylon (Polyamide PA)
+"Nylon, Aromatic",Nylon (Polyamide PA)
+Polyamide-imide (PAI),Nylon (Polyamide PA)
+Polyarylamide (PAA),Nylon (Polyamide PA)
+Polyarylsulfone (PAS),Nylon (Polyamide PA)
+Polybenzimidazole (PBI),Nylon (Polyamide PA)
+Polybutene,Nylon (Polyamide PA)
+Polycarbonate (PC),Nylon (Polyamide PA)
+"Polyester, TP",Polymer
+Polybutylene Terephthalate (PBT),"Polyester, TP"
+Polycyclohexylenedimethylene Terephthalate (PCT),"Polyester, TP"
+Polyethylene Terephthalate (PET),"Polyester, TP"
+Polytrimethylene Terephthalate (PTT),"Polyester, TP"
+Polyether Block Amide (PEBA),"Polyester, TP"
+Polyetherimide (PEI),"Polyester, TP"
+Polyethersulfone (PES),"Polyester, TP"
+Polyethylene (PE),Polymer
+High Density (HDPE),Polyethylene (PE)
+Linear Low Density (LLDPE),Polyethylene (PE)
+Low Density (LDPE),Polyethylene (PE)
+Medium Density (MDPE),Polyethylene (PE)
+"Polyimide, Thermoplastic",Polymer
+"Thermoplastic Polyimide, Unfilled","Polyimide, Thermoplastic"
+Polyketone,Polymer
+"Polyaryletherketone (PAEK), Unreinforced",Polyketone
+Polyetheretherketone (PEEK),Polyketone
+Polylactic Acid (PLA) Biopolymer,Polyketone
+Polymethylpentene (PMP),Polyketone
+Polyolefin,Polyketone
+Polyphenylene Ether/PPO,Polyketone
+Polyphenylene Sulfide (PPS),Polyketone
+Polyphenylsulfone (PPSU),Polyketone
+Polyphthalamide (PPA),Polyketone
+Polyphthalate Carbonate,Polyketone
+Polypropylene (PP),Polyketone
+Polystyrene (PS),Polymer
+Syndiotactic Polystyrene (SPS),Polystyrene (PS)
+Polysulfone (PSU),Polystyrene (PS)
+"Polyurethane, TP",Polystyrene (PS)
+Polyvinyl Dichloride (PVDC),Polystyrene (PS)
+SAN Polymer,Polystyrene (PS)
+"Silicone, Thermoplastic",Polystyrene (PS)
+Siloxane,Polystyrene (PS)
+SMA Polymer,Polystyrene (PS)
+Styrene-Butadiene,Polystyrene (PS)
+TPO,Polystyrene (PS)
+Vinyl (PVC),Polystyrene (PS)
+Thermoset,Polymer
+Acrylic/Cyanoacrylate Adhesive,Thermoset
+Aramid,Thermoset
+Carbon Fiber/Thermoset Composite,Thermoset
+Composite SMC,Thermoset
+Diallyl Phthalate (DAP),Thermoset
+Epoxy,Thermoset
+Filled/Reinforced Thermoset,Thermoset
+"Fluoropolymer, TS",Thermoset
+Melamine,Thermoset
+Methacrylate,Thermoset
+Phenolic,Thermoset
+"Polyester, TS",Thermoset
+"Polyimide, TS",Thermoset
+Polymethacrylimide,Thermoset
+Polysulfide Sealant/Adhesive,Thermoset
+"Polyurethane, TS",Thermoset
+Rubber or Thermoset Elastomer (TSE),Thermoset
+Silicone,Thermoset
+Vinyl Ester,Thermoset
+Pure Element,Polymer
+Wood and Natural Products,
+Wood,Wood and Natural Products
+Hardwood,Wood
+Softwood,Wood

@@ -23,7 +23,7 @@ type DB struct {
 }
 
 func openDB(dir string) (*DB, error) {
-	path := filepath.Join(dir, "db.data")
+	path := filepath.Join(dir, "database")
 	db, err := bbolt.Open(path, 0600, nil)
 	if err != nil {
 		return nil, err

@@ -16,10 +16,10 @@ import (
 )
 
 type server struct {
-	args   *args
-	db     *DB
-	cookie *sessions.CookieStore
-	router *mux.Router
+	args    *args
+	db      *DB
+	cookies *sessions.CookieStore
+	router  *mux.Router
 }
 
 func main() {
@@ -37,10 +37,10 @@ func main() {
 	}
 
 	server := &server{
-		args:   args,
-		db:     initDB(args.dataDir),
-		cookie: initCookieStore(args),
-		router: mux.NewRouter(),
+		args:    args,
+		db:      initDB(args.dataDir),
+		cookies: initCookieStore(args),
+		router:  mux.NewRouter(),
 	}
 	server.mountRoutes()
 
@@ -66,7 +66,7 @@ func main() {
 
 func initCookieStore(args *args) *sessions.CookieStore {
 	log.Println("Init cookie store ...")
-	keyPath := filepath.Join(args.dataDir, "cookie_auth.key")
+	keyPath := filepath.Join(args.dataDir, "cookies.key")
 	_, err := os.Stat(keyPath)
 	if err != nil && !os.IsNotExist(err) {
 		log.Fatalln("Cannot access cookie key at", keyPath, err)

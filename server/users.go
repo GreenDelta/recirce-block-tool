@@ -66,7 +66,7 @@ func findUser(db *DB, email string) *User {
 }
 
 func (s *server) getSessionUser(r *http.Request) *User {
-	session, err := s.cookie.Get(r, "easyepd-session")
+	session, err := s.cookies.Get(r, "easyepd-session")
 	if err != nil {
 		log.Println("ERROR: failed to read session cookie", err)
 		return nil
@@ -126,7 +126,7 @@ func (s *server) handleSignUp() http.HandlerFunc {
 			return
 		}
 
-		session, err := s.cookie.Get(r, "easyepd-session")
+		session, err := s.cookies.Get(r, "easyepd-session")
 		if err != nil {
 			// just logging the error for now
 			log.Println("WARNING: invalid cookie", err)
@@ -173,7 +173,7 @@ func (s *server) handleLogin() http.HandlerFunc {
 			return
 		}
 
-		session, _ := s.cookie.Get(r, "easyepd-session")
+		session, _ := s.cookies.Get(r, "easyepd-session")
 		session.Values["user"] = user.ID
 		session.Save(r, w)
 
@@ -185,7 +185,7 @@ func (s *server) handleLogin() http.HandlerFunc {
 func (s *server) handleLogout() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		session, _ := s.cookie.Get(r, "easyepd-session")
+		session, _ := s.cookies.Get(r, "easyepd-session")
 		session.Values["user"] = ""
 		session.Save(r, w)
 	}
