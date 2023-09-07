@@ -120,7 +120,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 			Email: email,
 			Hash:  hash,
 		}
-		user.ID = nextId()
+		user.ID = xid.New().String()
 		if err = s.db.Put(AccountBucket, user); err != nil {
 			http.Error(w, "server error", http.StatusInternalServerError)
 			return
@@ -136,7 +136,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 		}
 
 		user.Hash = ""
-		ServeJSON(user, w)
+		ServeAsJson(user, w)
 	}
 }
 
@@ -178,7 +178,7 @@ func (s *Server) handleLogin() http.HandlerFunc {
 		session.Save(r, w)
 
 		user.Hash = ""
-		ServeJSON(user, w)
+		ServeAsJson(user, w)
 	}
 }
 
@@ -200,7 +200,7 @@ func (s *Server) handleGetCurrentUser() http.HandlerFunc {
 			return
 		}
 		user.Hash = ""
-		ServeJSON(user, w)
+		ServeAsJson(user, w)
 	}
 }
 
@@ -226,12 +226,12 @@ func (s *Server) handleGetUsers() http.HandlerFunc {
 		})
 
 		if err != nil {
-			log.Println("ERROR: failed to get users", err)
+			log.Println("error: failed to get users:", err)
 			http.Error(w, "failed to get users", http.StatusInternalServerError)
 			return
 		}
 
-		ServeJSON(users, w)
+		ServeAsJson(users, w)
 	}
 }
 
@@ -252,7 +252,7 @@ func (s *Server) handleGetUser() http.HandlerFunc {
 			return
 		}
 		user.Hash = ""
-		ServeJSON(&user, w)
+		ServeAsJson(&user, w)
 	}
 }
 
@@ -330,7 +330,7 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 				return
 			}
 			user.Hash = ""
-			ServeJSON(&user, w)
+			ServeAsJson(&user, w)
 			return
 		}
 
@@ -360,6 +360,6 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 			return
 		}
 		user.Hash = ""
-		ServeJSON(&user, w)
+		ServeAsJson(&user, w)
 	}
 }

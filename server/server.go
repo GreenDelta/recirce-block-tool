@@ -54,7 +54,7 @@ func (s *Server) mountRoutes() {
 	// self regisration will be enabled later
 	// r.HandleFunc("/api/users/signup", s.handleSignUp()).Methods("POST")
 
-	r.HandleFunc("/api/next-id", s.getNextId()).Methods("GET")
+	r.HandleFunc("/api/materials", s.GetMaterials()).Methods("GET")
 
 	// EPD routes
 	/*

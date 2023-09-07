@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-// ServeJSON converts the given entity to a JSON string and writes it to the
+// ServeAsJson converts the given entity to a JSON string and writes it to the
 // given response.
-func ServeJSON(e interface{}, w http.ResponseWriter) {
+func ServeAsJson(e interface{}, w http.ResponseWriter) {
 	if e == nil {
 		http.Error(w, "No data", http.StatusInternalServerError)
 		return
