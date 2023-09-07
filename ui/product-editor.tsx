@@ -46,17 +46,15 @@ const ComponentPanel = (props: CompProps) => {
     <article style={{ margin: "3px", paddingBottom: "15px" }}>
       <header style={{ padding: "15px", marginBottom: "15px" }}>
         <div className="grid">
-          <label>
-            {props.isRoot ? "Product" : "Component"}
+          <div>
             <input type="text"
               value={comp.name}
               onChange={e => {
                 comp.name = e.target.value;
                 props.onChanged();
               }} />
-          </label>
-          <label>
-            Mass [kg]
+          </div>
+          <div style={{ display: "inline-flex" }}>
             <input type="number" value={comp.mass}
               onChange={e => {
                 const s = e.target.value;
@@ -65,8 +63,10 @@ const ComponentPanel = (props: CompProps) => {
                 }
                 props.onChanged();
               }} />
-          </label>
+            <label style={{ padding: 15 }}>kg</label>
+          </div>
         </div>
+
       </header>
       <CompMenu {...props} />
       {subComps}
@@ -96,25 +96,53 @@ const CompMenu = (props: CompProps) => {
   };
 
   const onDelete = () => {
+    const t = parentOf(props.component, props.product);
+    if (!t) {
+      return;
+    }
+    const [parent, idx] = t;
+    if (parent.components && idx >= 0) {
+      parent.components.splice(idx, 1);
+      props.onChanged();
+    }
+  };
 
-  }
-
-  const style = { cursor: "pointer" };
+  const style = { cursor: "pointer", fontSize: "0.8em" };
   const links = [
-    <li><a onClick={onAddComp} style={style}>Add a component</a></li>,
-    <li><a onClick={onAddMat} style={style}>Add a material</a></li>,
+    <li><a onClick={onAddComp} style={style}>Add component</a></li>,
+    <li>|</li>,
+    <li><a onClick={onAddMat} style={style}>Add material</a></li>,
   ];
   if (!props.isRoot) {
+    links.push(<li>|</li>);
     links.push(
-      <li><a onClick={onDelete} style={style}>Delete this component</a></li>
+      <li><a onClick={onDelete} style={style}>Delete</a></li>
     );
   }
 
   return (
-    <nav aria-label="breadcrumb">
+    <nav>
+      <ul></ul>
       <ul>
         {links}
       </ul>
     </nav>
   );
 };
+
+function parentOf(comp: Component, root: Component): [Component, number] | null {
+  if (!comp || !root || !root.components) {
+    return null;
+  }
+  for (let i = 0; i < root.components.length; i++) {
+    const child = root.components[i];
+    if (child.id === comp.id) {
+      return [root, i];
+    }
+    const sub = parentOf(comp, child);
+    if (sub) {
+      return sub;
+    }
+  }
+  return null;
+}
