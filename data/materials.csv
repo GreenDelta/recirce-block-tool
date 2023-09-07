@@ -1,262 +1,262 @@
-Carbon,
-Carbon Black,Carbon
-Carbon Fiber/Carbon Fibre,Carbon
-Diamond,Carbon
-Graphite,Carbon
-Ceramic,
-Aerogel,Ceramic
-Boride,Ceramic
-Carbide,Ceramic
-Ceramic Matrix Composite,Ceramic
-Clay,Ceramic
-Concrete,Ceramic
-Glass,Ceramic
-Glass Ceramic,Glass
-Glass Fiber,Glass
-Optical,Ceramic
-Filter,Optical
-Halide,Optical
-Hydride,Optical
-Machinable Ceramic,Optical
-Nitride,Optical
-Oxide,Ceramic
-Aluminum Oxide,Oxide
-Magnesium Oxide,Oxide
-Silicon Oxide,Oxide
-Titanium Oxide,Oxide
-Zirconium Oxide,Oxide
-Phosphide/Pnictide,Oxide
-Piezoelectric,Oxide
-Sulfide/Chalcogenide,Oxide
-Fluid,
-Lubricant,Fluid
-Alkylated Naphthalene (AN),Lubricant
-Aluminum Gellant,Lubricant
-Calcium Gellant,Lubricant
-Clay Gellant,Lubricant
-Fluoropolymer Base,Lubricant
-Lithium Gellant,Lubricant
-Multiply-Alkylated Cyclopentane (MAC),Lubricant
-Organic Soap Gellant,Lubricant
-Perfluoropolyether (PFPE),Lubricant
-Polyalphaolefin (PAO),Lubricant
-Polyglycol,Lubricant
-Polyphenylether (PPE) Base,Lubricant
-PTFE Gellant,Lubricant
-Silica Gellant,Lubricant
-Silicone Base,Lubricant
-Synthetic Ether Base,Lubricant
-Urea Gellant,Lubricant
-White Mineral Oil (WMO),Lubricant
-Zinc Oxide Gellant,Lubricant
-Quenchant,Lubricant
-Solvent,Lubricant
-Metal,
-Electronic/Magnetic Alloy,Metal
-Ferrous Metal,Metal
-Alloy Steel,Metal
-AISI 4000 Series Steel,Alloy Steel
-AISI 5000 Series Steel,Alloy Steel
-AISI 6000 Series Steel,Alloy Steel
-AISI 8000 Series Steel,Alloy Steel
-AISI 9000 Series Steel,Alloy Steel
-Low Alloy Steel,Alloy Steel
-Medium Alloy Steel,Alloy Steel
-ASTM Steel,Alloy Steel
-Carbon Steel,Metal
-AISI 1000 Series Steel,Carbon Steel
-High Carbon Steel,Carbon Steel
-Low Carbon Steel,Carbon Steel
-Medium Carbon Steel,Carbon Steel
-Cast Iron,Metal
-Alloy Cast Iron,Cast Iron
-Ductile Iron,Cast Iron
-Gray Cast Iron,Cast Iron
-Malleable Iron,Cast Iron
-White Cast Iron,Cast Iron
-Chrome-moly Steel,Cast Iron
-Duplex,Cast Iron
-Maraging Steel,Cast Iron
-Pressure Vessel Steel,Cast Iron
-Special-Purpose Steel,Cast Iron
-Stainless Steel,Metal
-Cast Stainless Steel,Stainless Steel
-Precipitation Hardening Stainless,Stainless Steel
-T 300 Series Stainless Steel,Stainless Steel
-T 400 Series Stainless Steel,Stainless Steel
-T 600 Series Stainless Steel,Stainless Steel
-T S10000 Series Stainless Steel,Stainless Steel
-Tool Steel,Metal
-Air-Hardening Steel,Tool Steel
-Cold Work Steel,Tool Steel
-Hot Work Steel,Tool Steel
-Mold Steel,Tool Steel
-Oil-Hardening Steel,Tool Steel
-Shock-Resisting Steel,Tool Steel
-Water-Hardening Steel,Tool Steel
-Intermetallic,Tool Steel
-"Metal Foam, Mesh, or Honeycomb",Tool Steel
-Metal Matrix Composite,Tool Steel
-Nonferrous Metal,Metal
-Aluminum Alloy,Metal
-1000 Series Aluminum,Aluminum Alloy
-2000 Series Aluminum Alloy,Aluminum Alloy
-3000 Series Aluminum Alloy,Aluminum Alloy
-4000 Series Aluminum Alloy,Aluminum Alloy
-5000 Series Aluminum Alloy,Aluminum Alloy
-6000 Series Aluminum Alloy,Aluminum Alloy
-7000 Series Aluminum Alloy,Aluminum Alloy
-Aluminum Casting Alloy,Aluminum Alloy
-Other Wrought Al Alloy,Aluminum Alloy
-Beryllium Alloy,Aluminum Alloy
-Bismuth Alloy,Aluminum Alloy
-Cobalt Alloy,Aluminum Alloy
-Copper Alloy,Metal
-Brass,Copper Alloy
-Bronze,Copper Alloy
-Copper Casting Alloy,Copper Alloy
-Indium Alloy,Copper Alloy
-Lead Alloy,Copper Alloy
-Magnesium Alloy,Copper Alloy
-Molybdenum Alloy,Copper Alloy
-Nickel Alloy,Copper Alloy
-Niobium Alloy,Copper Alloy
-Precious Metal,Metal
-Gold Alloy,Precious Metal
-Palladium Alloy,Precious Metal
-Platinum Alloy,Precious Metal
-Silver Alloy,Precious Metal
-Refractory Metal,Precious Metal
-Solder/Braze Alloy,Precious Metal
-Tin Alloy,Precious Metal
-Titanium Alloy,Metal
-Alpha/Beta Titanium Alloy,Titanium Alloy
-Alpha/Near Alpha Titanium Alloy,Titanium Alloy
-Beta Titanium Alloy,Titanium Alloy
-Unalloyed/Modified Titanium,Titanium Alloy
-Tungsten Alloy,Titanium Alloy
-Zinc Alloy,Titanium Alloy
-Zirconium Alloy,Titanium Alloy
-Other Engineering Material,
-Additive/Filler for Polymer,Other Engineering Material
-Catalyst/Initiator,Other Engineering Material
-Ceramic/Metallic Coating,Other Engineering Material
-Composite Core Material,Other Engineering Material
-Composite Fibers,Other Engineering Material
-Semiconductor,Other Engineering Material
-Polymer,
-Adhesive,Polymer
-Film,Polymer
-Rapid Prototyping Polymer,Polymer
-Renewable/Recycled Polymer,Polymer
-Tape,Polymer
-Thermoplastic,Polymer
-ABS Polymer,Thermoplastic
-"Acetal (Polyoxymethylene, POM)",Thermoplastic
-Acrylic (PMMA),Thermoplastic
-AES Polymer,Thermoplastic
-ASA Polymer,Thermoplastic
-Cellulosic,Thermoplastic
-Cyclo Olefin Polymer,Thermoplastic
-"Elastomer, TPE",Polymer
-Olefinic TPE,"Elastomer, TPE"
-Polyester TPE,"Elastomer, TPE"
-Polyurethane TPE,"Elastomer, TPE"
-Styrenic TPE,"Elastomer, TPE"
-Thermoplastic Vulcanizate Elastomer (TPV),"Elastomer, TPE"
-EMAAA Terpolymer,"Elastomer, TPE"
-Ethylene Acrylic Acid,"Elastomer, TPE"
-Ethylene Butyl Acrylate,"Elastomer, TPE"
-Ethylene Methyl Acrylate,"Elastomer, TPE"
-Ethylene Vinyl Acetate,"Elastomer, TPE"
-Ethylene Vinyl Alcohol (EVOH),"Elastomer, TPE"
-Fluoropolymer,Polymer
-ETFE/ECTFE,Fluoropolymer
-Fluorinated Ethylene Propylene (FEP),Fluoropolymer
-Perfluoroalkoxy (PFA),Fluoropolymer
-Polytetrafluoroethylene (PTFE),Fluoropolymer
-Polyvinylidene Fluoride (PVDF),Fluoropolymer
-Ionomer,Fluoropolymer
-Liquid Crystal Polymer (LCP),Fluoropolymer
-Nylon (Polyamide PA),Polymer
-Amorphous Nylon,Nylon (Polyamide PA)
-Nylon 11 (PA11),Nylon (Polyamide PA)
-Nylon 12 (PA12),Nylon (Polyamide PA)
-Nylon 46 (PA46),Nylon (Polyamide PA)
-Nylon 6 (PA6),Nylon (Polyamide PA)
-Nylon 6-3 (PA63),Nylon (Polyamide PA)
-Nylon 6/66,Nylon (Polyamide PA)
-Nylon 610 (PA610),Nylon (Polyamide PA)
-Nylon 612 (PA612),Nylon (Polyamide PA)
-Nylon 66 (PA66),Nylon (Polyamide PA)
-"Nylon, Aromatic",Nylon (Polyamide PA)
-Polyamide-imide (PAI),Nylon (Polyamide PA)
-Polyarylamide (PAA),Nylon (Polyamide PA)
-Polyarylsulfone (PAS),Nylon (Polyamide PA)
-Polybenzimidazole (PBI),Nylon (Polyamide PA)
-Polybutene,Nylon (Polyamide PA)
-Polycarbonate (PC),Nylon (Polyamide PA)
-"Polyester, TP",Polymer
-Polybutylene Terephthalate (PBT),"Polyester, TP"
-Polycyclohexylenedimethylene Terephthalate (PCT),"Polyester, TP"
-Polyethylene Terephthalate (PET),"Polyester, TP"
-Polytrimethylene Terephthalate (PTT),"Polyester, TP"
-Polyether Block Amide (PEBA),"Polyester, TP"
-Polyetherimide (PEI),"Polyester, TP"
-Polyethersulfone (PES),"Polyester, TP"
-Polyethylene (PE),Polymer
-High Density (HDPE),Polyethylene (PE)
-Linear Low Density (LLDPE),Polyethylene (PE)
-Low Density (LDPE),Polyethylene (PE)
-Medium Density (MDPE),Polyethylene (PE)
-"Polyimide, Thermoplastic",Polymer
-"Thermoplastic Polyimide, Unfilled","Polyimide, Thermoplastic"
-Polyketone,Polymer
-"Polyaryletherketone (PAEK), Unreinforced",Polyketone
-Polyetheretherketone (PEEK),Polyketone
-Polylactic Acid (PLA) Biopolymer,Polyketone
-Polymethylpentene (PMP),Polyketone
-Polyolefin,Polyketone
-Polyphenylene Ether/PPO,Polyketone
-Polyphenylene Sulfide (PPS),Polyketone
-Polyphenylsulfone (PPSU),Polyketone
-Polyphthalamide (PPA),Polyketone
-Polyphthalate Carbonate,Polyketone
-Polypropylene (PP),Polyketone
-Polystyrene (PS),Polymer
-Syndiotactic Polystyrene (SPS),Polystyrene (PS)
-Polysulfone (PSU),Polystyrene (PS)
-"Polyurethane, TP",Polystyrene (PS)
-Polyvinyl Dichloride (PVDC),Polystyrene (PS)
-SAN Polymer,Polystyrene (PS)
-"Silicone, Thermoplastic",Polystyrene (PS)
-Siloxane,Polystyrene (PS)
-SMA Polymer,Polystyrene (PS)
-Styrene-Butadiene,Polystyrene (PS)
-TPO,Polystyrene (PS)
-Vinyl (PVC),Polystyrene (PS)
-Thermoset,Polymer
-Acrylic/Cyanoacrylate Adhesive,Thermoset
-Aramid,Thermoset
-Carbon Fiber/Thermoset Composite,Thermoset
-Composite SMC,Thermoset
-Diallyl Phthalate (DAP),Thermoset
-Epoxy,Thermoset
-Filled/Reinforced Thermoset,Thermoset
-"Fluoropolymer, TS",Thermoset
-Melamine,Thermoset
-Methacrylate,Thermoset
-Phenolic,Thermoset
-"Polyester, TS",Thermoset
-"Polyimide, TS",Thermoset
-Polymethacrylimide,Thermoset
-Polysulfide Sealant/Adhesive,Thermoset
-"Polyurethane, TS",Thermoset
-Rubber or Thermoset Elastomer (TSE),Thermoset
-Silicone,Thermoset
-Vinyl Ester,Thermoset
-Pure Element,Polymer
-Wood and Natural Products,
-Wood,Wood and Natural Products
-Hardwood,Wood
-Softwood,Wood
+0993657d-b785-4d83-a013-8022151dc074,Carbon,
+cfb2ac4f-7733-45e1-a59e-f71d7fb9b551,Carbon Black,0993657d-b785-4d83-a013-8022151dc074
+6a1a705e-3564-43c0-ae7c-556144536e16,Carbon Fiber/Carbon Fibre,0993657d-b785-4d83-a013-8022151dc074
+1cbc6504-6657-4225-bb37-318b19f0b421,Diamond,0993657d-b785-4d83-a013-8022151dc074
+a6944ec0-3e79-4f1f-8d30-087e5d86aa06,Graphite,0993657d-b785-4d83-a013-8022151dc074
+1d242bb3-242b-4bfe-9b87-4cc19fc84b28,Ceramic,
+4204a688-135d-46df-9967-58671bfde098,Aerogel,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+2125890c-2618-4f2e-81a4-f41ea66f4829,Boride,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+2a57db29-0391-42fe-a1a7-c0cee39c636c,Carbide,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+5ec49235-7f04-41e1-8ab8-bb75b2108da8,Ceramic Matrix Composite,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+5aa47d0f-ac29-4109-a086-f880a397ce90,Clay,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+cb878e01-f141-4a1b-b548-3f8ddb6458b6,Concrete,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+a8133376-7311-4c7f-8a8e-819ce4334229,Glass,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+73796a6d-2dde-435e-85d5-0d4a9664fddd,Glass Ceramic,a8133376-7311-4c7f-8a8e-819ce4334229
+d77aa54a-27bc-42a0-be87-76902288885c,Glass Fiber,a8133376-7311-4c7f-8a8e-819ce4334229
+22e1852e-f24a-4618-9f04-15eb8e5e5a87,Optical,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+5b6aa350-3a6e-4357-b3bc-5ea1acabe58a,Filter,22e1852e-f24a-4618-9f04-15eb8e5e5a87
+e805a91e-cf4a-4fe0-9cd8-790d8bdcdf14,Halide,22e1852e-f24a-4618-9f04-15eb8e5e5a87
+18fd5a2a-5023-4465-8d91-3c0db6ab7602,Hydride,22e1852e-f24a-4618-9f04-15eb8e5e5a87
+6026870b-8e98-4ce9-9806-b1a8b45c291f,Machinable Ceramic,22e1852e-f24a-4618-9f04-15eb8e5e5a87
+074cc635-0dc6-494c-9f2e-09162131a636,Nitride,22e1852e-f24a-4618-9f04-15eb8e5e5a87
+096be7f5-420e-443e-b48a-1c383cdd4eb9,Oxide,1d242bb3-242b-4bfe-9b87-4cc19fc84b28
+c6554e4f-eee5-4667-92e3-65e27afe5365,Aluminum Oxide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+5077f9d1-3716-4b2d-a4dd-019d5ce24bb9,Magnesium Oxide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+40b8b780-d0cb-4708-b9b0-b4913f3a4d0b,Silicon Oxide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+3a9399af-44e1-45dc-b984-abb5632a9815,Titanium Oxide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+d2f5c2e8-5efd-4cd2-b454-0f745b61b4c6,Zirconium Oxide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+6c8a6e8e-c03d-4027-82c1-a82898a7c802,Phosphide/Pnictide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+d4121d77-1bc0-495e-8c42-d5c2d15ff41f,Piezoelectric,096be7f5-420e-443e-b48a-1c383cdd4eb9
+fcb9cc15-9323-4a5f-a2e9-17d842c77c01,Sulfide/Chalcogenide,096be7f5-420e-443e-b48a-1c383cdd4eb9
+ded5af8a-29cb-4c68-bb5b-88e01f2e5009,Fluid,
+9ab3ff3a-fa61-47c4-9345-d95974e71a9f,Lubricant,ded5af8a-29cb-4c68-bb5b-88e01f2e5009
+ef95e511-ee20-4f68-975c-9a17ad3e606c,Alkylated Naphthalene (AN),9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+d06c3dac-2287-4e1a-97f8-a2f2c2e05d8a,Aluminum Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+9d10f27c-6c2d-4384-89f4-1cd27cb7b185,Calcium Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+338393b4-2575-49be-8960-10c7255f438c,Clay Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+c8ca459d-8b85-4353-87da-58f1d8a3dc23,Fluoropolymer Base,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+a3f2b53a-4515-4e08-be8b-c22cddf466de,Lithium Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+f672383d-b106-4d36-8396-af486e0024b5,Multiply-Alkylated Cyclopentane (MAC),9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+43745b76-5c92-43be-a122-5585af763d24,Organic Soap Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+8ada13d9-0fc4-431d-b9d7-870f721fd44d,Perfluoropolyether (PFPE),9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+0d141828-965d-4efa-946d-1d8c65da315a,Polyalphaolefin (PAO),9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+fbf079b5-8a51-478d-9ead-1b436d1a916d,Polyglycol,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+83a47fa5-3933-4507-b4a6-7b7549fa4666,Polyphenylether (PPE) Base,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+d78ccab1-6dee-40c1-82e9-d0a638b50516,PTFE Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+a6fe7cd6-50ef-45c0-8737-6de3604c6b7d,Silica Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+892ed620-b2eb-463c-b64b-ba09510b10c3,Silicone Base,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+d4316e50-1d9b-4858-849c-69fe8434de16,Synthetic Ether Base,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+55ed8acd-c986-49eb-9574-cb823df80475,Urea Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+57135f24-ede7-424f-8f97-261320b8c699,White Mineral Oil (WMO),9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+0a26b4d9-c49d-4998-b15a-0721c62ff442,Zinc Oxide Gellant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+e55f9afa-2856-41c6-a9c8-a64e36395486,Quenchant,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+7efb9e82-d8ba-4b39-aa0c-5dd534eaaa20,Solvent,9ab3ff3a-fa61-47c4-9345-d95974e71a9f
+a06507fb-6834-4315-9e94-6be3cfd66013,Metal,
+cad4564f-26e0-41eb-88c9-47ab2a66d951,Electronic/Magnetic Alloy,a06507fb-6834-4315-9e94-6be3cfd66013
+64ad24ec-6d3f-4d8b-ac42-98ee8ce41d60,Ferrous Metal,a06507fb-6834-4315-9e94-6be3cfd66013
+5ec153a2-5b91-4650-9bac-dce1b11cc957,Alloy Steel,a06507fb-6834-4315-9e94-6be3cfd66013
+f7d3fa7b-a461-4230-8a05-37dc1565e375,AISI 4000 Series Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+1c063d4f-0ad9-46d3-b34b-26fa6c764936,AISI 5000 Series Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+3f7c3b99-480a-42d4-9279-ab0153c7c924,AISI 6000 Series Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+01ca7671-4792-4a93-9b01-c016a8798d9e,AISI 8000 Series Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+9973b8fe-d249-4067-a0ff-3c44b06a8aa4,AISI 9000 Series Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+343c0c13-8511-4675-a9e4-a205d5b8c859,Low Alloy Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+29e011d3-6c23-4c05-8b28-2a0beff76fc9,Medium Alloy Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+053a18ee-f5ed-4913-bc02-baae2e42ef2c,ASTM Steel,5ec153a2-5b91-4650-9bac-dce1b11cc957
+1fc973f6-26de-438f-8bb2-c6d44a02850b,Carbon Steel,a06507fb-6834-4315-9e94-6be3cfd66013
+31f41d76-15d4-4a9a-bf37-02ecf29582a9,AISI 1000 Series Steel,1fc973f6-26de-438f-8bb2-c6d44a02850b
+a06427fa-9809-4c32-bc6e-71ae1c0b590d,High Carbon Steel,1fc973f6-26de-438f-8bb2-c6d44a02850b
+e88b7e4c-c9ed-498f-905f-00419ae6f8cb,Low Carbon Steel,1fc973f6-26de-438f-8bb2-c6d44a02850b
+dc425075-83ae-4639-b667-cfc375457998,Medium Carbon Steel,1fc973f6-26de-438f-8bb2-c6d44a02850b
+ff223bc3-6312-44ad-a71f-2aa5aa29db59,Cast Iron,a06507fb-6834-4315-9e94-6be3cfd66013
+0f68e1c2-0c42-4669-a3a4-ed475b6ca39a,Alloy Cast Iron,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+1f8d9187-52c3-4df4-94ed-391a9f5b204b,Ductile Iron,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+111d1dbc-a95d-47cd-ae15-0c966c3d05e5,Gray Cast Iron,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+90b692de-4671-4e1a-a4ef-7b1766afc841,Malleable Iron,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+9a3e92e7-4ba9-4c00-8e39-7f341c007a8e,White Cast Iron,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+179640b2-96bf-4985-8552-a248f9b13b80,Chrome-moly Steel,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+679931db-457f-4721-be74-52d09857e85d,Duplex,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+74d7ac8f-f5c1-4ff7-a376-2b2df6c569b3,Maraging Steel,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+e894671c-e514-4ed7-acc7-7eaa31806669,Pressure Vessel Steel,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+b27f76e8-3c5e-49f2-aeb4-a80092a465fd,Special-Purpose Steel,ff223bc3-6312-44ad-a71f-2aa5aa29db59
+c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708,Stainless Steel,a06507fb-6834-4315-9e94-6be3cfd66013
+8096c1d1-8c7f-4994-9b1d-c39d926caaf9,Cast Stainless Steel,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+b22aee6c-d007-413e-b1dd-78ea71de758b,Precipitation Hardening Stainless,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+d0e17ae0-0724-4246-916b-7a70ff72f288,T 300 Series Stainless Steel,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+b81cbef1-5205-4dc2-bf65-a579cbe30a27,T 400 Series Stainless Steel,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+f51feffe-82f9-4fd5-8065-21eca8543ab6,T 600 Series Stainless Steel,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+c260026d-bcae-4d94-b412-bf8c4e5c9b24,T S10000 Series Stainless Steel,c15cbeb8-7d4a-43fb-bde0-ee2f7d7f1708
+e0311d2c-5adf-455e-8c03-026095cb4e06,Tool Steel,a06507fb-6834-4315-9e94-6be3cfd66013
+4f77c4ee-e12c-470d-ae45-8acef979ed30,Air-Hardening Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+2da8e4b2-77d5-4231-bb56-1c4f8f26ba60,Cold Work Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+1c0f9e22-31c2-4e67-a4b2-535d78f200d2,Hot Work Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+6075b8b1-a511-44fd-9a85-b281554ab57a,Mold Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+f38f8f29-79f1-4f72-a9e2-3faaf47be268,Oil-Hardening Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+bbb79080-550b-425e-b8c6-dcf6e904b7d3,Shock-Resisting Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+1c41596e-893f-43db-a82c-0fe613b9fdb0,Water-Hardening Steel,e0311d2c-5adf-455e-8c03-026095cb4e06
+776fb874-9c54-492c-89f7-88b394815a15,Intermetallic,e0311d2c-5adf-455e-8c03-026095cb4e06
+ace833e9-238e-4e1b-b084-c3f03654f68d,"Metal Foam, Mesh, or Honeycomb",e0311d2c-5adf-455e-8c03-026095cb4e06
+6d58d59d-84a3-43b7-a4cf-44d910f58e94,Metal Matrix Composite,e0311d2c-5adf-455e-8c03-026095cb4e06
+2386a59e-9118-42f2-b951-b32554c094ec,Nonferrous Metal,a06507fb-6834-4315-9e94-6be3cfd66013
+512022f9-33f0-4f90-ac8d-0f017b7534d4,Aluminum Alloy,a06507fb-6834-4315-9e94-6be3cfd66013
+9bd23293-8f93-4b7d-b8c7-061bc25373bf,1000 Series Aluminum,512022f9-33f0-4f90-ac8d-0f017b7534d4
+a96b3c53-c4fc-4118-a03a-40c796950e7f,2000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+5f6ffa00-1247-4bf7-82d6-b39ca927e6b0,3000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+21f58a95-c7a8-48a8-b6fe-b9ec520c4472,4000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+b351b840-6d3f-4aa5-aead-33f2e43e8299,5000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+c36ec0ba-fb62-4349-bf67-b14758e0c984,6000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+ced444d2-4c64-4f8c-a361-a37a06b4eebb,7000 Series Aluminum Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+2b6b394e-58a8-4dbb-bc95-d4f006b41f76,Aluminum Casting Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+32088ac7-cfa3-4808-99e5-63f4012dc81e,Other Wrought Al Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+5d65513a-6b2b-4b47-89f8-5cb78a3d7982,Beryllium Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+9f4122d4-f7b0-42d0-b11b-3858b61f15b3,Bismuth Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+5fd5c84f-c372-4fd2-8bfc-f3ac33b3e3a9,Cobalt Alloy,512022f9-33f0-4f90-ac8d-0f017b7534d4
+3ff6b9d1-386b-4846-a3cb-bceff69e8f16,Copper Alloy,a06507fb-6834-4315-9e94-6be3cfd66013
+38edf1c2-3e27-4c49-bc5e-0e23e12be043,Brass,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+0990a47d-b59c-4d88-96ad-29a2b4cae606,Bronze,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+d5279e0e-442a-4943-aab4-91a26e139814,Copper Casting Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+b97b1dc1-aefe-491c-9b4f-0219e57aac51,Indium Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+bf20a2ee-44e6-4386-9ae3-91044c926f83,Lead Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+57eec840-b3ee-4fcb-99d7-db41d19babc5,Magnesium Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+bf9da157-bec4-4ddc-9124-f8148b844b7e,Molybdenum Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+0d7d3f7f-42fd-4353-9138-c48c9f448786,Nickel Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+a9972a1b-0751-457c-960c-acb48f22dafc,Niobium Alloy,3ff6b9d1-386b-4846-a3cb-bceff69e8f16
+02541762-4df3-4d70-acf3-3babf5d9b3f6,Precious Metal,a06507fb-6834-4315-9e94-6be3cfd66013
+27476b8f-a89d-4850-b20f-cdea28c214c2,Gold Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+a4ff9c51-4225-458c-9440-5eb22b5ee239,Palladium Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+745a0c27-7b14-4944-80b4-6cf468d2ec87,Platinum Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+4ae3a9bb-244d-4510-9650-fa923a63f72c,Silver Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+9fdb1859-7dbd-49e3-abec-0baa0ebca72f,Refractory Metal,02541762-4df3-4d70-acf3-3babf5d9b3f6
+d785990f-de26-4f71-b70d-e518785e63ae,Solder/Braze Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+32c978ea-a9d2-41ff-9279-b123048e6ae0,Tin Alloy,02541762-4df3-4d70-acf3-3babf5d9b3f6
+d74eb718-c9e5-46ea-a671-6d4ac52d16ee,Titanium Alloy,a06507fb-6834-4315-9e94-6be3cfd66013
+a8710987-cb47-4b11-beed-a70eac2add25,Alpha/Beta Titanium Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+6a95db68-2f18-40c6-accf-554b827b4145,Alpha/Near Alpha Titanium Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+c3ff80bb-5d5c-4822-9b03-b118002c8cac,Beta Titanium Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+fff7b102-993d-48bf-8bbd-097e302fc84b,Unalloyed/Modified Titanium,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+ece8913d-26a3-4cd7-a8d8-def5cf3eb7b3,Tungsten Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+a1acd51a-5c15-4571-a559-928ee427547d,Zinc Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+b0ef191d-98a8-468b-b323-896fc21266d7,Zirconium Alloy,d74eb718-c9e5-46ea-a671-6d4ac52d16ee
+68c2042b-77b7-434c-ad2b-a74a7fc907d0,Other Engineering Material,
+6d18f9d5-e76a-4da2-8085-c0304afeaf13,Additive/Filler for Polymer,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+efeccaa1-b46b-42a7-b68f-cf6e2c20de8e,Catalyst/Initiator,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+0635fe15-aa4e-45c3-966f-7b068d6517e7,Ceramic/Metallic Coating,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+82e02e89-823b-49e9-ab85-0a07b0d46f5f,Composite Core Material,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+7d4d552b-b85b-4acd-b335-277ee12a8529,Composite Fibers,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+3a66022b-3ada-48a8-99ef-dad2f9365ab9,Semiconductor,68c2042b-77b7-434c-ad2b-a74a7fc907d0
+b39ea9e6-4d97-481e-ab7a-eba9490d66db,Polymer,
+e6c5f8cd-653e-4c1b-bb0a-ae41491c296d,Adhesive,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+89402288-4413-4394-8d0d-bc185be16666,Film,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+80928f25-0fd8-46e0-9c64-c32308408531,Rapid Prototyping Polymer,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+e183014b-4b5b-410a-be03-2fc1233544d7,Renewable/Recycled Polymer,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+4d1b83f4-eaec-44b5-8154-62232b97ab2d,Tape,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+618c7cb6-5486-461d-b8b7-3e03ba328c84,Thermoplastic,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+ae89c133-bf3a-4e32-8f3f-46d6eda8582b,ABS Polymer,618c7cb6-5486-461d-b8b7-3e03ba328c84
+4d504296-f3f9-43f0-9fcd-57cc0d4fc278,"Acetal (Polyoxymethylene, POM)",618c7cb6-5486-461d-b8b7-3e03ba328c84
+913aefbb-9a9f-4042-ae4d-a73042a82603,Acrylic (PMMA),618c7cb6-5486-461d-b8b7-3e03ba328c84
+1fea75ef-96cb-41c4-baba-fe8ebc3f7e98,AES Polymer,618c7cb6-5486-461d-b8b7-3e03ba328c84
+c3dd466f-2d7a-439b-8629-835cc943dcaf,ASA Polymer,618c7cb6-5486-461d-b8b7-3e03ba328c84
+0987661e-250d-4ec7-bf63-38be923bb4d6,Cellulosic,618c7cb6-5486-461d-b8b7-3e03ba328c84
+11cfe5b8-9a47-4326-aca9-5a5aa699fe9c,Cyclo Olefin Polymer,618c7cb6-5486-461d-b8b7-3e03ba328c84
+a9da885f-0cfb-4565-adee-bec8461f1277,"Elastomer, TPE",b39ea9e6-4d97-481e-ab7a-eba9490d66db
+7d6fa906-47cb-4052-bdd7-a5592dadc60e,Olefinic TPE,a9da885f-0cfb-4565-adee-bec8461f1277
+b4b1a68d-1bb6-46e2-b7e5-1816b6085d4c,Polyester TPE,a9da885f-0cfb-4565-adee-bec8461f1277
+9387cc62-6ac1-4543-a43a-8ec1d7b6a719,Polyurethane TPE,a9da885f-0cfb-4565-adee-bec8461f1277
+a98066e5-feaa-48a8-a1fd-c4aba71ac3db,Styrenic TPE,a9da885f-0cfb-4565-adee-bec8461f1277
+3bcc23fd-8a47-4349-99cf-cfc2ded878ae,Thermoplastic Vulcanizate Elastomer (TPV),a9da885f-0cfb-4565-adee-bec8461f1277
+53dcbf72-79d9-41f7-8604-95bb2d4cd483,EMAAA Terpolymer,a9da885f-0cfb-4565-adee-bec8461f1277
+8d99ebfd-4334-4c40-a662-de700cdda8a2,Ethylene Acrylic Acid,a9da885f-0cfb-4565-adee-bec8461f1277
+3ed86ce4-242a-4236-8382-fd07b3b3c04f,Ethylene Butyl Acrylate,a9da885f-0cfb-4565-adee-bec8461f1277
+4294d531-eb81-4a2e-bb07-986fd651ffad,Ethylene Methyl Acrylate,a9da885f-0cfb-4565-adee-bec8461f1277
+496a2e9f-d437-46e3-bedf-a1723df0656c,Ethylene Vinyl Acetate,a9da885f-0cfb-4565-adee-bec8461f1277
+1417c143-fc82-4f5a-b7ec-23d4e9ea6fea,Ethylene Vinyl Alcohol (EVOH),a9da885f-0cfb-4565-adee-bec8461f1277
+cc374a5c-88ab-4a75-94f6-c702cd82fe38,Fluoropolymer,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+880defd0-e1d4-4bd2-aef8-6ea7609b17ca,ETFE/ECTFE,cc374a5c-88ab-4a75-94f6-c702cd82fe38
+e8c49334-287b-4454-b76b-3a859fa10b9b,Fluorinated Ethylene Propylene (FEP),cc374a5c-88ab-4a75-94f6-c702cd82fe38
+7d6fe418-850e-4d56-95ee-ea7bcac938b6,Perfluoroalkoxy (PFA),cc374a5c-88ab-4a75-94f6-c702cd82fe38
+daa2a32e-6ed4-4e9e-ba98-253b37914bcb,Polytetrafluoroethylene (PTFE),cc374a5c-88ab-4a75-94f6-c702cd82fe38
+4a9db629-b4ad-48e5-9251-a03fe61cc0e8,Polyvinylidene Fluoride (PVDF),cc374a5c-88ab-4a75-94f6-c702cd82fe38
+145cf519-1e3a-482a-9d99-5b7ad12420a8,Ionomer,cc374a5c-88ab-4a75-94f6-c702cd82fe38
+8517c1d2-8acb-4267-a4d8-3c57311f478e,Liquid Crystal Polymer (LCP),cc374a5c-88ab-4a75-94f6-c702cd82fe38
+b67d2339-cf59-48f1-b3fd-cd73c8f975fc,Nylon (Polyamide PA),b39ea9e6-4d97-481e-ab7a-eba9490d66db
+e2569946-f728-4389-9e81-7c5cef80004d,Amorphous Nylon,b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+83f67b75-13c2-4724-8549-cba9e7d355de,Nylon 11 (PA11),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+e7bbb66d-8532-4336-9612-1fb320a7468b,Nylon 12 (PA12),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+cc9e78b8-e967-4443-b1ef-d8338ba9d4ed,Nylon 46 (PA46),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+ead2111e-a581-4ac0-be2e-ef5fd834eedd,Nylon 6 (PA6),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+81923da9-f85c-48cb-bda6-4696a371db27,Nylon 6-3 (PA63),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+35d622d2-5aaa-49e4-b691-fc55a94e030a,Nylon 6/66,b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+2a28b3bc-76b1-4bbb-9002-996c94a5e9d0,Nylon 610 (PA610),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+0876189b-6cdf-423a-8a0e-c71a347ca866,Nylon 612 (PA612),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+e61aa680-9a3d-410b-97ce-cfce10692b57,Nylon 66 (PA66),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+56fd3bb4-838e-4d82-af43-c5aea938933f,"Nylon, Aromatic",b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+6dd11eb5-a6f9-4acd-8844-d2999621a9dd,Polyamide-imide (PAI),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+e6f9d715-89d9-4e6e-9437-26dc7933c9c7,Polyarylamide (PAA),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+00cbaef7-f5d6-48d3-bddf-01d28aa346a9,Polyarylsulfone (PAS),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+4fd845c9-01a8-4012-82be-30ff9955b9a2,Polybenzimidazole (PBI),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+3f44b6fc-30e4-4e03-9774-55392a87c034,Polybutene,b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+e49c87a0-fba4-4ddf-8092-a758cc69c139,Polycarbonate (PC),b67d2339-cf59-48f1-b3fd-cd73c8f975fc
+dd9ebe05-e769-49ef-9659-361b90251a87,"Polyester, TP",b39ea9e6-4d97-481e-ab7a-eba9490d66db
+5834caa4-43fa-40e0-8cf2-89bbbe7e4ea7,Polybutylene Terephthalate (PBT),dd9ebe05-e769-49ef-9659-361b90251a87
+81d63e48-efd3-4473-b220-6a8d6e9fd58d,Polycyclohexylenedimethylene Terephthalate (PCT),dd9ebe05-e769-49ef-9659-361b90251a87
+8e927cfa-7be2-4fe6-89a8-3a4349f37319,Polyethylene Terephthalate (PET),dd9ebe05-e769-49ef-9659-361b90251a87
+fe2df8d6-1456-4b7d-83c3-d576b0fdf003,Polytrimethylene Terephthalate (PTT),dd9ebe05-e769-49ef-9659-361b90251a87
+4a414a26-ce5a-4f4c-9a6d-50b9198ef31a,Polyether Block Amide (PEBA),dd9ebe05-e769-49ef-9659-361b90251a87
+be20ac5e-2b4a-4815-b082-3badf856a6b2,Polyetherimide (PEI),dd9ebe05-e769-49ef-9659-361b90251a87
+de5d51ea-033b-450a-a2ee-8e2071194070,Polyethersulfone (PES),dd9ebe05-e769-49ef-9659-361b90251a87
+579ebec5-2e22-487f-b5ab-cf6964619f35,Polyethylene (PE),b39ea9e6-4d97-481e-ab7a-eba9490d66db
+2d7d95f5-91f3-4f39-8521-22abba521e9b,High Density (HDPE),579ebec5-2e22-487f-b5ab-cf6964619f35
+65e4908a-5e15-480b-ac18-ab0127d96a3d,Linear Low Density (LLDPE),579ebec5-2e22-487f-b5ab-cf6964619f35
+eb48ee9f-3070-4930-b9d6-593b34454477,Low Density (LDPE),579ebec5-2e22-487f-b5ab-cf6964619f35
+38f564cc-328a-4b50-92ba-630df295453b,Medium Density (MDPE),579ebec5-2e22-487f-b5ab-cf6964619f35
+cc718055-798e-456b-9071-9993e9d88c93,"Polyimide, Thermoplastic",b39ea9e6-4d97-481e-ab7a-eba9490d66db
+27c442be-044d-4575-90cb-ba69dd57ccaa,"Thermoplastic Polyimide, Unfilled",cc718055-798e-456b-9071-9993e9d88c93
+583c4cb9-5c60-45b1-aca0-f3bbd437473f,Polyketone,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+8b4e6792-6989-4abc-949a-ef9f8aceff98,"Polyaryletherketone (PAEK), Unreinforced",583c4cb9-5c60-45b1-aca0-f3bbd437473f
+806bd0b9-f331-428a-abdd-5241897bb89a,Polyetheretherketone (PEEK),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+ce16aef2-f0e1-4f7b-a018-9fbf4a4445ba,Polylactic Acid (PLA) Biopolymer,583c4cb9-5c60-45b1-aca0-f3bbd437473f
+e4d771f6-7882-4aa9-9f28-261617ec1eb8,Polymethylpentene (PMP),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+c0c521e5-9d2f-4969-8657-1bb76d657d8b,Polyolefin,583c4cb9-5c60-45b1-aca0-f3bbd437473f
+17f34ed3-244d-4815-98f7-9c492111aef4,Polyphenylene Ether/PPO,583c4cb9-5c60-45b1-aca0-f3bbd437473f
+9209fbdf-ec29-4ad9-90cf-92014c25a087,Polyphenylene Sulfide (PPS),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+1a4b8dfe-cc37-4d31-a3d8-284874ac0aac,Polyphenylsulfone (PPSU),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+433e93bd-effc-40d1-963f-0e6d6d737fe7,Polyphthalamide (PPA),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+1f0c0378-0829-4a87-ad43-d8765293718b,Polyphthalate Carbonate,583c4cb9-5c60-45b1-aca0-f3bbd437473f
+e991482a-ad97-4710-8138-a98e5c032c7d,Polypropylene (PP),583c4cb9-5c60-45b1-aca0-f3bbd437473f
+3177a66c-241e-47be-bb58-c47ef8a12868,Polystyrene (PS),b39ea9e6-4d97-481e-ab7a-eba9490d66db
+bf5df8d1-3b4d-4d05-bb4a-e1a3fbd9e968,Syndiotactic Polystyrene (SPS),3177a66c-241e-47be-bb58-c47ef8a12868
+ed480499-d874-40ee-b1cf-0a3f7d7da060,Polysulfone (PSU),3177a66c-241e-47be-bb58-c47ef8a12868
+bf972937-0588-4c24-93e8-b24758062928,"Polyurethane, TP",3177a66c-241e-47be-bb58-c47ef8a12868
+ab5aa62a-a7bd-4a9f-b4d5-4b601ff019cf,Polyvinyl Dichloride (PVDC),3177a66c-241e-47be-bb58-c47ef8a12868
+edc559d9-9486-4716-956b-6df665c4d0bc,SAN Polymer,3177a66c-241e-47be-bb58-c47ef8a12868
+c163ddfd-0f69-4f28-bce8-cd9fd1c635ab,"Silicone, Thermoplastic",3177a66c-241e-47be-bb58-c47ef8a12868
+dded6adb-7638-464a-9ebf-c794359eb888,Siloxane,3177a66c-241e-47be-bb58-c47ef8a12868
+a21238fb-9924-4247-a1a9-9495a7d701d6,SMA Polymer,3177a66c-241e-47be-bb58-c47ef8a12868
+f8497a10-feba-4a37-ac41-11218f5712a4,Styrene-Butadiene,3177a66c-241e-47be-bb58-c47ef8a12868
+ea63b8da-bab8-4b19-b445-1e52f9cb21bc,TPO,3177a66c-241e-47be-bb58-c47ef8a12868
+b53153a2-d06b-41d0-8697-5fb853608039,Vinyl (PVC),3177a66c-241e-47be-bb58-c47ef8a12868
+55d47adf-1785-49d1-a297-5093e975737f,Thermoset,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+6a57efe8-d7cc-4cd4-ab10-e59db4f9d66d,Acrylic/Cyanoacrylate Adhesive,55d47adf-1785-49d1-a297-5093e975737f
+041e8e23-8a6e-49e4-beb7-3fd025fd45e1,Aramid,55d47adf-1785-49d1-a297-5093e975737f
+af539319-ad18-4b42-bcc8-6896353396de,Carbon Fiber/Thermoset Composite,55d47adf-1785-49d1-a297-5093e975737f
+f6cd9d9e-11bb-4708-8223-6007d7bf2750,Composite SMC,55d47adf-1785-49d1-a297-5093e975737f
+24023377-1c27-4cc3-b63b-aa5764913dd8,Diallyl Phthalate (DAP),55d47adf-1785-49d1-a297-5093e975737f
+2fb9900c-4ee3-486e-ae84-62aceb825258,Epoxy,55d47adf-1785-49d1-a297-5093e975737f
+00b04f95-eb89-4ccf-8b16-349934bdba03,Filled/Reinforced Thermoset,55d47adf-1785-49d1-a297-5093e975737f
+5c653e09-8218-49eb-a210-568a4d31de30,"Fluoropolymer, TS",55d47adf-1785-49d1-a297-5093e975737f
+27e51484-11c4-40e9-b5e2-fdc65d5643ec,Melamine,55d47adf-1785-49d1-a297-5093e975737f
+ec114b3a-e468-47d7-a9d1-79ce1f409ce0,Methacrylate,55d47adf-1785-49d1-a297-5093e975737f
+9a107552-f6b7-4f35-b1e6-0ed4cf828a51,Phenolic,55d47adf-1785-49d1-a297-5093e975737f
+c6d1984c-d540-4ae1-89a7-6c7c63f5add5,"Polyester, TS",55d47adf-1785-49d1-a297-5093e975737f
+2076e1a2-2f40-4337-b01e-e53366eaf21a,"Polyimide, TS",55d47adf-1785-49d1-a297-5093e975737f
+9f00d885-6716-4c3e-a648-e60c80366536,Polymethacrylimide,55d47adf-1785-49d1-a297-5093e975737f
+e6833ef2-1b4e-4444-b87a-57c804d1b06a,Polysulfide Sealant/Adhesive,55d47adf-1785-49d1-a297-5093e975737f
+890640ed-516b-4150-b27f-117f8d9b38fd,"Polyurethane, TS",55d47adf-1785-49d1-a297-5093e975737f
+1bc68fd3-3002-4aec-8cdf-e61bb78db92f,Rubber or Thermoset Elastomer (TSE),55d47adf-1785-49d1-a297-5093e975737f
+0251a3ee-3750-4cd3-a474-723efb999593,Silicone,55d47adf-1785-49d1-a297-5093e975737f
+4954a917-9b81-4118-860f-f935c2f5b751,Vinyl Ester,55d47adf-1785-49d1-a297-5093e975737f
+28c9859f-f54d-4ed7-874a-4448c537f2e7,Pure Element,b39ea9e6-4d97-481e-ab7a-eba9490d66db
+c69eebfa-7c4c-4c80-8d71-a66b915ea48c,Wood and Natural Products,
+37ddcf28-e655-4ac9-b193-73b52aecb40a,Wood,c69eebfa-7c4c-4c80-8d71-a66b915ea48c
+1fb50051-8265-45bf-a6e2-78cfef1e37f7,Hardwood,37ddcf28-e655-4ac9-b193-73b52aecb40a
+80fce2c7-3db6-499d-b551-35572a2fe425,Softwood,37ddcf28-e655-4ac9-b193-73b52aecb40a

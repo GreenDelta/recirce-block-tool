@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"log"
 	"os"
 	"path/filepath"
@@ -74,7 +75,36 @@ func (dir *DataDir) initDatabase() error {
 	log.Println("WARNING: created default admin; " +
 		"you should set another password")
 
+	dir.insertMaterials()
+
 	return nil
+}
+
+func (dir *DataDir) insertMaterials() {
+	path := filepath.Join(dir.dir, "materials.csv")
+	file, err := os.Open(path)
+	if err != nil {
+		log.Println("failed to read default materials:", err)
+		return
+	}
+	defer file.Close()
+	rows, err := csv.NewReader(file).ReadAll()
+	if err != nil {
+		log.Println("failed to read default materials:", err)
+		return
+	}
+	log.Println("insert materials from", path)
+	for _, row := range rows {
+		mat := &Material{
+			ID:     row[0],
+			Name:   row[1],
+			Parent: row[2],
+		}
+		if err := dir.db.Put(MaterialBucket, mat); err != nil {
+			log.Println("failed to insert material:", err)
+			return
+		}
+	}
 }
 
 func (dir *DataDir) initCookieStore() error {

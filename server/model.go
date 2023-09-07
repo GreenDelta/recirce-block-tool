@@ -28,6 +28,16 @@ type User struct {
 	IsAdmin bool   `json:"isAdmin"`
 }
 
+type Material struct {
+	ID     string `json:"id"`
+	Name   string `json:"name"`
+	Parent string `json:"parent"`
+}
+
+func (m *Material) Key() []byte {
+	return []byte(m.ID)
+}
+
 type Product struct {
 	BaseEntity
 }
