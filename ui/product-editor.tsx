@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MainMenu } from "./menu";
-import { Component, Product } from "./model";
+import { Component, Product, ProductPart } from "./model";
 import * as uuid from "uuid";
 
 export const ProductEditor = () => {
@@ -20,13 +20,21 @@ export const ProductEditor = () => {
       isRoot
       product={product}
       component={product}
-      onChanged={() => setProduct({ ...product })} />
+      onChanged={() => setProduct({ ...product })}
+      onSave={() => { }} />
   </>;
 }
 
 interface CompProps {
   isRoot?: boolean;
   component: Component;
+  product: Product;
+  onChanged: () => void;
+  onSave: () => void;
+}
+
+interface MatProps {
+  material: ProductPart,
   product: Product;
   onChanged: () => void;
 }
@@ -39,6 +47,17 @@ const ComponentPanel = (props: CompProps) => {
     for (const c of comp.components) {
       const subProps = { ...props, component: c, isRoot: false };
       subComps.push(<ComponentPanel key={c.id} {...subProps} />);
+    }
+  }
+
+  const matParts = [];
+  if (comp.materials) {
+    for (const mat of comp.materials) {
+      matParts.push(
+        <MaterialPanel key={mat.id}
+          material={mat}
+          product={props.product}
+          onChanged={props.onChanged} />);
     }
   }
 
@@ -70,6 +89,7 @@ const ComponentPanel = (props: CompProps) => {
       </header>
       <CompMenu {...props} />
       {subComps}
+      {matParts}
     </article>
   </>;
 }
@@ -92,7 +112,18 @@ const CompMenu = (props: CompProps) => {
   };
 
   const onAddMat = () => {
-
+    const mat = {
+      id: uuid.v4(),
+      name: "New material",
+      mass: 1.0,
+    }
+    const c = props.component;
+    if (c.materials) {
+      c.materials.push(mat);
+    } else {
+      c.materials = [mat];
+    }
+    props.onChanged();
   };
 
   const onDelete = () => {
@@ -107,28 +138,62 @@ const CompMenu = (props: CompProps) => {
     }
   };
 
-  const style = { cursor: "pointer", fontSize: "0.8em" };
   const links = [
-    <li><a onClick={onAddComp} style={style}>Add component</a></li>,
-    <li>|</li>,
-    <li><a onClick={onAddMat} style={style}>Add material</a></li>,
+    <PanelLink onClick={onAddComp} label="Add component" sep />,
+    <PanelLink onClick={onAddMat} label="Add material" sep />,
   ];
-  if (!props.isRoot) {
-    links.push(<li>|</li>);
-    links.push(
-      <li><a onClick={onDelete} style={style}>Delete</a></li>
-    );
+  if (props.isRoot) {
+    links.push(<PanelLink onClick={props.onSave} label="Save product" />);
+  } else {
+    links.push(<PanelLink onClick={onDelete} label="Delete component" />);
   }
+
+  const massFraction = props.isRoot
+    ? <></>
+    : massFractionOf(props.component, props.product);
 
   return (
     <nav>
-      <ul></ul>
+      <ul>
+        {massFraction}
+      </ul>
       <ul>
         {links}
       </ul>
     </nav>
   );
 };
+
+const MaterialPanel = (props: MatProps) => {
+
+  const onDelete = () => {
+
+  };
+
+  return (
+    <article style={{ margin: "3px", paddingBottom: "15px" }}>
+      <header style={{ padding: "15px", marginBottom: "15px" }}>
+        <div className="grid">
+          <select required>
+            <option value="" selected>Select a material...</option>
+          </select>
+          <div style={{ display: "inline-flex" }}>
+            <input type="number" value={props.material.mass} />
+            <label style={{ padding: 15 }}>kg</label>
+          </div>
+        </div>
+      </header>
+      <nav>
+        <ul></ul>
+        <ul>
+          <PanelLink onClick={onDelete} label="Delete material" />
+        </ul>
+      </nav>
+    </article>
+  );
+}
+
+
 
 function parentOf(comp: Component, root: Component): [Component, number] | null {
   if (!comp || !root || !root.components) {
@@ -145,4 +210,36 @@ function parentOf(comp: Component, root: Component): [Component, number] | null 
     }
   }
   return null;
+}
+
+function massFractionOf(elem: ProductPart, product: Product) {
+  const style: React.CSSProperties = { fontSize: "0.8em" };
+  let share;
+  if (product.mass <= 0 || elem.mass < 0) {
+    style.color = "red";
+    share = "NaN";
+  } else {
+    const val = 100 * elem.mass / product.mass;
+    share = val.toFixed(2);
+    if (val > 100) {
+      style.color = "red";
+    }
+  }
+  return <li>Mass fraction: <span style={style}>{share}</span></li>;
+}
+
+const PanelLink = ({ onClick, label, sep }: {
+  onClick: () => void,
+  label: string,
+  sep?: boolean
+}) => {
+  const link = <li>
+    <a onClick={onClick}
+      style={{ cursor: "pointer", fontSize: "0.8em" }}>
+      {label}
+    </a>
+  </li>;
+  return sep
+    ? <>{link} <li>|</li></>
+    : link;
 }
