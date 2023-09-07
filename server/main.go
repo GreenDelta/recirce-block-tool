@@ -16,14 +16,17 @@ import (
 )
 
 type server struct {
+	args   *args
 	db     *DB
 	cookie *sessions.CookieStore
+	router *mux.Router
 }
 
 func main() {
 
 	args := readArgs()
 
+	// initialize the data folder
 	log.Println("init data folder", args.dataDir)
 	for _, folder := range []string{args.dataDir} {
 		err := os.MkdirAll(folder, os.ModePerm)
@@ -32,46 +35,14 @@ func main() {
 			return
 		}
 	}
-	s := &server{}
-	s.db = initDB(args.dataDir)
-	s.cookie = initCookieStore(args)
 
-	log.Println("Create server with static files from:", args.staticDir)
-	r := mux.NewRouter()
-
-	// user routes (account management)
-	r.HandleFunc("/api/users", s.handleGetUsers()).Methods("GET")
-	r.HandleFunc("/api/users", s.handlePostUser()).Methods("POST")
-	r.HandleFunc("/api/users/login", s.handleLogin()).Methods("POST")
-	r.HandleFunc("/api/users/logout", s.handleLogout()).Methods("POST")
-	r.HandleFunc("/api/users/current", s.handleGetCurrentUser()).Methods("GET")
-	r.HandleFunc("/api/users/{id}", s.handleGetUser()).Methods("GET")
-	// self regisration will be enabled later
-	// r.HandleFunc("/api/users/signup", s.handleSignUp()).Methods("POST")
-
-	r.HandleFunc("/api/next-id", s.getNextId()).Methods("GET")
-
-	// EPD routes
-	/*
-		r.HandleFunc("/api/epds", s.handleGetEPDs()).Methods("GET")
-		r.HandleFunc("/api/epds", s.handlePostEPD()).Methods("POST")
-		r.HandleFunc("/api/epds/{id}", s.handleGetEPD()).Methods("GET")
-		r.HandleFunc("/api/epds/{id}", s.handleDeleteEPD()).Methods("DELETE")
-		r.HandleFunc("/api/epds/export/pdf/{id}", s.handlePdfExport()).Methods("GET")
-		r.HandleFunc("/api/epds/export/docx/{id}", s.handleDocxExport()).Methods("GET")
-	*/
-
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		html, err := os.ReadFile(filepath.Join(args.staticDir, "index.html"))
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "text/html")
-		w.Write(html)
-	})
-	fs := http.FileServer(http.Dir(args.staticDir))
-	r.PathPrefix("/").Handler(NoCache(fs)) // TODO: NoCache only in dev-mode
+	server := &server{
+		args:   args,
+		db:     initDB(args.dataDir),
+		cookie: initCookieStore(args),
+		router: mux.NewRouter(),
+	}
+	server.mountRoutes()
 
 	log.Println("Register shutdown routines")
 	ossignals := make(chan os.Signal, 1)
@@ -80,7 +51,7 @@ func main() {
 	go func() {
 		<-ossignals
 		log.Println("Shutdown server")
-		err := s.db.Close()
+		err := server.db.Close()
 		if err != nil {
 			log.Fatal("Failed to close database", err)
 		}
@@ -88,7 +59,7 @@ func main() {
 	}()
 
 	log.Println("Starting server at port:", args.port)
-	if err := http.ListenAndServe(":"+args.port, r); err != nil {
+	if err := http.ListenAndServe(":"+args.port, server.router); err != nil {
 		log.Println("ERROR: failed to start server;", err)
 	}
 }

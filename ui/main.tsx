@@ -4,15 +4,24 @@ import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
 import { MainMenu } from "./menu";
 import { LoginPage } from "./login";
-import { ProductEditor, ProductsOverview } from "./products";
+import { ProductsOverview } from "./products";
+import { ProductEditor } from "./product-editor";
 
 const ErrorPage = () => {
-  return <div>
-    <h1>Oops!</h1>
-    <p>
-      We can't seem to find the page you're looking for.
-    </p>
-  </div>;
+  return (
+    <>
+      <MainMenu />
+      <div>
+        <p>
+          <strong>Oops!</strong>
+        </p>
+        <p>
+          We can't seem to find the page you're looking for.
+        </p>
+        <Link to="/">Back to home page</Link>
+      </div>
+    </>
+  );
 };
 
 const Article = ({ header }: { header: string }) => {
@@ -33,27 +42,27 @@ function main() {
       errorElement: <ErrorPage />,
     },
     {
-      path: "/analyses",
+      path: "/ui/analyses",
       element: <Article header="Analyses" />
     },
     {
-      path: "/products",
+      path: "/ui/products",
       element: <ProductsOverview />
     },
     {
-      path: "/products/create",
+      path: "/ui/products/create",
       element: <ProductEditor />
     },
     {
-      path: "/processes",
+      path: "/ui/processes",
       element: <Article header="Processes" />
     },
     {
-      path: "/emission-factors",
+      path: "/ui/emission-factors",
       element: <Article header="Emission factors" />
     },
     {
-      path: "/login",
+      path: "/ui/login",
       element: <LoginPage />
     }
   ]);
