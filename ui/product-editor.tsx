@@ -107,7 +107,7 @@ const CompMenu = (props: CompProps) => {
   if (!props.isRoot) {
     links.push(
       <li><a onClick={onDelete} style={style}>Delete this component</a></li>
-    )
+    );
   }
 
   return (

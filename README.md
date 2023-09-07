@@ -14,3 +14,7 @@ cd server
 go build
 ./recircle -data ../data -static ../static
 ```
+
+## Linting
+
+https://typescript-eslint.io/getting-started

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MainMenu } from "./menu";
 
-export const HomePage = (props: {}) => {
+export const HomePage = () => {
   return <>
     <MainMenu />
     <p>
