@@ -25,7 +25,7 @@ export const MaterialsPage = () => {
 
   const index: Record<string, Material> = {};
   for (const mat of materials) {
-    index[mat.id] = mat;
+    index[mat.name] = mat;
   }
 
   const rows = [];

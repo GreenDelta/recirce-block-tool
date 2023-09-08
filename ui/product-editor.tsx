@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { MainMenu } from "./menu";
-import { Component, Material, Product, ProductPart } from "./model";
+import { Component, Product, ProductPart } from "./model";
 import * as api from "./api";
 import * as uuid from "uuid";
 import { ProgressPage } from "./progress";
 
 export const ProductEditor = () => {
-  const [materials, setMaterials] = useState<Material[] | null>(null);
+  const [materials, setMaterials] = useState<string[] | null>(null);
 
   const [product, setProduct] = useState<Product>({
     id: uuid.v4(),
@@ -15,7 +15,10 @@ export const ProductEditor = () => {
   });
 
   useEffect(() => {
-    api.getMaterials().then(setMaterials);
+    api.getMaterials().then(mats => {
+      const names = mats.map(m => m.name).sort();
+      setMaterials(names);
+    });
   }, []);
   if (!materials) {
     return <ProgressPage message="Loading materials..." />;
@@ -28,7 +31,7 @@ export const ProductEditor = () => {
         <strong>Create a new product</strong>
       </p>
       <datalist id="materials">
-        {materials.map(m => <option value={m.name} />)}
+        {materials.map(m => <option value={m} />)}
       </datalist>
       <ComponentPanel
         key={product.id}
@@ -47,7 +50,7 @@ interface CompProps {
   isRoot?: boolean;
   component: Component;
   product: Product;
-  materials: Material[];
+  materials: string[];
   onChanged: () => void;
   onSave: () => void;
 }
@@ -55,7 +58,7 @@ interface CompProps {
 interface MatProps {
   material: ProductPart;
   product: Product;
-  materials: Material[];
+  materials: string[];
   onChanged: () => void;
 }
 

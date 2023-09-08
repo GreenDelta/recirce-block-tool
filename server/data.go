@@ -96,9 +96,8 @@ func (dir *DataDir) insertMaterials() {
 	log.Println("insert materials from", path)
 	for _, row := range rows {
 		mat := &Material{
-			ID:     row[0],
-			Name:   row[1],
-			Parent: row[2],
+			Name:   row[0],
+			Parent: row[1],
 		}
 		if err := dir.db.Put(MaterialBucket, mat); err != nil {
 			log.Println("failed to insert material:", err)

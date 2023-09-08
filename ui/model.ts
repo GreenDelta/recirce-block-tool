@@ -14,7 +14,6 @@ export interface Product extends Component {
 }
 
 export interface Material {
-  id: string;
   name: string;
   parent: string;
 }
