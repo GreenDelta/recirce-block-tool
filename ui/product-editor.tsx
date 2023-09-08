@@ -146,7 +146,7 @@ const CompMenu = (props: CompProps) => {
   const onAddMat = () => {
     const mat = {
       id: uuid.v4(),
-      name: "New material",
+      material: "",
       mass: 1.0,
     };
     const c = props.component;

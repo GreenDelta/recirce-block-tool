@@ -1,16 +1,19 @@
 export interface ProductPart {
   id: string;
-  name: string;
   mass: number;
 }
 
-export interface Component extends ProductPart{
+export interface MaterialPart extends ProductPart {
+  material: string;
+}
+
+export interface Component extends ProductPart {
+  name: string;
   components?: Component[];
-  materials?: ProductPart[];
+  materials?: MaterialPart[];
 }
 
 export interface Product extends Component {
-  id: string;
 }
 
 export interface Material {
