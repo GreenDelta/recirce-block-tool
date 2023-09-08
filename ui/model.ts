@@ -1,5 +1,5 @@
 export interface ProductPart {
-  id: string
+  id: string;
   name: string;
   mass: number;
 }
@@ -10,5 +10,11 @@ export interface Component extends ProductPart{
 }
 
 export interface Product extends Component {
-  id: string
+  id: string;
+}
+
+export interface Material {
+  id: string;
+  name: string;
+  parent: string;
 }

@@ -6,6 +6,7 @@ import { MainMenu } from "./menu";
 import { LoginPage } from "./login";
 import { ProductsOverview } from "./products";
 import { ProductEditor } from "./product-editor";
+import { MaterialsPage } from "./materials";
 
 const ErrorPage = () => {
   return (
@@ -56,6 +57,10 @@ function main() {
     {
       path: "/ui/processes",
       element: <Article header="Processes" />
+    },
+    {
+      path: "/ui/materials",
+      element: <MaterialsPage />,
     },
     {
       path: "/ui/emission-factors",
