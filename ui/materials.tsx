@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Material } from "./model";
 import * as api from "./api";
 import { ProgressPage } from "./progress";
@@ -6,9 +6,9 @@ import { MainMenu } from "./menu";
 
 export const MaterialsPage = () => {
 
-  const [materials, setMaterials] = React.useState<Material[] | null>(null);
+  const [materials, setMaterials] = useState<Material[] | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api.getMaterials().then(setMaterials);
   }, []);
 

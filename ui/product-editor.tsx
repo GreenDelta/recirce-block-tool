@@ -1,41 +1,61 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { MainMenu } from "./menu";
-import { Component, Product, ProductPart } from "./model";
+import { Component, Material, Product, ProductPart } from "./model";
+import * as api from "./api";
 import * as uuid from "uuid";
+import { ProgressPage } from "./progress";
 
 export const ProductEditor = () => {
-  const [product, setProduct] = React.useState<Product>({
+  const [materials, setMaterials] = useState<Material[] | null>(null);
+
+  const [product, setProduct] = useState<Product>({
     id: uuid.v4(),
     name: "New product",
     mass: 1.0,
   });
 
-  return <>
-    <MainMenu />
-    <p>
-      <strong>Create a new product</strong>
-    </p>
-    <ComponentPanel
-      key={product.id}
-      isRoot
-      product={product}
-      component={product}
-      onChanged={() => setProduct({ ...product })}
-      onSave={() => { }} />
-  </>;
-}
+  useEffect(() => {
+    api.getMaterials().then(setMaterials);
+  }, []);
+  if (!materials) {
+    return <ProgressPage message="Loading materials..." />;
+  }
+
+  return (
+    <>
+      <MainMenu />
+      <p>
+        <strong>Create a new product</strong>
+      </p>
+      <datalist id="materials">
+        {materials.map(m => <option value={m.name} />)}
+      </datalist>
+      <ComponentPanel
+        key={product.id}
+        isRoot
+        product={product}
+        materials={materials}
+        component={product}
+        onChanged={() => setProduct({ ...product })}
+        onSave={() => {}}
+      />
+    </>
+  );
+};
 
 interface CompProps {
   isRoot?: boolean;
   component: Component;
   product: Product;
+  materials: Material[];
   onChanged: () => void;
   onSave: () => void;
 }
 
 interface MatProps {
-  material: ProductPart,
+  material: ProductPart;
   product: Product;
+  materials: Material[];
   onChanged: () => void;
 }
 
@@ -54,48 +74,57 @@ const ComponentPanel = (props: CompProps) => {
   if (comp.materials) {
     for (const mat of comp.materials) {
       matParts.push(
-        <MaterialPanel key={mat.id}
+        <MaterialPanel
+          key={mat.id}
           material={mat}
           product={props.product}
-          onChanged={props.onChanged} />);
+          materials={props.materials}
+          onChanged={props.onChanged}
+        />
+      );
     }
   }
 
-  return <>
-    <article style={{ margin: "3px", paddingBottom: "15px" }}>
-      <header style={{ padding: "15px", marginBottom: "15px" }}>
-        <div className="grid">
-          <div>
-            <input type="text"
-              value={comp.name}
-              onChange={e => {
-                comp.name = e.target.value;
-                props.onChanged();
-              }} />
+  return (
+    <>
+      <article style={{ margin: "3px", paddingBottom: "15px" }}>
+        <header style={{ padding: "15px", marginBottom: "15px" }}>
+          <div className="grid">
+            <div>
+              <input
+                type="text"
+                value={comp.name}
+                onChange={(e) => {
+                  comp.name = e.target.value;
+                  props.onChanged();
+                }}
+              />
+            </div>
+            <div style={{ display: "inline-flex" }}>
+              <input
+                type="number"
+                value={comp.mass}
+                onChange={(e) => {
+                  const s = e.target.value;
+                  if (s) {
+                    comp.mass = Number.parseFloat(s);
+                  }
+                  props.onChanged();
+                }}
+              />
+              <label style={{ padding: 15 }}>kg</label>
+            </div>
           </div>
-          <div style={{ display: "inline-flex" }}>
-            <input type="number" value={comp.mass}
-              onChange={e => {
-                const s = e.target.value;
-                if (s) {
-                  comp.mass = Number.parseFloat(s);
-                }
-                props.onChanged();
-              }} />
-            <label style={{ padding: 15 }}>kg</label>
-          </div>
-        </div>
-
-      </header>
-      <CompMenu {...props} />
-      {subComps}
-      {matParts}
-    </article>
-  </>;
-}
+        </header>
+        <CompMenu {...props} />
+        {subComps}
+        {matParts}
+      </article>
+    </>
+  );
+};
 
 const CompMenu = (props: CompProps) => {
-
   const onAddComp = () => {
     const sub = {
       id: uuid.v4(),
@@ -116,7 +145,7 @@ const CompMenu = (props: CompProps) => {
       id: uuid.v4(),
       name: "New material",
       mass: 1.0,
-    }
+    };
     const c = props.component;
     if (c.materials) {
       c.materials.push(mat);
@@ -148,35 +177,28 @@ const CompMenu = (props: CompProps) => {
     links.push(<PanelLink onClick={onDelete} label="Delete component" />);
   }
 
-  const massFraction = props.isRoot
-    ? <></>
-    : massFractionOf(props.component, props.product);
+  const massFraction = props.isRoot ? (
+    <></>
+  ) : (
+    massFractionOf(props.component, props.product)
+  );
 
   return (
     <nav>
-      <ul>
-        {massFraction}
-      </ul>
-      <ul>
-        {links}
-      </ul>
+      <ul>{massFraction}</ul>
+      <ul>{links}</ul>
     </nav>
   );
 };
 
 const MaterialPanel = (props: MatProps) => {
-
-  const onDelete = () => {
-
-  };
+  const onDelete = () => {};
 
   return (
     <article style={{ margin: "3px", paddingBottom: "15px" }}>
       <header style={{ padding: "15px", marginBottom: "15px" }}>
         <div className="grid">
-          <select required>
-            <option value="" selected>Select a material...</option>
-          </select>
+          <input list="materials" />
           <div style={{ display: "inline-flex" }}>
             <input type="number" value={props.material.mass} />
             <label style={{ padding: 15 }}>kg</label>
@@ -191,11 +213,12 @@ const MaterialPanel = (props: MatProps) => {
       </nav>
     </article>
   );
-}
+};
 
-
-
-function parentOf(comp: Component, root: Component): [Component, number] | null {
+function parentOf(
+  comp: Component,
+  root: Component
+): [Component, number] | null {
   if (!comp || !root || !root.components) {
     return null;
   }
@@ -219,27 +242,40 @@ function massFractionOf(elem: ProductPart, product: Product) {
     style.color = "red";
     share = "NaN";
   } else {
-    const val = 100 * elem.mass / product.mass;
+    const val = (100 * elem.mass) / product.mass;
     share = val.toFixed(2);
     if (val > 100) {
       style.color = "red";
     }
   }
-  return <li>Mass fraction: <span style={style}>{share}</span></li>;
+  return (
+    <li>
+      Mass fraction: <span style={style}>{share}</span>
+    </li>
+  );
 }
 
-const PanelLink = ({ onClick, label, sep }: {
-  onClick: () => void,
-  label: string,
-  sep?: boolean
+const PanelLink = ({
+  onClick,
+  label,
+  sep,
+}: {
+  onClick: () => void;
+  label: string;
+  sep?: boolean;
 }) => {
-  const link = <li>
-    <a onClick={onClick}
-      style={{ cursor: "pointer", fontSize: "0.8em" }}>
-      {label}
-    </a>
-  </li>;
-  return sep
-    ? <>{link} <li>|</li></>
-    : link;
-}
+  const link = (
+    <li>
+      <a onClick={onClick} style={{ cursor: "pointer", fontSize: "0.8em" }}>
+        {label}
+      </a>
+    </li>
+  );
+  return sep ? (
+    <>
+      {link} <li>|</li>
+    </>
+  ) : (
+    link
+  );
+};
