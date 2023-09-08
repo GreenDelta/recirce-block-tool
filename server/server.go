@@ -55,6 +55,8 @@ func (s *Server) mountRoutes() {
 	// r.HandleFunc("/api/users/signup", s.handleSignUp()).Methods("POST")
 
 	r.HandleFunc("/api/materials", s.GetMaterials()).Methods("GET")
+	r.HandleFunc("/api/products", s.GetProducts()).Methods("GET")
+	r.HandleFunc("/api/products", s.PutProduct()).Methods("POST", "PUT")
 
 	// EPD routes
 	/*
