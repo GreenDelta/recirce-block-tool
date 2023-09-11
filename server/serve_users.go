@@ -99,7 +99,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 		}
 
 		var req request
-		if err := DecodeJSON(w, r, &req); err != nil {
+		if !ReadAsJson(w, r, &req) {
 			return
 		}
 
@@ -111,8 +111,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 
 		hash, err := hashPassword(password)
 		if err != nil {
-			http.Error(w, "server error", http.StatusInternalServerError)
-			log.Println("ERROR: could not generate password hash", err)
+			SendError(w, "could not generate password hash", err)
 			return
 		}
 
@@ -122,7 +121,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 		}
 		user.ID = xid.New().String()
 		if err = s.db.Put(AccountBucket, user); err != nil {
-			http.Error(w, "server error", http.StatusInternalServerError)
+			SendError(w, "failed to save user", err)
 			return
 		}
 
@@ -136,7 +135,7 @@ func (s *Server) handleSignUp() http.HandlerFunc {
 		}
 
 		user.Hash = ""
-		ServeAsJson(user, w)
+		SendAsJson(w, user)
 	}
 }
 
@@ -150,7 +149,7 @@ func (s *Server) handleLogin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		var credentials request
-		if err := DecodeJSON(w, r, &credentials); err != nil {
+		if !ReadAsJson(w, r, &credentials) {
 			http.Error(w, "invalid login data", http.StatusBadRequest)
 			return
 		}
@@ -164,7 +163,7 @@ func (s *Server) handleLogin() http.HandlerFunc {
 		// check the password hash
 		hash, err := base64.StdEncoding.DecodeString(user.Hash)
 		if err != nil {
-			http.Error(w, "could not process login data", http.StatusInternalServerError)
+			SendError(w, "could not process login data", err)
 			return
 		}
 		err = bcrypt.CompareHashAndPassword(hash, []byte(Trim(credentials.Password)))
@@ -178,7 +177,7 @@ func (s *Server) handleLogin() http.HandlerFunc {
 		session.Save(r, w)
 
 		user.Hash = ""
-		ServeAsJson(user, w)
+		SendAsJson(w, user)
 	}
 }
 
@@ -200,7 +199,7 @@ func (s *Server) handleGetCurrentUser() http.HandlerFunc {
 			return
 		}
 		user.Hash = ""
-		ServeAsJson(user, w)
+		SendAsJson(w, user)
 	}
 }
 
@@ -226,12 +225,11 @@ func (s *Server) handleGetUsers() http.HandlerFunc {
 		})
 
 		if err != nil {
-			log.Println("error: failed to get users:", err)
-			http.Error(w, "failed to get users", http.StatusInternalServerError)
+			SendError(w, "failed to get users", err)
 			return
 		}
 
-		ServeAsJson(users, w)
+		SendAsJson(w, users)
 	}
 }
 
@@ -252,7 +250,7 @@ func (s *Server) handleGetUser() http.HandlerFunc {
 			return
 		}
 		user.Hash = ""
-		ServeAsJson(&user, w)
+		SendAsJson(w, &user)
 	}
 }
 
@@ -274,7 +272,7 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 		}
 
 		var req request
-		if err := DecodeJSON(w, r, &req); err != nil {
+		if !ReadAsJson(w, r, &req) {
 			return
 		}
 
@@ -312,7 +310,7 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 				}
 				hash, err := hashPassword(Trim(req.Password))
 				if err != nil {
-					logErr(w, "failed to hash password", err)
+					SendError(w, "failed to hash password", err)
 					return
 				}
 				user.Hash = hash
@@ -326,11 +324,11 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 				user.IsAdmin = req.IsAdmin
 			}
 			if err := s.db.Put(AccountBucket, &user); err != nil {
-				logErr(w, "failed to save user", err)
+				SendError(w, "failed to save user", err)
 				return
 			}
 			user.Hash = ""
-			ServeAsJson(&user, w)
+			SendAsJson(w, &user)
 			return
 		}
 
@@ -343,7 +341,7 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 
 		hash, err := hashPassword(password)
 		if err != nil {
-			logErr(w, "could not generate password hash", err)
+			SendError(w, "could not generate password hash", err)
 			return
 		}
 
@@ -356,10 +354,10 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 		}
 		user.ID = xid.New().String()
 		if err := s.db.Put(AccountBucket, user); err != nil {
-			logErr(w, "failed to save user", err)
+			SendError(w, "failed to save user", err)
 			return
 		}
 		user.Hash = ""
-		ServeAsJson(&user, w)
+		SendAsJson(w, &user)
 	}
 }

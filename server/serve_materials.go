@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 )
 
@@ -21,10 +20,9 @@ func (s *Server) GetMaterials() http.HandlerFunc {
 		})
 
 		if err != nil {
-			log.Println("error: failed to read materials:", err)
-			http.Error(w, "failed to get materials", http.StatusInternalServerError)
+			SendError(w, "failed to read materials", err)
 			return
 		}
-		ServeAsJson(materials, w)
+		SendAsJson(w, materials)
 	}
 }
