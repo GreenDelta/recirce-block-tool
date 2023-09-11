@@ -1,10 +1,5 @@
 import { Material, Product } from "./model";
 
-export async function getNextId(): Promise<string> {
-  const r = await fetch("/api/next-id");
-  return r.text();
-}
-
 export async function getMaterials(): Promise<Material[]> {
   const r = await fetch("/api/materials");
   const json = await r.json();
@@ -15,6 +10,11 @@ export async function getProducts(): Promise<Product[]> {
   const r = await fetch("/api/products");
   const json = await r.json();
   return !json ? [] : json;
+}
+
+export async function getProduct(id: string): Promise<Product[]> {
+  const r = await fetch(`/api/product/${id}`);
+  return r.json();
 }
 
 export async function postProduct(p: Product): Promise<void> {
