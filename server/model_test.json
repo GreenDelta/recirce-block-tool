@@ -1,0 +1,43 @@
+{
+  "id": "123",
+  "name": "Example product",
+  "mass": 1.5,
+  "components": [
+    {
+      "id": "456",
+      "name": "Component B",
+      "mass": 0.8
+    },
+    {
+      "id": "789",
+      "name": "Component C",
+      "mass": 0.7,
+      "components": [
+        {
+          "id": "012",
+          "name": "Component D",
+          "mass": 0.3
+        }
+      ],
+      "materials": [
+        {
+          "id": "345",
+          "material": "Steel",
+          "mass": 0.5
+        },
+        {
+          "id": "678",
+          "material": "Aluminum",
+          "mass": 0.2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "id": "901",
+      "material": "Plastic",
+      "mass": 0.3
+    }
+  ]
+}

@@ -40,9 +40,10 @@ type Component struct {
 }
 
 type MaterialPart struct {
-	ID       string  `json:"id"`
-	Material string  `json:"material"`
-	Mass     float64 `json:"mass"`
+	ID        string         `json:"id"`
+	Material  string         `json:"material"`
+	Mass      float64        `json:"mass"`
+	Materials []MaterialPart `json:"materials,omitempty"`
 }
 
 type Product struct {
