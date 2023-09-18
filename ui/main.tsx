@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import * as ReactDOM from "react-dom";
-import { createBrowserRouter, Link, Outlet, redirect, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, Outlet, useNavigate, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
-import { MainMenu } from "./menu";
 import { LoginPage } from "./login";
 import { ProductsOverview } from "./products";
 import { ProductEditor } from "./product-editor";
 import { MaterialsPage } from "./materials";
+import { User } from "./model";
+import * as api from "./api";
 
 const ErrorPage = () => {
   return (
@@ -34,11 +35,51 @@ const Article = ({ header }: { header: string }) => {
 }
 
 const Root = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+  const onLogout = () => {
+    api.postLogout().then(() => setUser(null));
+    navigate("/");
+  };
   return <>
-    <MainMenu />
-    <Outlet />
+    <MainMenu user={user} onLogout={onLogout}/>
+    <Outlet context={[user, setUser]} />
   </>;
 }
+
+const MainMenu = (props: { user: User | null, onLogout: () => void }) => {
+
+  if (!props.user) {
+    return (
+      <nav style={{ marginBottom: 30 }}>
+        <ul>
+          <li><Link to="/"><img src="/logo.png"></img></Link></li>
+        </ul>
+        <ul>
+          <li><Link to="/ui/login">Login</Link></li>
+        </ul>
+      </nav>
+    );
+  }
+
+  return (
+    <nav style={{ marginBottom: 30 }}>
+      <ul>
+        <li><Link to="/"><img src="/logo.png"></img></Link></li>
+        <li></li>
+        <li><Link to="/ui/analyses">Analyses</Link></li>
+        <li><Link to="/ui/products">Products</Link></li>
+        <li><Link to="/ui/materials">Materials</Link></li>
+        <li><Link to="/ui/emission-factors">Emission factors</Link></li>
+      </ul>
+      <ul>
+        <li>
+          <a style={{cursor: "pointer"}} onClick={props.onLogout}>Logout</a>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 function main() {
   const router = createBrowserRouter([
@@ -83,7 +124,5 @@ function main() {
     <RouterProvider router={router} />
   </React.StrictMode>;
   ReactDOM.render(provider, document.getElementById("app"));
-
-  redirect("/ui/home");
 }
 main();

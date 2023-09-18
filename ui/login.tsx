@@ -1,26 +1,35 @@
 import React, { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import * as api from "./api";
+import { User } from "./model";
+
+type UserContext =[User | null, (user: User) => void];
 
 export const LoginPage = () => {
 
+  const navigate = useNavigate();
+  const [user, setUser] = useOutletContext<UserContext>();
   const [inProgress, setInProgress] = useState(false);
-  const [user, setUser] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<unknown>(null);
 
   const onLogin = async () => {
     setInProgress(true);
     try {
-      const u = await api.postLogin({ user, password });
-      console.log(u);
-      redirect("/ui/home");
+      const u = await api.postLogin({ user: userName, password });
+      setUser(u);
+      setInProgress(false);
     } catch (err: unknown) {
       console.log(err);
       setError(err);
+      setInProgress(false);
     }
   };
 
+  if (user) {
+    navigate("/");
+  }
 
   return <>
     <article>
@@ -33,8 +42,8 @@ export const LoginPage = () => {
               type="text"
               required
               disabled={inProgress}
-              value={user}
-              onChange={e => setUser(e.target.value)}></input>
+              value={userName}
+              onChange={e => setUserName(e.target.value)}></input>
           </label>
           <div />
         </div>

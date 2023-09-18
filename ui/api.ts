@@ -45,3 +45,11 @@ export async function postLogin(credentials: Credentials): Promise<User> {
   }
   return r.json();
 }
+
+export async function postLogout(): Promise<void> {
+  const r = await fetch("/api/users/logout", { method: "POST" });
+  if (r.status !== 200) {
+    const message = await r.text();
+    throw new Error(`failed to login: ${message}`);
+  }
+}
