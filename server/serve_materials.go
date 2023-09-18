@@ -7,15 +7,30 @@ import (
 
 func (s *Server) GetMaterials() http.HandlerFunc {
 
+	type response struct {
+		Name   string `json:"name"`
+		Parent string `json:"parent"`
+	}
+
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		var materials []*Material
+		user := s.getSessionUser(w, r)
+		if user == nil {
+			return
+		}
+
+		var materials []*response
 		err := s.db.Each(MaterialBucket, func(key string, data []byte) error {
 			var m Material
 			if err := json.Unmarshal(data, &m); err != nil {
 				return err
 			}
-			materials = append(materials, &m)
+			if m.User == user.ID {
+				materials = append(materials, &response{
+					Name:   m.Name,
+					Parent: m.Parent,
+				})
+			}
 			return nil
 		})
 

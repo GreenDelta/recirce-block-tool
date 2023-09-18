@@ -21,6 +21,7 @@ func (u *User) Key() []byte {
 }
 
 type Material struct {
+	User   string `json:"user"`
 	Name   string `json:"name"`
 	Parent string `json:"parent"`
 }
@@ -46,6 +47,7 @@ type MaterialPart struct {
 
 type Product struct {
 	Component
+	User string `json:"user"`
 }
 
 func (p *Product) Key() []byte {

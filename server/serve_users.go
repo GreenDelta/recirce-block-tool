@@ -51,18 +51,20 @@ func findUser(db *DB, name string) *User {
 	return user
 }
 
-func (s *Server) getSessionUser(r *http.Request) *User {
+func (s *Server) getSessionUser(w http.ResponseWriter, r *http.Request) *User {
 	ses := s.Session(r)
 	if ses == nil {
+		http.Error(w, "Not logged in", http.StatusUnauthorized)
 		return nil
 	}
 	id, ok := ses.Values["user"].(string)
 	if !ok || id == "" {
+		http.Error(w, "Not logged in", http.StatusUnauthorized)
 		return nil
 	}
 	var user User
 	if err := s.db.Load(AccountBucket, id, &user); err != nil {
-		log.Println("ERROR: failed to load user ", id, "from database", err)
+		SendError(w, "failed to load user", err)
 		return nil
 	}
 	return &user
@@ -126,9 +128,8 @@ func (s *Server) PostLogout() http.HandlerFunc {
 func (s *Server) GetCurrentUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		user := s.getSessionUser(r)
+		user := s.getSessionUser(w, r)
 		if user == nil {
-			http.Error(w, "not logged in", http.StatusUnauthorized)
 			return
 		}
 		user.Hash = ""
@@ -140,9 +141,8 @@ func (s *Server) GetUsers() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		account := s.getSessionUser(r)
+		account := s.getSessionUser(w, r)
 		if account == nil {
-			http.Error(w, "Not logged in", http.StatusUnauthorized)
 			return
 		}
 		if !account.IsAdmin {
@@ -174,9 +174,8 @@ func (s *Server) GetUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		account := s.getSessionUser(r)
+		account := s.getSessionUser(w, r)
 		if account == nil {
-			http.Error(w, "Not logged in", http.StatusUnauthorized)
 			return
 		}
 		id := mux.Vars(r)["id"]
@@ -205,9 +204,8 @@ func (s *Server) PostUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		account := s.getSessionUser(r)
+		account := s.getSessionUser(w, r)
 		if account == nil {
-			http.Error(w, "not logged in", http.StatusUnauthorized)
 			return
 		}
 
