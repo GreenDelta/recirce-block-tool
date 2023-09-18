@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MainMenu } from "./menu";
 import { Product } from "./model";
 import * as api from "./api";
 import { ProgressPage } from "./progress";
@@ -17,7 +16,6 @@ export const ProductsOverview = () => {
   products.sort((p1, p2) => p1.name.localeCompare(p2.name));
 
   return <>
-    <MainMenu />
     <nav>
       <ul>
         <li><strong>Products</strong></li>

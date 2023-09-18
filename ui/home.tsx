@@ -1,9 +1,7 @@
 import * as React from "react";
-import { MainMenu } from "./menu";
 
 export const HomePage = () => {
   return <>
-    <MainMenu />
     <p>
       <strong>Welcome to the ReCircE Block Tool!</strong>
     </p>

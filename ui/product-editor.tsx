@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { MainMenu } from "./menu";
 import { Component, Product, ProductPart } from "./model";
 import * as api from "./api";
 import * as uuid from "uuid";
@@ -26,7 +25,6 @@ export const ProductEditor = () => {
 
   return (
     <>
-      <MainMenu />
       <p>
         <strong>Create a new product</strong>
       </p>

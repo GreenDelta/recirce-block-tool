@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { redirect } from "react-router-dom";
-import { HomePage } from "./home";
-import { MainMenu } from "./menu";
-import { AppState } from "./model";
 import * as api from "./api";
 
-export const LoginPage = (props: { state: AppState }) => {
-
-  if (props.state.user) {
-    return <HomePage />;
-  }
+export const LoginPage = () => {
 
   const [inProgress, setInProgress] = useState(false);
   const [user, setUser] = useState("");
@@ -30,8 +23,6 @@ export const LoginPage = (props: { state: AppState }) => {
 
 
   return <>
-    <MainMenu />
-
     <article>
       <form>
         <div className="grid">

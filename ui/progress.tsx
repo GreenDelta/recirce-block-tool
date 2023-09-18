@@ -1,5 +1,4 @@
 import * as React from "react";
-import { MainMenu } from "./menu";
 
 export const ProgressPage = (props: {message?: string}) => {
 
@@ -9,7 +8,6 @@ export const ProgressPage = (props: {message?: string}) => {
 
   return (
     <>
-      <MainMenu disabled />
       <article>
         <p>{message}</p>
         <progress />

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Material } from "./model";
 import * as api from "./api";
 import { ProgressPage } from "./progress";
-import { MainMenu } from "./menu";
 
 export const MaterialsPage = () => {
 
@@ -49,7 +48,6 @@ export const MaterialsPage = () => {
 
   return (
     <>
-      <MainMenu />
       <table>
         <thead>
           <tr>
