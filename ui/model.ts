@@ -1,3 +1,11 @@
+export interface User {
+  name: string;
+}
+
+export interface AppState {
+  user?: User;
+}
+
 export interface ProductPart {
   id: string;
   mass: number;

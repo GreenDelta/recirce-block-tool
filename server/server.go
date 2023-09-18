@@ -19,6 +19,15 @@ type Server struct {
 	router  *mux.Router
 }
 
+func (s *Server) Session(r *http.Request) *sessions.Session {
+	ses, err := s.cookies.Get(r, "recirce-block-tool")
+	if err != nil {
+		log.Println("failed to get session:", err)
+		return nil
+	}
+	return ses
+}
+
 func (s *Server) Serve() error {
 	s.mountRoutes()
 	s.addShutdownHook()
@@ -45,12 +54,12 @@ func (s *Server) mountRoutes() {
 	r := s.router
 
 	// user routes (account management)
-	r.HandleFunc("/api/users", s.handleGetUsers()).Methods("GET")
-	r.HandleFunc("/api/users", s.handlePostUser()).Methods("POST")
-	r.HandleFunc("/api/users/login", s.handleLogin()).Methods("POST")
-	r.HandleFunc("/api/users/logout", s.handleLogout()).Methods("POST")
-	r.HandleFunc("/api/users/current", s.handleGetCurrentUser()).Methods("GET")
-	r.HandleFunc("/api/users/{id}", s.handleGetUser()).Methods("GET")
+	r.HandleFunc("/api/users", s.GetUsers()).Methods("GET")
+	r.HandleFunc("/api/users", s.PostUser()).Methods("POST")
+	r.HandleFunc("/api/users/login", s.PostLogin()).Methods("POST")
+	r.HandleFunc("/api/users/logout", s.PostLogout()).Methods("POST")
+	r.HandleFunc("/api/users/current", s.GetCurrentUser()).Methods("GET")
+	r.HandleFunc("/api/users/{id}", s.GetUser()).Methods("GET")
 	// self regisration will be enabled later
 	// r.HandleFunc("/api/users/signup", s.handleSignUp()).Methods("POST")
 

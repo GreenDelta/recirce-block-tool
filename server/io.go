@@ -11,6 +11,10 @@ func SendError(w http.ResponseWriter, msg string, err error) {
 	http.Error(w, msg, http.StatusInternalServerError)
 }
 
+func SendBadRequest(w http.ResponseWriter, msg string) {
+	http.Error(w, msg, http.StatusBadRequest)
+}
+
 func SendNotFound(w http.ResponseWriter, msg string) {
 	http.Error(w, msg, http.StatusNotFound)
 }

@@ -8,10 +8,8 @@ type Entity interface {
 }
 
 type User struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Email     string `json:"email,omitempty"`
-	Telephone string `json:"telephone,omitempty"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
 
 	// the password hash should be never sent to the client
 	Hash    string `json:"hash,omitempty"`

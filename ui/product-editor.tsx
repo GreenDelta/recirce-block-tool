@@ -115,7 +115,7 @@ const ComponentPanel = (props: CompProps) => {
                   props.onChanged();
                 }}
               />
-              <label style={{ padding: 15 }}>kg</label>
+              <label style={{ padding: 15 }}>g</label>
             </div>
           </div>
         </header>
@@ -204,7 +204,7 @@ const MaterialPanel = (props: MatProps) => {
           <input list="materials" />
           <div style={{ display: "inline-flex" }}>
             <input type="number" value={props.material.mass} />
-            <label style={{ padding: 15 }}>kg</label>
+            <label style={{ padding: 15 }}>g</label>
           </div>
         </div>
       </header>

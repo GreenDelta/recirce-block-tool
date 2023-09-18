@@ -1,0 +1,31 @@
+{
+  "id": "fdedd371-8d69-4b19-9658-96cde3d6a19b",
+  "name": "Smartphone",
+  "mass": 129.51,
+  "components": [
+    {
+      "id": "5fec291a-55fe-4e65-8ccc-8d49930be9f5",
+      "name": "Battery",
+      "mass": 27.59,
+      "materials": [
+        {
+          "id": "5878888a-a613-42c9-93d1-e196974fefce",
+          "name": "Metals",
+          "mass": 10.1,
+          "materials": [
+            {
+              "id": "2f01bdd4-919e-44e8-b283-ef5dd2d6855d",
+              "name": "Lithium",
+              "mass": 6.3
+            },
+            {
+              "id": "26821801-26c1-4dd7-852f-975ba6147ce1",
+              "name": "Cupper",
+              "mass": 3.8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

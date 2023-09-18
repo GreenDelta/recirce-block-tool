@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/rs/xid"
@@ -29,30 +28,17 @@ func isValidPassword(w http.ResponseWriter, password string) bool {
 	return true
 }
 
-// Checks if the given email can be registered for a user. When this is not the
-// case, the corresponding error is written to the response and false is returned.
-func canRegisterEmail(w http.ResponseWriter, s *Server, email string) bool {
-	if len(email) < 4 || !strings.Contains(email, "@") {
-		http.Error(w, "invalid email", http.StatusBadRequest)
-		return false
-	}
-	if user := findUser(s.db, email); user != nil {
-		http.Error(w, "email in use", http.StatusBadRequest)
-		return false
-	}
-	return true
-}
-
-func findUser(db *DB, email string) *User {
+func findUser(db *DB, name string) *User {
+	key := LowerTrim(name)
 	var user *User
-	err := db.EachWhile(AccountBucket, func(key string, value []byte) bool {
+	err := db.EachWhile(AccountBucket, func(_ string, value []byte) bool {
 		var u User
 		err := json.Unmarshal(value, &u)
 		if err != nil {
 			log.Println("error: failed to unmarshal user:", err)
 			return true
 		}
-		if u.Email == email {
+		if LowerTrim(u.Name) == key {
 			user = &u
 			return false
 		}
@@ -66,83 +52,26 @@ func findUser(db *DB, email string) *User {
 }
 
 func (s *Server) getSessionUser(r *http.Request) *User {
-	session, err := s.cookies.Get(r, "easyepd-session")
-	if err != nil {
-		log.Println("ERROR: failed to read session cookie", err)
+	ses := s.Session(r)
+	if ses == nil {
 		return nil
 	}
-	id, ok := session.Values["user"].(string)
+	id, ok := ses.Values["user"].(string)
 	if !ok || id == "" {
 		return nil
 	}
 	var user User
-	err = s.db.Load(AccountBucket, id, &user)
-	if err != nil {
+	if err := s.db.Load(AccountBucket, id, &user); err != nil {
 		log.Println("ERROR: failed to load user ", id, "from database", err)
 		return nil
 	}
 	return &user
 }
 
-func (s *Server) handleSignUp() http.HandlerFunc {
+func (s *Server) PostLogin() http.HandlerFunc {
 
 	type request struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-
-	return func(w http.ResponseWriter, r *http.Request) {
-
-		if existing := s.getSessionUser(r); existing != nil {
-			http.Error(w, "you are already logged in", http.StatusBadRequest)
-			return
-		}
-
-		var req request
-		if !ReadAsJson(w, r, &req) {
-			return
-		}
-
-		email := LowerTrim(req.Email)
-		password := Trim(req.Password)
-		if !isValidPassword(w, password) || !canRegisterEmail(w, s, email) {
-			return
-		}
-
-		hash, err := hashPassword(password)
-		if err != nil {
-			SendError(w, "could not generate password hash", err)
-			return
-		}
-
-		user := &User{
-			Email: email,
-			Hash:  hash,
-		}
-		user.ID = xid.New().String()
-		if err = s.db.Put(AccountBucket, user); err != nil {
-			SendError(w, "failed to save user", err)
-			return
-		}
-
-		session, err := s.cookies.Get(r, "easyepd-session")
-		if err != nil {
-			// just logging the error for now
-			log.Println("WARNING: invalid cookie", err)
-		} else {
-			session.Values["user"] = user.ID
-			session.Save(r, w)
-		}
-
-		user.Hash = ""
-		SendAsJson(w, user)
-	}
-}
-
-func (s *Server) handleLogin() http.HandlerFunc {
-
-	type request struct {
-		Email    string `json:"email"`
+		User     string `json:"user"`
 		Password string `json:"password"`
 	}
 
@@ -154,7 +83,7 @@ func (s *Server) handleLogin() http.HandlerFunc {
 			return
 		}
 
-		user := findUser(s.db, LowerTrim(credentials.Email))
+		user := findUser(s.db, credentials.User)
 		if user == nil {
 			http.Error(w, "invalid login data", http.StatusUnauthorized)
 			return
@@ -181,16 +110,17 @@ func (s *Server) handleLogin() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handleLogout() http.HandlerFunc {
-
+func (s *Server) PostLogout() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		session, _ := s.cookies.Get(r, "easyepd-session")
-		session.Values["user"] = ""
-		session.Save(r, w)
+		ses := s.Session(r)
+		if ses != nil {
+			ses.Values["user"] = ""
+			ses.Save(r, w)
+		}
 	}
 }
 
-func (s *Server) handleGetCurrentUser() http.HandlerFunc {
+func (s *Server) GetCurrentUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(r)
@@ -203,13 +133,17 @@ func (s *Server) handleGetCurrentUser() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handleGetUsers() http.HandlerFunc {
+func (s *Server) GetUsers() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		account := s.getSessionUser(r)
 		if account == nil {
 			http.Error(w, "Not logged in", http.StatusUnauthorized)
+			return
+		}
+		if !account.IsAdmin {
+			http.Error(w, "Not allowed", http.StatusUnauthorized)
 			return
 		}
 
@@ -233,7 +167,7 @@ func (s *Server) handleGetUsers() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handleGetUser() http.HandlerFunc {
+func (s *Server) GetUser() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -242,8 +176,11 @@ func (s *Server) handleGetUser() http.HandlerFunc {
 			http.Error(w, "Not logged in", http.StatusUnauthorized)
 			return
 		}
-
 		id := mux.Vars(r)["id"]
+		if id != account.ID && !account.IsAdmin {
+			http.Error(w, "Not allowed", http.StatusUnauthorized)
+		}
+
 		var user User
 		if err := s.db.Load(AccountBucket, id, &user); err != nil {
 			http.NotFound(w, r)
@@ -254,7 +191,7 @@ func (s *Server) handleGetUser() http.HandlerFunc {
 	}
 }
 
-func (s *Server) handlePostUser() http.HandlerFunc {
+func (s *Server) PostUser() http.HandlerFunc {
 
 	type request struct {
 		User
@@ -295,13 +232,6 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 				return
 			}
 
-			email := LowerTrim(req.Email)
-			if email != user.Email {
-				if !canRegisterEmail(w, s, email) {
-					return
-				}
-			}
-
 			// check whether there is a password change
 			if req.Password != "" {
 				password := Trim(req.Password)
@@ -317,8 +247,6 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 			}
 
 			user.Name = req.Name
-			user.Email = req.Email
-			user.Telephone = req.Telephone
 			// make sure to not un-admin an admin
 			if user.ID != account.ID {
 				user.IsAdmin = req.IsAdmin
@@ -333,24 +261,26 @@ func (s *Server) handlePostUser() http.HandlerFunc {
 		}
 
 		// create a new user
-		email := LowerTrim(req.Email)
 		password := Trim(req.Password)
-		if !isValidPassword(w, password) || !canRegisterEmail(w, s, email) {
+		if !isValidPassword(w, password) {
+			return
+		}
+		existing := findUser(s.db, req.Name)
+		if existing != nil {
+			SendBadRequest(w, "a user with this name already exists")
 			return
 		}
 
 		hash, err := hashPassword(password)
 		if err != nil {
-			SendError(w, "could not generate password hash", err)
+			SendError(w, "failed to create user", err)
 			return
 		}
 
 		user := &User{
-			Email:     email,
-			Hash:      hash,
-			Name:      req.Name,
-			Telephone: req.Telephone,
-			IsAdmin:   req.IsAdmin,
+			Hash:    hash,
+			Name:    req.Name,
+			IsAdmin: req.IsAdmin,
 		}
 		user.ID = xid.New().String()
 		if err := s.db.Put(AccountBucket, user); err != nil {
