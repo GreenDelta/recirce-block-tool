@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
@@ -7,6 +7,7 @@ import { LoginPage } from "./login";
 import { ProductsOverview } from "./products";
 import { ProductEditor } from "./product-editor";
 import { MaterialsPage } from "./materials";
+import { AppState } from "./model";
 
 const ErrorPage = () => {
   return (
@@ -36,6 +37,8 @@ const Article = ({ header }: { header: string }) => {
 }
 
 function main() {
+  const state: AppState = {};
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -68,7 +71,7 @@ function main() {
     },
     {
       path: "/ui/login",
-      element: <LoginPage />
+      element: <LoginPage state={state} />
     }
   ]);
   const provider = <React.StrictMode>

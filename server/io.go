@@ -7,7 +7,9 @@ import (
 )
 
 func SendError(w http.ResponseWriter, msg string, err error) {
-	log.Println(msg, err)
+	if err != nil {
+		log.Println(msg, err)
+	}
 	http.Error(w, msg, http.StatusInternalServerError)
 }
 

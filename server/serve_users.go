@@ -100,11 +100,14 @@ func (s *Server) PostLogin() http.HandlerFunc {
 			http.Error(w, "invalid login data", http.StatusUnauthorized)
 			return
 		}
+		ses := s.Session(r)
+		if ses == nil {
+			SendError(w, "failed to create session", nil)
+			return
+		}
 
-		session, _ := s.cookies.Get(r, "easyepd-session")
-		session.Values["user"] = user.ID
-		session.Save(r, w)
-
+		ses.Values["user"] = user.ID
+		ses.Save(r, w)
 		user.Hash = ""
 		SendAsJson(w, user)
 	}

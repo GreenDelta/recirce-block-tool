@@ -1,5 +1,11 @@
 export interface User {
+  id: string;
   name: string;
+}
+
+export interface Credentials {
+  user: string;
+  password: string;
 }
 
 export interface AppState {
