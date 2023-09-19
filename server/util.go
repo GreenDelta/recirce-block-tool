@@ -14,3 +14,7 @@ func LowerTrim(s string) string {
 func Trim(s string) string {
 	return strings.TrimSpace(s)
 }
+
+func IsEq(a, b string) bool {
+	return LowerTrim(a) == LowerTrim(b)
+}

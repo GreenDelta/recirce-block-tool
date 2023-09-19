@@ -6,6 +6,20 @@ export async function getMaterials(): Promise<Material[]> {
   return !json ? [] : json;
 }
 
+export async function putMaterial(m: Material): Promise<void> {
+  const r = await fetch("/api/materials", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(m),
+  });
+  if (r.status !== 200) {
+    const message = await r.text();
+    throw new Error(`failed to put material: ${message}`);
+  }
+}
+
 export async function getProducts(): Promise<Product[]> {
   const r = await fetch("/api/products");
   const json = await r.json();
@@ -17,9 +31,9 @@ export async function getProduct(id: string): Promise<Product[]> {
   return r.json();
 }
 
-export async function postProduct(p: Product): Promise<void> {
+export async function putProduct(p: Product): Promise<void> {
   const r = await fetch("/api/products", {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },

@@ -21,13 +21,14 @@ func (u *User) Key() []byte {
 }
 
 type Material struct {
+	ID     string `json:"id"`
 	User   string `json:"user"`
 	Name   string `json:"name"`
 	Parent string `json:"parent"`
 }
 
 func (m *Material) Key() []byte {
-	return []byte(m.Name)
+	return []byte(m.ID)
 }
 
 type Component struct {

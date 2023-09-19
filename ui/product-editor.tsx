@@ -38,7 +38,7 @@ export const ProductEditor = () => {
         materials={materials}
         component={product}
         onChanged={() => setProduct({ ...product })}
-        onSave={() => api.postProduct(product)}
+        onSave={() => api.putProduct(product)}
       />
     </>
   );
