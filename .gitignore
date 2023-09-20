@@ -6,6 +6,7 @@ node_modules/
 .vscode
 
 static/main.js*
+static/pico.min.css
 
 server/recirce*
 

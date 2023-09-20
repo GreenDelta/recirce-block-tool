@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './ui/main.tsx',
@@ -20,4 +21,11 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'static'),
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'node_modules/@picocss/pico/css/pico.min.css', to: './' }
+      ]
+    })
+  ]
 };

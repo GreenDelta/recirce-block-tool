@@ -27,7 +27,7 @@ const ProcessTable = () => {
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Product</th>
+          <th scope="col">Process</th>
         </tr>
       </thead>
       <tbody>
