@@ -4,7 +4,7 @@ import { createBrowserRouter, Link, Outlet, useNavigate, RouterProvider } from "
 import { HomePage } from "./home";
 import { LoginPage } from "./login";
 import { ProductsOverview } from "./products";
-import { ProductEditor } from "./product-editor";
+import { ProductEditor } from "./product-editor/editor";
 import { MaterialsPage } from "./materials";
 import { User } from "./model";
 import * as api from "./api";
