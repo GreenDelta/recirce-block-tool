@@ -35,7 +35,8 @@ export const MaterialsPage = () => {
       <tr>
         <td>{i + 1}</td>
         <td>{mat.name}</td>
-        <td>{mat.parent}</td>
+        <td>{mat.parent || "Material"}</td>
+        <td><a style={{ cursor: "pointer" }}>Delete</a></td>
       </tr>
     );
   }
@@ -48,6 +49,7 @@ export const MaterialsPage = () => {
             <th scope="col">#</th>
             <th scope="col">Material</th>
             <th scope="col">Is a</th>
+            <th scope="col" />
           </tr>
         </thead>
         <tbody>

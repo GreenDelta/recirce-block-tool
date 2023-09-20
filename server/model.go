@@ -48,7 +48,7 @@ type MaterialPart struct {
 
 type Product struct {
 	Component
-	User string `json:"user"`
+	User string `json:"user,omitempty"`
 }
 
 func (p *Product) Key() []byte {

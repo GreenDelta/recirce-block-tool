@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Component, Product, ProductPart } from "./model";
 import * as api from "./api";
 import * as uuid from "uuid";
 import { ProgressPage } from "./progress";
 
-export const ProductEditor = () => {
-  const [materials, setMaterials] = useState<string[] | null>(null);
+export const ProductEditor = (props: { product?: Product }) => {
 
-  const [product, setProduct] = useState<Product>({
+  const navigate = useNavigate();
+  const [materials, setMaterials] = useState<string[] | null>(null);
+  const [product, setProduct] = useState<Product>(props.product ||
+  {
     id: uuid.v4(),
     name: "New product",
     mass: 1.0,
@@ -19,15 +22,31 @@ export const ProductEditor = () => {
       setMaterials(names);
     });
   }, []);
-  if (!materials) {
+  if (!materials || !product) {
     return <ProgressPage message="Loading materials..." />;
+  }
+
+  const onSave = async () => {
+    try {
+      await api.putProduct(product);
+      navigate("/ui/products");
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
     <>
-      <p>
-        <strong>Create a new product</strong>
-      </p>
+      <nav>
+        <ul>
+          <li><strong>{product.name}</strong></li>
+        </ul>
+        <ul>
+          <li><a onClick={onSave}>Upload product</a></li>
+          <li>|</li>
+          <li><a>Delete product</a></li>
+        </ul>
+      </nav>
       <datalist id="materials">
         {materials.map(m => <option value={m} />)}
       </datalist>
@@ -193,7 +212,7 @@ const CompMenu = (props: CompProps) => {
 };
 
 const MaterialPanel = (props: MatProps) => {
-  const onDelete = () => {};
+  const onDelete = () => { };
 
   return (
     <article style={{ margin: "3px", paddingBottom: "15px" }}>

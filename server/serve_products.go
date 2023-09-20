@@ -10,6 +10,10 @@ import (
 func (s *Server) GetProducts() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		user := s.getSessionUser(w, r)
+		if user == nil {
+			return
+		}
 
 		var products []*Product
 		err := s.db.Each(ProductBucket, func(key string, data []byte) error {
@@ -17,7 +21,9 @@ func (s *Server) GetProducts() http.HandlerFunc {
 			if err := json.Unmarshal(data, &p); err != nil {
 				return err
 			}
-			products = append(products, &p)
+			if p.User == user.ID {
+				products = append(products, &p)
+			}
 			return nil
 		})
 
@@ -32,21 +38,33 @@ func (s *Server) GetProducts() http.HandlerFunc {
 func (s *Server) GetProduct() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		id := mux.Vars(r)["id"]
-		data, err := s.db.Get(ProductBucket, id)
-		if data == nil {
-			SendNotFound(w, "no product exists for id="+id)
+		user := s.getSessionUser(w, r)
+		if user == nil {
 			return
 		}
+
+		id := mux.Vars(r)["id"]
+		data, err := s.db.Get(ProductBucket, id)
 		if err != nil {
 			SendError(w, "failed to get product: "+id, err)
 			return
 		}
+		if data == nil {
+			SendNotFound(w, "no product exists for id="+id)
+			return
+		}
+
 		var p Product
 		if err := json.Unmarshal(data, &p); err != nil {
 			SendError(w, "failed to parse product: "+id, err)
 			return
 		}
+		if p.User != user.ID {
+			http.Error(w, "not allowed", http.StatusUnauthorized)
+			return
+		}
+		p.User = ""
+
 		SendAsJson(w, &p)
 	}
 }
@@ -54,10 +72,15 @@ func (s *Server) GetProduct() http.HandlerFunc {
 func (s *Server) PutProduct() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		user := s.getSessionUser(w, r)
+		if user == nil {
+			return
+		}
 		var product Product
 		if !ReadAsJson(w, r, &product) {
 			return
 		}
+		product.User = user.ID
 		if err := s.db.Put(ProductBucket, &product); err != nil {
 			SendError(w, "failed to store product", err)
 			return
