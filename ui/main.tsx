@@ -8,6 +8,8 @@ import { ProductEditor } from "./product-editor/editor";
 import { MaterialsPage } from "./materials";
 import { User } from "./model";
 import * as api from "./api";
+import { ProcessOverview } from "./processes";
+import { ProcessEditor } from "./process-editor/editor";
 
 const ErrorPage = () => {
   return (
@@ -46,7 +48,7 @@ const Root = () => {
     navigate("/");
   };
   return <>
-    <MainMenu user={user} onLogout={onLogout}/>
+    <MainMenu user={user} onLogout={onLogout} />
     <Outlet context={[user, setUser]} />
   </>;
 }
@@ -72,13 +74,14 @@ const MainMenu = (props: { user: User | null, onLogout: () => void }) => {
         <li><Link to="/"><img src="/logo.png"></img></Link></li>
         <li></li>
         <li><Link to="/ui/analyses">Analyses</Link></li>
+        <li><Link to="/ui/processes">Processes</Link></li>
         <li><Link to="/ui/products">Products</Link></li>
         <li><Link to="/ui/materials">Materials</Link></li>
-        <li><Link to="/ui/emission-factors">Emission factors</Link></li>
+        <li><Link to="/ui/emissions">Emissions</Link></li>
       </ul>
       <ul>
         <li>
-          <a style={{cursor: "pointer"}} onClick={props.onLogout}>Logout</a>
+          <a onClick={props.onLogout}>Logout</a>
         </li>
       </ul>
     </nav>
@@ -100,6 +103,14 @@ function main() {
         {
           path: "/ui/analyses",
           element: <Article header="Analyses" />
+        },
+        {
+          path: "/ui/processes",
+          element: <ProcessOverview />,
+        },
+        {
+          path: "/ui/processes/edit/:id?",
+          element: <ProcessEditor />,
         },
         {
           path: "/ui/products",

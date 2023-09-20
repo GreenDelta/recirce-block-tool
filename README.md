@@ -2,6 +2,9 @@
 
 __TODO__:
 
+* store processes
+* edit processes
+* define process steps
 * delete material
 * uploading a product should sync materials (creating them if they do not exist)
 * create a waste treatment tree

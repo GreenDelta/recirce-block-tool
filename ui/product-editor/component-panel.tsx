@@ -9,7 +9,6 @@ interface Props {
   product: Product;
   materials: string[];
   onChanged: () => void;
-  onSave: () => void;
 }
 
 export const ComponentPanel = (props: Props) => {

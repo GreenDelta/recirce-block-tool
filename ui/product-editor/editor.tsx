@@ -10,7 +10,6 @@ export const ProductEditor = () => {
 
   const navigate = useNavigate();
   const {id} = useParams();
-
   const [materials, setMaterials] = useState<string[] | null>(null);
   const [product, setProduct] = useState<Product | null>(null);
 
@@ -32,7 +31,7 @@ export const ProductEditor = () => {
     })();
   }, []);
   if (!materials || !product) {
-    return <ProgressPage message="Loading materials..." />;
+    return <ProgressPage />;
   }
 
   const onSave = async () => {
@@ -66,7 +65,6 @@ export const ProductEditor = () => {
         materials={materials}
         component={product}
         onChanged={() => setProduct({ ...product })}
-        onSave={() => api.putProduct(product)}
       />
     </>
   );

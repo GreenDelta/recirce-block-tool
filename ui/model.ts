@@ -30,3 +30,9 @@ export interface Material {
   name: string;
   parent: string;
 }
+
+export interface Process {
+  id: string;
+  name: string;
+  product?: Product;
+}
