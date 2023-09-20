@@ -21,7 +21,7 @@ export const ProductsOverview = () => {
         <li><strong>Products</strong></li>
       </ul>
       <ul>
-        <li><Link to="/ui/products/create">Create a new product</Link></li>
+        <li><Link to="/ui/products/edit">Create a new product</Link></li>
         <li>|</li>
         <li><Link to="/ui/products/upload">Upload a product pass</Link></li>
       </ul>
@@ -42,7 +42,7 @@ const ProductTable = ({ products }: { products: Product[] }) => {
       <tr>
         <td>{i + 1}</td>
         <td>
-          <Link to={`/ui/products/${product.id}`}>
+          <Link to={`/ui/products/edit/${product.id}`}>
             {product.name}
           </Link>
         </td>

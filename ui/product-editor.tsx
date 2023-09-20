@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Component, Product, ProductPart } from "./model";
 import * as api from "./api";
 import * as uuid from "uuid";
 import { ProgressPage } from "./progress";
 
-export const ProductEditor = (props: { product?: Product }) => {
+export const ProductEditor = () => {
 
   const navigate = useNavigate();
+  const {id} = useParams();
+
   const [materials, setMaterials] = useState<string[] | null>(null);
-  const [product, setProduct] = useState<Product>(props.product ||
-  {
-    id: uuid.v4(),
-    name: "New product",
-    mass: 1.0,
-  });
+  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    api.getMaterials().then(mats => {
+    (async () => {
+      if (typeof id === "string") {
+        const p = await api.getProduct(id);
+        setProduct(p);
+      } else {
+        setProduct({
+          id: uuid.v4(),
+          name: "New product",
+          mass: 1.0,
+        })
+      }
+      const mats = await api.getMaterials();
       const names = mats.map(m => m.name).sort();
       setMaterials(names);
-    });
+    })();
   }, []);
   if (!materials || !product) {
     return <ProgressPage message="Loading materials..." />;

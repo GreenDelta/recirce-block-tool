@@ -26,8 +26,8 @@ export async function getProducts(): Promise<Product[]> {
   return !json ? [] : json;
 }
 
-export async function getProduct(id: string): Promise<Product[]> {
-  const r = await fetch(`/api/product/${id}`);
+export async function getProduct(id: string): Promise<Product> {
+  const r = await fetch(`/api/products/${id}`);
   return r.json();
 }
 

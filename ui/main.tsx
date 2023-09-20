@@ -106,7 +106,7 @@ function main() {
           element: <ProductsOverview />
         },
         {
-          path: "/ui/products/create",
+          path: "/ui/products/edit/:id?",
           element: <ProductEditor />
         },
         {
