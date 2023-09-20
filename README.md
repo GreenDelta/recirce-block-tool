@@ -2,6 +2,7 @@
 
 __TODO__:
 
+* delete material
 * uploading a product should sync materials (creating them if they do not exist)
 * create a waste treatment tree
 * create templates for treatment steps

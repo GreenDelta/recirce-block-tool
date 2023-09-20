@@ -1,10 +1,9 @@
 import React from "react";
 import { Component, Product, ProductPart } from "../model";
-import { MaterialPanel } from "./material-panel";
 import * as uuid from "uuid";
-import { PanelLink } from "./util";
+import { MaterialList, PanelLink, numOf } from "./util";
 
-interface CompProps {
+interface Props {
   isRoot?: boolean;
   component: Component;
   product: Product;
@@ -13,7 +12,7 @@ interface CompProps {
   onSave: () => void;
 }
 
-export const ComponentPanel = (props: CompProps) => {
+export const ComponentPanel = (props: Props) => {
   const comp = props.component;
 
   const subComps = [];
@@ -21,21 +20,6 @@ export const ComponentPanel = (props: CompProps) => {
     for (const c of comp.components) {
       const subProps = { ...props, component: c, isRoot: false };
       subComps.push(<ComponentPanel key={c.id} {...subProps} />);
-    }
-  }
-
-  const matParts = [];
-  if (comp.materials) {
-    for (const mat of comp.materials) {
-      matParts.push(
-        <MaterialPanel
-          key={mat.id}
-          material={mat}
-          product={props.product}
-          materials={props.materials}
-          onChanged={props.onChanged}
-        />
-      );
     }
   }
 
@@ -58,27 +42,24 @@ export const ComponentPanel = (props: CompProps) => {
               <input
                 type="number"
                 value={comp.mass}
-                onChange={(e) => {
-                  const s = e.target.value;
-                  if (s) {
-                    comp.mass = Number.parseFloat(s);
-                  }
+                onChange={(e) => numOf(e, num => {
+                  comp.mass = num;
                   props.onChanged();
-                }}
+                })}
               />
               <label style={{ padding: 15 }}>g</label>
             </div>
           </div>
         </header>
-        <CompMenu {...props} />
+        <Menu {...props} />
         {subComps}
-        {matParts}
+        <MaterialList part={comp} {...props} />
       </article>
     </>
   );
 };
 
-const CompMenu = (props: CompProps) => {
+const Menu = (props: Props) => {
   const onAddComp = () => {
     const sub = {
       id: uuid.v4(),

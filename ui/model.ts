@@ -11,6 +11,7 @@ export interface Credentials {
 export interface ProductPart {
   id: string;
   mass: number;
+  materials?: MaterialPart[];
 }
 
 export interface MaterialPart extends ProductPart {
@@ -20,7 +21,6 @@ export interface MaterialPart extends ProductPart {
 export interface Component extends ProductPart {
   name: string;
   components?: Component[];
-  materials?: MaterialPart[];
 }
 
 export interface Product extends Component {
