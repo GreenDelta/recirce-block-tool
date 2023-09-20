@@ -67,3 +67,10 @@ export async function postLogout(): Promise<void> {
     throw new Error(`failed to login: ${message}`);
   }
 }
+
+export async function getCurrentUser(): Promise<User | null> {
+  const r = await fetch("/api/users/current");
+  return r.status === 200
+    ? r.json()
+    : null;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Link, Outlet, useNavigate, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
@@ -37,6 +37,10 @@ const Article = ({ header }: { header: string }) => {
 const Root = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    api.getCurrentUser().then(setUser);
+  }, [])
+
   const onLogout = () => {
     api.postLogout().then(() => setUser(null));
     navigate("/");
