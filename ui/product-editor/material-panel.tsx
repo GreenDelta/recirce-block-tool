@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import * as uuid from "uuid";
 import { MaterialPart, Product } from "../model";
 import { MaterialList, numOf } from "./util";
 import { PanelLink } from "../components";
+import { ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
   material: MaterialPart;
@@ -12,29 +13,44 @@ interface Props {
 }
 
 export const MaterialPanel = (props: Props) => {
+
+  const [collapsed, setCollapsed] = useState(false);
+  const icon = collapsed
+    ? <ExpandLessIcon tooltip="Collapse" onClick={() => setCollapsed(false)} />
+    : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
+
+  const content = collapsed
+    ? <></>
+    : <>
+      <Menu {...props} />
+      <MaterialList part={props.material} {...props} />
+    </>
+
   return (
     <article className="re-panel">
-
-        <div className="grid">
+      <div className="grid">
+        <div className="re-flex-div">
+          <label>
+            {icon}
+          </label>
           <input list="materials" className="re-panel-input"
             value={props.material.material}
             onChange={e => {
               props.material.material = e.target.value;
               props.onChanged();
             }} />
-          <div style={{ display: "inline-flex" }}>
-            <input type="number" className="re-panel-input"
-              value={props.material.mass}
-              onChange={e => numOf(e, num => {
-                props.material.mass = num;
-                props.onChanged();
-              })} />
-            <label style={{ padding: 15 }}>g</label>
-          </div>
         </div>
-
-      <Menu {...props} />
-      <MaterialList part={props.material} {...props} />
+        <div className="re-flex-div">
+          <input type="number" className="re-panel-input"
+            value={props.material.mass}
+            onChange={e => numOf(e, num => {
+              props.material.mass = num;
+              props.onChanged();
+            })} />
+          <label>g</label>
+        </div>
+      </div>
+      {content}
     </article>
   );
 };
@@ -62,8 +78,7 @@ const Menu = (props: Props) => {
 
   return (
     <nav>
-      <ul></ul>
-      <ul>
+      <ul style={{ paddingLeft: 15 }}>
         <PanelLink onClick={onAdd} label="Add material" sep />
         <PanelLink onClick={onDelete} label="Delete material" />
       </ul>

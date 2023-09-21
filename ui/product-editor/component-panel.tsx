@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Component, Product, ProductPart } from "../model";
 import * as uuid from "uuid";
 import { MaterialList, numOf } from "./util";
 import { PanelLink } from "../components";
 
-import { ExpandIcon as ExpandedIcon } from "../icons";
+import { ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
   isRoot?: boolean;
@@ -15,8 +15,10 @@ interface Props {
 }
 
 export const ComponentPanel = (props: Props) => {
-  const comp = props.component;
 
+  const [collapsed, setCollapsed] = useState(false);
+
+  const comp = props.component;
   const subComps = [];
   if (comp.components) {
     for (const c of comp.components) {
@@ -25,14 +27,25 @@ export const ComponentPanel = (props: Props) => {
     }
   }
 
+  const icon = collapsed
+    ? <ExpandLessIcon tooltip="Collapse" onClick={() => setCollapsed(false)} />
+    : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
+
+  const content = collapsed
+    ? <></>
+    : <>
+      <Menu {...props} />
+      {subComps}
+      <MaterialList part={comp} {...props} />
+    </>
+
   return (
     <>
       <article className="re-panel">
-
         <div className="grid">
           <div className="re-flex-div">
             <label>
-              <ExpandedIcon tooltip="Expand panel" />
+              {icon}
             </label>
             <input type="text" className="re-panel-input"
               value={comp.name}
@@ -50,13 +63,10 @@ export const ComponentPanel = (props: Props) => {
                 props.onChanged();
               })}
             />
-            <label>g</label>
+            <label>g | xx.xx%</label>
           </div>
         </div>
-
-        <Menu {...props} />
-        {subComps}
-        <MaterialList part={comp} {...props} />
+        {content}
       </article>
     </>
   );
@@ -113,16 +123,9 @@ const Menu = (props: Props) => {
     links.push(<PanelLink onClick={onDelete} label="Delete component" />);
   }
 
-  const massFraction = props.isRoot ? (
-    <></>
-  ) : (
-    massFractionOf(props.component, props.product)
-  );
-
   return (
     <nav>
-      <ul>{massFraction}</ul>
-      <ul>{links}</ul>
+      <ul style={{paddingLeft: 15}}>{links}</ul>
     </nav>
   );
 };
