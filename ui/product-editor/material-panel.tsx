@@ -20,10 +20,7 @@ export const MaterialPanel = (props: Props) => {
 
   const content = collapsed
     ? <></>
-    : <article className="re-panel">
-      <Menu {...props} />
-      <MaterialList part={props.material} {...props} />
-    </article>
+    : <MaterialList part={props.material} {...props} />;
 
   const onDelete = () => {
     // TODO: not yet implemented
@@ -33,9 +30,10 @@ export const MaterialPanel = (props: Props) => {
     <article className="re-panel">
       <div className="grid">
         <div className="re-flex-div">
-          <label>
+          <div className="re-panel-toolbar">
             {icon}
-          </label>
+            {!collapsed && <Menu {...props} /> || <></>}
+          </div>
           <input list="materials" className="re-panel-input"
             value={props.material.material}
             onChange={e => {

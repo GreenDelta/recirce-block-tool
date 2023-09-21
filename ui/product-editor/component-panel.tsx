@@ -44,20 +44,20 @@ export const ComponentPanel = (props: Props) => {
 
   const content = collapsed
     ? <></>
-    : <article className="re-panel">
-      <Menu {...props} />
+    : <>
       {subComps}
       <MaterialList part={comp} {...props} />
-    </article>
+    </>
 
   return (
     <>
       <article className="re-panel">
         <div className="grid">
           <div className="re-flex-div">
-            <label>
+            <div className="re-panel-toolbar">
               {icon}
-            </label>
+              {!collapsed && <Menu {...props} /> || <></>}
+            </div>
             <input type="text" className="re-panel-input"
               value={comp.name}
               onChange={(e) => {
