@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Process, Product } from "../model";
+import { Process, ProcessStep, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
-import { ProgressPanel } from "../components";
+import { PanelLink, ProgressPanel } from "../components";
 
 export const ProcessEditor = () => {
 
@@ -46,7 +46,8 @@ export const ProcessEditor = () => {
         <div>
           <label>
             Name
-            <input type="text" value={process.name}
+            <input type="text" className="re-panel-input"
+              value={process.name}
               onChange={e => {
                 process.name = e.target.value;
                 onChange();
@@ -60,7 +61,23 @@ export const ProcessEditor = () => {
             onChange={onChange} />
         </div>
       </div>
-
+      <nav>
+        <ul />
+        <ul>
+          <PanelLink label="Add treatment step" onClick={() => {
+            const step: ProcessStep = {
+              id: uuid.v4(),
+              name: "New treatment step"
+            };
+            if (process.steps) {
+              process.steps.push(step);
+            } else {
+              process.steps = [step];
+            }
+            onChange();
+          }} />
+        </ul>
+      </nav>
     </article>
   </>
   );
@@ -99,7 +116,8 @@ const ProductCombo = ({ process, products, onChange }: {
   return (
     <label>
       Product
-      <select onChange={e => handleChange(e.target.value)}>
+      <select className="re-panel-input"
+        onChange={e => handleChange(e.target.value)}>
         {options}
       </select>
     </label>

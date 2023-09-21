@@ -11,3 +11,20 @@ export const ProgressPanel = (props: { message?: string }) => {
     </>
   );
 };
+
+export const PanelLink = ({ onClick, label, sep }: {
+  onClick: () => void;
+  label: string;
+  sep?: boolean;
+}) => {
+  const link = (
+    <li className="re-panel-link">
+      <a onClick={onClick} className="re-panel-link">
+        {label}
+      </a>
+    </li>
+  );
+  return sep
+    ? <>{link} <li className="re-panel-link">|</li></>
+    : link;
+};

@@ -1,7 +1,8 @@
 import React from "react";
 import { Component, Product, ProductPart } from "../model";
 import * as uuid from "uuid";
-import { MaterialList, PanelLink, numOf } from "./util";
+import { MaterialList, numOf } from "./util";
+import { PanelLink } from "../components";
 
 interface Props {
   isRoot?: boolean;
@@ -28,8 +29,7 @@ export const ComponentPanel = (props: Props) => {
         <header style={{ padding: "15px", marginBottom: "15px" }}>
           <div className="grid">
             <div>
-              <input
-                type="text"
+              <input type="text" className="re-panel-input"
                 value={comp.name}
                 onChange={(e) => {
                   comp.name = e.target.value;
@@ -38,8 +38,7 @@ export const ComponentPanel = (props: Props) => {
               />
             </div>
             <div style={{ display: "inline-flex" }}>
-              <input
-                type="number"
+              <input type="number" className="re-panel-input"
                 value={comp.mass}
                 onChange={(e) => numOf(e, num => {
                   comp.mass = num;
@@ -137,7 +136,7 @@ function massFractionOf(elem: ProductPart, product: Product) {
     }
   }
   return (
-    <li>
+    <li className="re-panel-link">
       Mass fraction: <span style={style}>{share}</span>
     </li>
   );

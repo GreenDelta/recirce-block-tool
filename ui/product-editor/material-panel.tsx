@@ -1,7 +1,8 @@
 import React from "react";
 import * as uuid from "uuid";
 import { MaterialPart, Product } from "../model";
-import { MaterialList, PanelLink, numOf } from "./util";
+import { MaterialList, numOf } from "./util";
+import { PanelLink } from "../components";
 
 interface Props {
   material: MaterialPart;
@@ -15,13 +16,15 @@ export const MaterialPanel = (props: Props) => {
     <article style={{ margin: "3px", paddingBottom: "15px" }}>
       <header style={{ padding: "15px", marginBottom: "15px" }}>
         <div className="grid">
-          <input list="materials" value={props.material.material}
+          <input list="materials" className="re-panel-input"
+            value={props.material.material}
             onChange={e => {
               props.material.material = e.target.value;
               props.onChanged();
             }} />
           <div style={{ display: "inline-flex" }}>
-            <input type="number" value={props.material.mass}
+            <input type="number" className="re-panel-input"
+              value={props.material.mass}
               onChange={e => numOf(e, num => {
                 props.material.mass = num;
                 props.onChanged();

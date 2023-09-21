@@ -35,4 +35,19 @@ export interface Process {
   id: string;
   name: string;
   product?: Product;
+  steps?: ProcessStep[];
+}
+
+export interface ProcessStep {
+  id: string;
+  name: string;
+  energyDemand?: number;
+  input?: Flow;
+  output?: Flow;
+  steps?: ProcessStep[];
+}
+
+export interface Flow {
+  materials?: MaterialPart[];
+  components?: Component[];
 }
