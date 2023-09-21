@@ -4,7 +4,7 @@ import * as uuid from "uuid";
 import { MaterialList, numOf } from "./util";
 import { PanelLink } from "../components";
 
-import { ExpandLessIcon, ExpandMoreIcon } from "../icons";
+import { DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
   isRoot?: boolean;
@@ -30,6 +30,18 @@ export const ComponentPanel = (props: Props) => {
   const icon = collapsed
     ? <ExpandLessIcon tooltip="Collapse" onClick={() => setCollapsed(false)} />
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
+
+  const onDelete = () => {
+    const t = parentOf(props.component, props.product);
+    if (!t) {
+      return;
+    }
+    const [parent, idx] = t;
+    if (parent.components && idx >= 0) {
+      parent.components.splice(idx, 1);
+      props.onChanged();
+    }
+  };
 
   const content = collapsed
     ? <></>
@@ -63,7 +75,12 @@ export const ComponentPanel = (props: Props) => {
                 props.onChanged();
               })}
             />
-            <label>g | xx.xx%</label>
+            <label>g</label>
+            {!props.isRoot &&
+              <label>
+                <DeleteIcon tooltip="Delete component" onClick={onDelete} />
+              </label>
+            }
           </div>
         </div>
         {content}
@@ -103,29 +120,12 @@ const Menu = (props: Props) => {
     props.onChanged();
   };
 
-  const onDelete = () => {
-    const t = parentOf(props.component, props.product);
-    if (!t) {
-      return;
-    }
-    const [parent, idx] = t;
-    if (parent.components && idx >= 0) {
-      parent.components.splice(idx, 1);
-      props.onChanged();
-    }
-  };
-
-  const links = [
-    <PanelLink onClick={onAddComp} label="Add component" sep />,
-    <PanelLink onClick={onAddMat} label="Add material" sep={!props.isRoot} />,
-  ];
-  if (!props.isRoot) {
-    links.push(<PanelLink onClick={onDelete} label="Delete component" />);
-  }
-
   return (
     <nav>
-      <ul style={{paddingLeft: 15}}>{links}</ul>
+      <ul style={{ paddingLeft: 15 }}>
+        <PanelLink onClick={onAddComp} label="Add component" sep />
+        <PanelLink onClick={onAddMat} label="Add material" />
+      </ul>
     </nav>
   );
 };

@@ -3,7 +3,7 @@ import * as uuid from "uuid";
 import { MaterialPart, Product } from "../model";
 import { MaterialList, numOf } from "./util";
 import { PanelLink } from "../components";
-import { ExpandLessIcon, ExpandMoreIcon } from "../icons";
+import { DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
   material: MaterialPart;
@@ -25,6 +25,10 @@ export const MaterialPanel = (props: Props) => {
       <Menu {...props} />
       <MaterialList part={props.material} {...props} />
     </>
+
+  const onDelete = () => {
+    // TODO: not yet implemented
+  };
 
   return (
     <article className="re-panel">
@@ -48,6 +52,9 @@ export const MaterialPanel = (props: Props) => {
               props.onChanged();
             })} />
           <label>g</label>
+          <label>
+            <DeleteIcon tooltip="Delete component" onClick={onDelete} />
+          </label>
         </div>
       </div>
       {content}
@@ -72,15 +79,10 @@ const Menu = (props: Props) => {
     props.onChanged();
   };
 
-  const onDelete = () => {
-
-  };
-
   return (
     <nav>
       <ul style={{ paddingLeft: 15 }}>
         <PanelLink onClick={onAdd} label="Add material" sep />
-        <PanelLink onClick={onDelete} label="Delete material" />
       </ul>
     </nav>
   );
