@@ -13,8 +13,8 @@ interface Props {
 
 export const MaterialPanel = (props: Props) => {
   return (
-    <article style={{ margin: "3px", paddingBottom: "15px" }}>
-      <header style={{ padding: "15px", marginBottom: "15px" }}>
+    <article className="re-panel">
+
         <div className="grid">
           <input list="materials" className="re-panel-input"
             value={props.material.material}
@@ -32,7 +32,7 @@ export const MaterialPanel = (props: Props) => {
             <label style={{ padding: 15 }}>g</label>
           </div>
         </div>
-      </header>
+
       <Menu {...props} />
       <MaterialList part={props.material} {...props} />
     </article>

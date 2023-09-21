@@ -41,7 +41,7 @@ export const ProcessEditor = () => {
         <li><a>Delete process</a></li>
       </ul>
     </nav>
-    <article style={{ margin: 3, padding: 10 }}>
+    <article className="re-panel">
       <div className="grid">
         <div>
           <label>

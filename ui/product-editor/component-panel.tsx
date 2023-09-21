@@ -4,6 +4,8 @@ import * as uuid from "uuid";
 import { MaterialList, numOf } from "./util";
 import { PanelLink } from "../components";
 
+import { ExpandIcon as ExpandedIcon } from "../icons";
+
 interface Props {
   isRoot?: boolean;
   component: Component;
@@ -25,30 +27,33 @@ export const ComponentPanel = (props: Props) => {
 
   return (
     <>
-      <article style={{ margin: "3px", paddingBottom: "15px" }}>
-        <header style={{ padding: "15px", marginBottom: "15px" }}>
-          <div className="grid">
-            <div>
-              <input type="text" className="re-panel-input"
-                value={comp.name}
-                onChange={(e) => {
-                  comp.name = e.target.value;
-                  props.onChanged();
-                }}
-              />
-            </div>
-            <div style={{ display: "inline-flex" }}>
-              <input type="number" className="re-panel-input"
-                value={comp.mass}
-                onChange={(e) => numOf(e, num => {
-                  comp.mass = num;
-                  props.onChanged();
-                })}
-              />
-              <label style={{ padding: 15 }}>g</label>
-            </div>
+      <article className="re-panel">
+
+        <div className="grid">
+          <div className="re-flex-div">
+            <label>
+              <ExpandedIcon tooltip="Expand panel" />
+            </label>
+            <input type="text" className="re-panel-input"
+              value={comp.name}
+              onChange={(e) => {
+                comp.name = e.target.value;
+                props.onChanged();
+              }}
+            />
           </div>
-        </header>
+          <div className="re-flex-div">
+            <input type="number" className="re-panel-input"
+              value={comp.mass}
+              onChange={(e) => numOf(e, num => {
+                comp.mass = num;
+                props.onChanged();
+              })}
+            />
+            <label>g</label>
+          </div>
+        </div>
+
         <Menu {...props} />
         {subComps}
         <MaterialList part={comp} {...props} />
