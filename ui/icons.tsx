@@ -10,6 +10,11 @@ export const AddIcon = (props: Props) => {
     path={<path d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>} />;
 };
 
+export const AddComponentIcon = (props: Props) => {
+  return <Icon {...props}
+    path={<path d="M640-121v-120H520v-80h120v-120h80v120h120v80H720v120h-80ZM120-240v-80h80v80h-80Zm160 0v-80h163q-3 21-2.5 40t3.5 40H280ZM120-400v-80h80v80h-80Zm160 0v-80h266q-23 16-41.5 36T472-400H280ZM120-560v-80h80v80h-80Zm160 0v-80h480v80H280ZM120-720v-80h80v80h-80Zm160 0v-80h480v80H280Z"/>} />;
+};
+
 export const ExpandMoreIcon = (props: Props) => {
   return <Icon {...props}
     path={<path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />} />;

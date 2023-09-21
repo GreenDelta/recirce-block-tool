@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Component, Product, ProductPart } from "../model";
 import * as uuid from "uuid";
 import { MaterialList, numOf } from "./util";
-import { PanelLink } from "../components";
 
-import { DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
+import { AddComponentIcon, AddIcon, DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
   isRoot?: boolean;
@@ -45,11 +44,11 @@ export const ComponentPanel = (props: Props) => {
 
   const content = collapsed
     ? <></>
-    : <>
+    : <article className="re-panel">
       <Menu {...props} />
       {subComps}
       <MaterialList part={comp} {...props} />
-    </>
+    </article>
 
   return (
     <>
@@ -121,12 +120,10 @@ const Menu = (props: Props) => {
   };
 
   return (
-    <nav>
-      <ul style={{ paddingLeft: 15 }}>
-        <PanelLink onClick={onAddComp} label="Add component" sep />
-        <PanelLink onClick={onAddMat} label="Add material" />
-      </ul>
-    </nav>
+    <>
+      <AddComponentIcon tooltip="Add sub component" onClick={onAddComp} />
+      <AddIcon tooltip="Add material" onClick={onAddMat} />
+    </>
   );
 };
 

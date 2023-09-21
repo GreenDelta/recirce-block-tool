@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import * as uuid from "uuid";
 import { MaterialPart, Product } from "../model";
 import { MaterialList, numOf } from "./util";
-import { PanelLink } from "../components";
 import { AddIcon, DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
 
 interface Props {
@@ -21,12 +20,10 @@ export const MaterialPanel = (props: Props) => {
 
   const content = collapsed
     ? <></>
-    : <>
-      <article className="re-panel">
+    : <article className="re-panel">
       <Menu {...props} />
       <MaterialList part={props.material} {...props} />
-      </article>
-    </>
+    </article>
 
   const onDelete = () => {
     // TODO: not yet implemented
@@ -82,6 +79,6 @@ const Menu = (props: Props) => {
   };
 
   return (
-     <AddIcon tooltip="Add a sub material" onClick={onAdd}/>
+    <AddIcon tooltip="Add a sub material" onClick={onAdd} />
   );
 }
