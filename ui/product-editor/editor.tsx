@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
-import { ProgressPage } from "../progress";
 import { ComponentPanel } from "./component-panel";
+import { ProgressPanel } from "../components";
 
 export const ProductEditor = () => {
 
@@ -31,7 +31,7 @@ export const ProductEditor = () => {
     })();
   }, []);
   if (!materials || !product) {
-    return <ProgressPage />;
+    return <ProgressPanel />;
   }
 
   const onSave = async () => {

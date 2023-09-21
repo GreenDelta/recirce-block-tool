@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "./model";
 import * as api from "./api";
-import { ProgressPage } from "./progress";
+import { ProgressPanel } from "./components";
 
 export const ProductsOverview = () => {
 
@@ -11,7 +11,7 @@ export const ProductsOverview = () => {
     api.getProducts().then(setProducts);
   }, []);
   if (!products) {
-    return <ProgressPage message="Loading products" />;
+    return <ProgressPanel message="Loading products" />;
   }
   products.sort((p1, p2) => p1.name.localeCompare(p2.name));
 

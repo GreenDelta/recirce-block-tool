@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Process, Product } from "../model";
-import { ProgressPage } from "../progress";
 import * as api from "../api";
 import * as uuid from "uuid";
+import { ProgressPanel } from "../components";
 
 export const ProcessEditor = () => {
 
   const [process, setProcess] = useState<Process | null>();
   const [products, setProducts] = useState<Product[] | null>(null);
-  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -25,10 +24,11 @@ export const ProcessEditor = () => {
   }, []);
 
   if (!products || !process) {
-    return <ProgressPage />;
+    return <ProgressPanel />;
   }
 
-  const onSave = () => {};
+  const onSave = () => { };
+  const onChange = () => setProcess({ ...process });
 
   return (<>
     <nav>
@@ -41,6 +41,67 @@ export const ProcessEditor = () => {
         <li><a>Delete process</a></li>
       </ul>
     </nav>
+    <article style={{ margin: 3, padding: 10 }}>
+      <div className="grid">
+        <div>
+          <label>
+            Name
+            <input type="text" value={process.name}
+              onChange={e => {
+                process.name = e.target.value;
+                onChange();
+              }} />
+          </label>
+        </div>
+        <div>
+          <ProductCombo
+            process={process}
+            products={products}
+            onChange={onChange} />
+        </div>
+      </div>
+
+    </article>
   </>
+  );
+}
+
+const ProductCombo = ({ process, products, onChange }: {
+  process: Process,
+  products: Product[],
+  onChange: () => void,
+}) => {
+  const options = [];
+  options.push(<option value=""></option>);
+  for (const p of products) {
+    const isSelected = process.product?.id === p.id || false;
+    options.push(
+      <option value={p.id} selected={isSelected}>
+        {p.name}
+      </option>
+    );
+  }
+
+  const handleChange = (id: string) => {
+    if (!id) {
+      delete process.product;
+    } else {
+      for (const p of products) {
+        if (p.id === id) {
+          process.product = p;
+          break;
+        }
+      }
+    }
+    onChange();
+  };
+
+  return (
+    <label>
+      Product
+      <select onChange={e => handleChange(e.target.value)}>
+        {options}
+      </select>
+    </label>
   );
 }

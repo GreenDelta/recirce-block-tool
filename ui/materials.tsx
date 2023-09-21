@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Material } from "./model";
 import * as api from "./api";
-import { ProgressPage } from "./progress";
+import { ProgressPanel } from "./components";
 
 export const MaterialsPage = () => {
 
@@ -12,7 +12,7 @@ export const MaterialsPage = () => {
   }, []);
 
   if (!materials) {
-    return <ProgressPage message="Get materials from server..." />;
+    return <ProgressPanel message="Get materials from server..." />;
   }
 
   const onAdd = async (mat: Material) => {
