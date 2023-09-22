@@ -58,7 +58,7 @@ func (dir *DataDir) initDatabase() error {
 
 	// create an admin
 	account := &User{
-		Name:    "Admin",
+		Name:    "admin",
 		IsAdmin: true,
 	}
 	account.ID = xid.New().String()

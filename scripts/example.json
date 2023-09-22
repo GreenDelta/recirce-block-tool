@@ -5,27 +5,127 @@
   "components": [
     {
       "id": "5fec291a-55fe-4e65-8ccc-8d49930be9f5",
-      "name": "Battery",
+      "name": "Akkumulator",
       "mass": 27.59,
       "materials": [
         {
+          "id": "652d7941-d750-4f8f-9870-04ddcb3fefb7",
+          "material": "Reststoffe",
+          "mass": 17.49
+        },
+        {
           "id": "5878888a-a613-42c9-93d1-e196974fefce",
-          "name": "Metals",
+          "material": "Metalle",
           "mass": 10.1,
           "materials": [
             {
               "id": "2f01bdd4-919e-44e8-b283-ef5dd2d6855d",
-              "name": "Lithium",
+              "material": "Lithium",
               "mass": 6.3
-            },
-            {
-              "id": "26821801-26c1-4dd7-852f-975ba6147ce1",
-              "name": "Cupper",
-              "mass": 3.8
             }
           ]
         }
       ]
+    },
+    {
+      "id": "ec5ffd96-e59d-4a0c-89c1-a277d3845e4f",
+      "name": "Leiterplatte",
+      "mass": 13.72806,
+      "materials": [
+        {
+          "id": "6071a710-5fc7-4072-9ae6-9e0c8b03fd7a",
+          "material": "Metalle",
+          "mass": 8.365,
+          "materials": [
+            {
+              "id": "d3fb127d-422c-4563-90e7-873a5a44837b",
+              "material": "Kupfer (Cu)",
+              "mass": 6.946
+            },
+            {
+              "id": "1461751c-0d11-414b-9f71-55cb609e56ac",
+              "material": "Eisen (Fe)",
+              "mass": 0.198
+            },
+            {
+              "id": "efda3288-c619-4b41-8a6c-8e876c71ee59",
+              "material": "Zink (Zn)",
+              "mass": 0.016
+            },
+            {
+              "id": "ba3d0192-1b62-4bd2-8e12-54bc28a6ae9c",
+              "material": "Nickel (Ni)",
+              "mass": 0.246
+            },
+            {
+              "id": "60ecbc54-db7b-4457-b263-2250e21a950d",
+              "material": "Chrom (Cr)",
+              "mass": 0.026
+            },
+            {
+              "id": "50626356-9b45-4420-8463-c69db94e6da6",
+              "material": "Silber (Ag)",
+              "mass": 0.04
+            },
+            {
+              "id": "526eeb93-2a48-4e21-bec8-7bc9b1a3d4ea",
+              "material": "Gold (Au)",
+              "mass": 0.01
+            },
+            {
+              "id": "fba9a2a5-ec7e-4cc7-aa47-a6d2d98dc0f8",
+              "material": "Cobalt (Co)",
+              "mass": 0.002
+            },
+            {
+              "id": "c02e6d0b-ae89-4563-8cbc-7390d2ef8d05",
+              "material": "Aluminium (Al)",
+              "mass": 0.262
+            },
+            {
+              "id": "a962ecb0-626b-4d2c-9435-89fba41b8a82",
+              "material": "Blei (Pb)",
+              "mass": 0.001
+            },
+            {
+              "id": "f948b33b-ecba-4bb4-9093-6eb84475b22f",
+              "material": "Zinn (Sn)",
+              "mass": 0.585
+            },
+            {
+              "id": "4c8b3e27-745c-4d87-b19f-8037c0a14757",
+              "material": "Magnesium (Mg)",
+              "mass": 0.034
+            }
+          ]
+        },
+        {
+          "id": "6fc599d6-b6c6-4d5d-9f52-c58cfe3d13b6",
+          "material": "Silica",
+          "mass": 2.372
+        },
+        {
+          "id": "61c19ccb-33b8-46cb-8b43-2d0211247e00",
+          "material": "Organic Part",
+          "mass": 0.001
+        }
+      ]
+    },
+    {
+      "id": "7b4f17e3-182e-48fa-9db0-609a0502a045",
+      "name": "Display",
+      "mass": 24.86592,
+      "materials": [
+        {
+          "id": "01c852be-b291-43a8-84fd-4a27085423a0",
+          "material": "Indiumzinnoxid (ITO) (Touch)",
+          "mass": 0.01
+        }
+      ]
+    }, {
+      "id": "983a7999-0d24-45c7-b059-8a3424972077",
+      "name": "Geh\u00c3\u00a4use",
+      "mass": 10.0
     }
   ]
 }
