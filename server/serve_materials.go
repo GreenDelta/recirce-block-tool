@@ -1,10 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
-
-	"github.com/rs/xid"
 )
 
 func (s *Server) PutMaterial() http.HandlerFunc {
@@ -23,41 +20,24 @@ func (s *Server) PutMaterial() http.HandlerFunc {
 		if !ReadAsJson(w, r, &req) {
 			return
 		}
-		matId := LowerTrim(req.Name)
-		if matId == "" {
+		if req.Name == "" {
 			SendBadRequest(w, "material name is empty")
 			return
 		}
-
-		var material *Material
-		err := s.db.EachWhile(MaterialBucket, func(key string, data []byte) bool {
-			m, err := readMaterial(data)
-			if err != nil || m.User != user.ID {
-				return true
-			}
-			if matId == LowerTrim(m.Name) {
-				material = m
-				return false
-			}
-			return true
-		})
+		material, err := s.db.FindMaterial(user, req.Name)
 		if err != nil {
 			SendError(w, "failed to search materials", err)
 			return
 		}
-
 		if material == nil {
-			material = &Material{
-				ID:     xid.New().String(),
-				User:   user.ID,
-				Name:   req.Name,
-				Parent: req.Parent,
+			if _, err := s.db.CreateMaterial(user, req.Name, req.Parent); err != nil {
+				SendError(w, "failed to create material", err)
 			}
 		} else {
 			material.Parent = req.Parent
-		}
-		if err := s.db.Put(MaterialBucket, material); err != nil {
-			SendError(w, "failed to save material", err)
+			if err := s.db.PutMaterial(user, material); err != nil {
+				SendError(w, "failed to update material", err)
+			}
 		}
 	}
 }
@@ -70,39 +50,22 @@ func (s *Server) GetMaterials() http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		user := s.getSessionUser(w, r)
 		if user == nil {
 			return
 		}
-
-		var materials []*response
-		err := s.db.Each(MaterialBucket, func(key string, data []byte) error {
-			m, err := readMaterial(data)
-			if err != nil {
-				return err
-			}
-			if m.User == user.ID {
-				materials = append(materials, &response{
-					Name:   m.Name,
-					Parent: m.Parent,
-				})
-			}
-			return nil
-		})
-
+		materials, err := s.db.GetMaterials(user)
 		if err != nil {
 			SendError(w, "failed to read materials", err)
 			return
 		}
-		SendAsJson(w, materials)
+		var list []*response
+		for _, m := range materials {
+			list = append(list, &response{
+				Name:   m.Name,
+				Parent: m.Parent,
+			})
+		}
+		SendAsJson(w, list)
 	}
-}
-
-func readMaterial(data []byte) (*Material, error) {
-	var material Material
-	if err := json.Unmarshal(data, &material); err != nil {
-		return nil, err
-	}
-	return &material, nil
 }

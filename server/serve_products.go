@@ -8,30 +8,16 @@ import (
 )
 
 func (s *Server) GetProducts() http.HandlerFunc {
-
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(w, r)
 		if user == nil {
 			return
 		}
-
-		var products []*Product
-		err := s.db.Each(ProductBucket, func(key string, data []byte) error {
-			var p Product
-			if err := json.Unmarshal(data, &p); err != nil {
-				return err
-			}
-			if p.User == user.ID {
-				products = append(products, &p)
-			}
-			return nil
-		})
-
-		if err != nil {
+		if products, err := s.db.GetProducts(user); err != nil {
 			SendError(w, "failed to get products", err)
-			return
+		} else {
+			SendAsJson(w, products)
 		}
-		SendAsJson(w, products)
 	}
 }
 
@@ -42,7 +28,6 @@ func (s *Server) GetProduct() http.HandlerFunc {
 		if user == nil {
 			return
 		}
-
 		id := mux.Vars(r)["id"]
 		data, err := s.db.Get(ProductBucket, id)
 		if err != nil {
@@ -80,10 +65,8 @@ func (s *Server) PutProduct() http.HandlerFunc {
 		if !ReadAsJson(w, r, &product) {
 			return
 		}
-		product.User = user.ID
-		if err := s.db.Put(ProductBucket, &product); err != nil {
+		if err := s.db.PutProduct(user, &product); err != nil {
 			SendError(w, "failed to store product", err)
-			return
 		}
 		w.Write([]byte("ok"))
 	}
