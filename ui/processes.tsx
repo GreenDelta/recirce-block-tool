@@ -9,7 +9,7 @@ export const ProcessOverview = () => {
     <>
       <nav>
         <ul>
-          <li><strong>Processes</strong></li>
+          <li><strong>Waste treatment processes</strong></li>
         </ul>
         <ul>
           <li><Link to="/ui/processes/edit">Create a new process</Link></li>

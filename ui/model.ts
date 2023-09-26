@@ -40,7 +40,12 @@ export interface Treatment {
 export interface TreatmentStep {
   id: string;
   process?: string;
-  input?: Component[];
-  output?: Component[];
+  fractions?: Fraction[];
   steps?: TreatmentStep[];
+}
+
+export interface Fraction {
+  component: Component;
+  isRecycled: false;
+  value: number;
 }

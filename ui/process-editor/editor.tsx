@@ -4,6 +4,7 @@ import * as api from "../api";
 import * as uuid from "uuid";
 import { PanelLink, ProgressPanel } from "../components";
 import { ProcessStepPanel } from "./step-panel";
+import { AddIcon } from "../icons";
 
 export const TreatmentEditor = () => {
 
@@ -75,30 +76,30 @@ export const TreatmentEditor = () => {
     </datalist>
     <article className="re-panel">
       <div className="grid">
-        <div>
-          <label>
-            Name
-            <input type="text" className="re-panel-input"
-              value={treatment.name}
-              onChange={e => {
-                treatment.name = e.target.value;
-                onChanged();
-              }} />
-          </label>
+        <div className="re-flex-div">
+          <div className="re-panel-toolbar">
+            {treatment.product
+              ? <AddIcon onClick={onAddStep} />
+              : <></>
+            }
+          </div>
+          <input type="text" className="re-panel-input"
+            value={treatment.name}
+            onChange={e => {
+              treatment.name = e.target.value;
+              onChanged();
+            }} />
         </div>
         <div>
-          <ProductCombo
-            treatment={treatment}
-            products={products}
-            onChange={onChanged} />
+          {treatment.product
+            ? <input value={treatment.product.name} readOnly />
+            : <ProductCombo
+              treatment={treatment}
+              products={products}
+              onChange={onChanged} />
+          }
         </div>
       </div>
-      <nav>
-        <ul />
-        <ul>
-          <PanelLink label="Add treatment step" onClick={onAddStep} />
-        </ul>
-      </nav>
       {stepPanels}
     </article>
   </>
@@ -136,12 +137,11 @@ const ProductCombo = ({ treatment, products, onChange }: {
   };
 
   return (
-    <label>
-      Product
-      <select className="re-panel-input"
-        onChange={e => handleChange(e.target.value)}>
-        {options}
-      </select>
-    </label>
+    <select
+      className="re-panel-input"
+      placeholder="Select a product"
+      onChange={e => handleChange(e.target.value)}>
+      {options}
+    </select>
   );
 }
