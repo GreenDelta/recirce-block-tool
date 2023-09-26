@@ -135,7 +135,7 @@ func (db *DB) PutProduct(user *User, product *Product) error {
 		matIdx[LowerTrim(m.Name)] = m
 	}
 
-	syncMat := func(material, parent string) error {
+	sync := func(material, parent string) error {
 		key := LowerTrim(material)
 		if key == "" {
 			return nil
@@ -151,42 +151,24 @@ func (db *DB) PutProduct(user *User, product *Product) error {
 		}
 	}
 
-	var visitMats func(materials []MaterialPart, parent *MaterialPart) error
-	visitMats = func(materials []MaterialPart, parent *MaterialPart) error {
-		for i := range materials {
-			mat := &materials[i]
-			par := ""
-			if parent != nil {
-				par = parent.Material
+	var visit func(root *Component) error
+	visit = func(root *Component) (err error) {
+		for i := range root.Parts {
+			child := &root.Parts[i]
+			if child.IsMaterial {
+				err = sync(child.Material, root.Material)
 			}
-			if err := syncMat(mat.Material, par); err != nil {
-				return err
+			if err == nil {
+				err = visit(child)
 			}
-			if err := visitMats(mat.Materials, mat); err != nil {
-				return err
-			}
-		}
-		return nil
-	}
-
-	var visitComps func(comps []Component) error
-	visitComps = func(comps []Component) error {
-		for i := range comps {
-			comp := &comps[i]
-			if err := visitMats(comp.Materials, nil); err != nil {
-				return err
-			}
-			if err := visitComps(comp.Components); err != nil {
+			if err != nil {
 				return err
 			}
 		}
 		return nil
 	}
 
-	if err := visitComps(product.Components); err != nil {
-		return err
-	}
-	if err := visitMats(product.Materials, nil); err != nil {
+	if err := visit(&product.Component); err != nil {
 		return err
 	}
 

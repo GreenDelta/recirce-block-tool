@@ -32,18 +32,12 @@ func (m *Material) Key() []byte {
 }
 
 type Component struct {
-	ID         string         `json:"id"`
-	Name       string         `json:"name"`
-	Mass       float64        `json:"mass"`
-	Components []Component    `json:"components,omitempty"`
-	Materials  []MaterialPart `json:"materials,omitempty"`
-}
-
-type MaterialPart struct {
-	ID        string         `json:"id"`
-	Material  string         `json:"material"`
-	Mass      float64        `json:"mass"`
-	Materials []MaterialPart `json:"materials,omitempty"`
+	ID         string      `json:"id"`
+	Name       string      `json:"name"`
+	Mass       float64     `json:"mass"`
+	IsMaterial bool        `json:"isMaterial"`
+	Material   string      `json:"material,omitempty"`
+	Parts      []Component `json:"parts,omitempty"`
 }
 
 type Product struct {

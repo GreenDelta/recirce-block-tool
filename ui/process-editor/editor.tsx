@@ -67,7 +67,8 @@ export const ProcessEditor = () => {
           <PanelLink label="Add treatment step" onClick={() => {
             const step: ProcessStep = {
               id: uuid.v4(),
-              name: "New treatment step"
+              name: "New treatment step",
+              energyDemand: 0,
             };
             if (process.steps) {
               process.steps.push(step);

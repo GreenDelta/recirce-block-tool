@@ -82,8 +82,9 @@ export const ComponentPanel = (props: Props) => {
 };
 
 const Menu = (props: Props) => {
+  const c = props.component;
+
   const onAdd = (isMaterial: boolean) => {
-    const c = props.component;
     const sub: Component = {
       id: uuid.v4(),
       name: isMaterial ? "New component" : "",
@@ -98,15 +99,20 @@ const Menu = (props: Props) => {
     props.onChanged();
   };
 
+  const matIcon = <AddIcon
+    tooltip="Add material"
+    onClick={() => onAdd(true)} />;
+
+  if (c.isMaterial) {
+    return matIcon;
+  }
 
   return (
     <>
       <AddComponentIcon
         tooltip="Add sub component"
         onClick={() => onAdd(false)} />
-      <AddIcon
-        tooltip="Add material"
-        onClick={() => onAdd(true)} />
+      {matIcon}
     </>
   );
 };
@@ -154,25 +160,3 @@ const PartList = (props: Props & { collapsed: boolean }) => {
   }
   return <>{list}</>;
 }
-
-function massFractionOf(elem: ProductPart, product: Product) {
-  const style: React.CSSProperties = { fontSize: "0.8em" };
-  let share;
-  if (product.mass <= 0 || elem.mass < 0) {
-    style.color = "red";
-    share = "NaN";
-  } else {
-    const val = (100 * elem.mass) / product.mass;
-    share = val.toFixed(2);
-    if (val > 100) {
-      style.color = "red";
-    }
-  }
-  return (
-    <li className="re-panel-link">
-      Mass fraction: <span style={style}>{share}</span>
-    </li>
-  );
-}
-
-
