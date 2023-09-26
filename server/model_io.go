@@ -152,11 +152,15 @@ func (db *DB) PutProduct(user *User, product *Product) error {
 	}
 
 	var visit func(root *Component) error
-	visit = func(root *Component) (err error) {
-		for i := range root.Parts {
-			child := &root.Parts[i]
+	visit = func(parent *Component) (err error) {
+		for i := range parent.Parts {
+			child := &parent.Parts[i]
 			if child.IsMaterial {
-				err = sync(child.Material, root.Material)
+				if parent.IsMaterial {
+					err = sync(child.Name, parent.Name)
+				} else {
+					err = sync(child.Name, "")
+				}
 			}
 			if err == nil {
 				err = visit(child)

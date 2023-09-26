@@ -13,7 +13,6 @@ export interface Component {
   name: string;
   mass: number;
   isMaterial: boolean;
-  material?: string;
   parts?: Component[];
 }
 

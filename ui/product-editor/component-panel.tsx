@@ -124,10 +124,9 @@ const NameInput = (props: Props) => {
       <input
         list="materials"
         className="re-panel-input"
-        value={c.material}
+        value={c.name}
         onChange={e => {
           c.name = e.target.value
-          c.material = e.target.value;
           props.onChanged();
         }} />
     );

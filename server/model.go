@@ -36,7 +36,6 @@ type Component struct {
 	Name       string      `json:"name"`
 	Mass       float64     `json:"mass"`
 	IsMaterial bool        `json:"isMaterial"`
-	Material   string      `json:"material,omitempty"`
 	Parts      []Component `json:"parts,omitempty"`
 }
 
