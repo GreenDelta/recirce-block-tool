@@ -1,0 +1,72 @@
+[
+  {
+    "id": "incineration",
+    "name": "Incineration",
+    "emissionFactor": 0.6
+  },
+  {
+    "id": "landfill",
+    "name": "Landfill",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "composting",
+    "name": "Composting",
+    "emissionFactor": 0.1
+  },
+  {
+    "id": "recycling",
+    "name": "Recycling",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "waste-to-energy",
+    "name": "Waste-to-Energy",
+    "emissionFactor": 0.4
+  },
+  {
+    "id": "metals-recycling",
+    "name": "Metals Recycling",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "plastics-recycling",
+    "name": "Plastics Recycling",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "electronics-recycling",
+    "name": "Electronics Recycling",
+    "emissionFactor": 0.25
+  },
+  {
+    "id": "metals-incineration",
+    "name": "Metals Incineration",
+    "emissionFactor": 0.5
+  },
+  {
+    "id": "plastics-incineration",
+    "name": "Plastics Incineration",
+    "emissionFactor": 0.4
+  },
+  {
+    "id": "electronics-incineration",
+    "name": "Electronics Incineration",
+    "emissionFactor": 0.45
+  },
+  {
+    "id": "metals-landfill",
+    "name": "Metals Landfill",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "plastics-landfill",
+    "name": "Plastics Landfill",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "electronics-landfill",
+    "name": "Electronics Landfill",
+    "emissionFactor": 0.35
+  }
+]

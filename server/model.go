@@ -49,11 +49,10 @@ func (p *Product) Key() []byte {
 }
 
 type Process struct {
-	ID             string  `json:"id"`
 	Name           string  `json:"name"`
 	EmissionFactor float64 `json:"emissionFactor"`
 }
 
 func (p *Process) Key() []byte {
-	return []byte(p.ID)
+	return []byte(LowerTrim(p.Name))
 }

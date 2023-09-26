@@ -26,10 +26,18 @@ def main():
     #     f"{url}/users", json={"name": "Test", "password": "eaef390de73a"}
     # ).raise_for_status()
 
-    example = Path(__file__).parent / "example.json"
-    with open(example, "r", encoding="utf-8") as f:
+    product_json = Path(__file__).parent / "product.json"
+    with open(product_json, "r", encoding="utf-8") as f:
         product = json.load(f)
         s.put(f"{url}/products", json=product).raise_for_status()
+
+    processes_json = Path(__file__).parent / "processes.json"
+    with open(processes_json, "r", encoding="utf-8") as f:
+        processes: list = json.load(f)
+        for process in processes:
+            s.put("f{url}/processes", json=process).raise_for_status()
+
+
 
 if __name__ == "__main__":
     main()

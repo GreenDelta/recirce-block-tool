@@ -16,6 +16,7 @@ const (
 	AccountBucket  BucketName = "accounts"
 	MaterialBucket BucketName = "materials"
 	ProductBucket  BucketName = "products"
+	ProcessBucket  BucketName = "processes"
 )
 
 // DB provides the database methods of the application.
@@ -35,6 +36,7 @@ func OpenDB(path string) (*DB, error) {
 		AccountBucket,
 		MaterialBucket,
 		ProductBucket,
+		ProcessBucket,
 	}
 	err = db.Update(func(tx *bbolt.Tx) error {
 		for _, bucket := range buckets {
