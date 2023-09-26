@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { Component, Product, ProductPart } from "../model";
+import { Component, Product } from "../model";
 import * as uuid from "uuid";
-import { MaterialList, numOf } from "./util";
+import * as util from "./util";
 
-import { AddComponentIcon, AddIcon, DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from "../icons";
+import {
+  AddComponentIcon,
+  AddIcon,
+  DeleteIcon,
+  ExpandLessIcon,
+  ExpandMoreIcon
+} from "../icons";
 
 interface Props {
   isRoot?: boolean;
@@ -19,35 +25,28 @@ export const ComponentPanel = (props: Props) => {
 
   const comp = props.component;
   const subComps = [];
-  if (comp.components) {
-    for (const c of comp.components) {
+  if (comp.parts) {
+    for (const c of comp.parts) {
       const subProps = { ...props, component: c, isRoot: false };
       subComps.push(<ComponentPanel key={c.id} {...subProps} />);
     }
   }
 
-  const icon = collapsed
+  const expander = collapsed
     ? <ExpandLessIcon tooltip="Collapse" onClick={() => setCollapsed(false)} />
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
 
   const onDelete = () => {
-    const t = parentOf(props.component, props.product);
+    const t = util.parentOf(props.component, props.product);
     if (!t) {
       return;
     }
     const [parent, idx] = t;
-    if (parent.components && idx >= 0) {
-      parent.components.splice(idx, 1);
+    if (parent.parts && idx >= 0) {
+      parent.parts.splice(idx, 1);
       props.onChanged();
     }
   };
-
-  const content = collapsed
-    ? <></>
-    : <>
-      {subComps}
-      <MaterialList part={comp} {...props} />
-    </>
 
   return (
     <>
@@ -55,21 +54,15 @@ export const ComponentPanel = (props: Props) => {
         <div className="grid">
           <div className="re-flex-div">
             <div className="re-panel-toolbar">
-              {icon}
+              {expander}
               {!collapsed && <Menu {...props} /> || <></>}
             </div>
-            <input type="text" className="re-panel-input"
-              value={comp.name}
-              onChange={(e) => {
-                comp.name = e.target.value;
-                props.onChanged();
-              }}
-            />
+            <NameInput {...props} />
           </div>
           <div className="re-flex-div">
             <input type="number" className="re-panel-input"
               value={comp.mass}
-              onChange={(e) => numOf(e, num => {
+              onChange={(e) => util.numOf(e, num => {
                 comp.mass = num;
                 props.onChanged();
               })}
@@ -82,50 +75,85 @@ export const ComponentPanel = (props: Props) => {
             }
           </div>
         </div>
-        {content}
+        {<PartList collapsed={collapsed} {...props} />}
       </article>
     </>
   );
 };
 
 const Menu = (props: Props) => {
-  const onAddComp = () => {
-    const sub = {
-      id: uuid.v4(),
-      name: "New component",
-      mass: 1.0,
-    };
+  const onAdd = (isMaterial: boolean) => {
     const c = props.component;
-    if (c.components) {
-      c.components.push(sub);
+    const sub: Component = {
+      id: uuid.v4(),
+      name: isMaterial ? "New component" : "",
+      mass: util.nextPartMassOf(c),
+      isMaterial,
+    };
+    if (c.parts) {
+      c.parts.push(sub);
     } else {
-      c.components = [sub];
+      c.parts = [sub];
     }
     props.onChanged();
   };
 
-  const onAddMat = () => {
-    const mat = {
-      id: uuid.v4(),
-      material: "",
-      mass: 1.0,
-    };
-    const c = props.component;
-    if (c.materials) {
-      c.materials.push(mat);
-    } else {
-      c.materials = [mat];
-    }
-    props.onChanged();
-  };
 
   return (
     <>
-      <AddComponentIcon tooltip="Add sub component" onClick={onAddComp} />
-      <AddIcon tooltip="Add material" onClick={onAddMat} />
+      <AddComponentIcon
+        tooltip="Add sub component"
+        onClick={() => onAdd(false)} />
+      <AddIcon
+        tooltip="Add material"
+        onClick={() => onAdd(true)} />
     </>
   );
 };
+
+const NameInput = (props: Props) => {
+  const c = props.component;
+  if (c.isMaterial) {
+    return (
+      <input
+        list="materials"
+        className="re-panel-input"
+        value={c.material}
+        onChange={e => {
+          c.name = e.target.value
+          c.material = e.target.value;
+          props.onChanged();
+        }} />
+    );
+  }
+  return (
+    <input
+      type="text"
+      className="re-panel-input"
+      value={c.name}
+      onChange={(e) => {
+        c.name = e.target.value;
+        props.onChanged();
+      }} />
+  );
+}
+
+const PartList = (props: Props & { collapsed: boolean }) => {
+  if (props.collapsed) {
+    return <></>;
+  }
+  const list = [];
+  const c = props.component;
+  if (c.parts) {
+    for (const part of c.parts) {
+      const subProps = {
+        ...props, component: part, isRoot: false
+      };
+      list.push(<ComponentPanel key={c.id} {...subProps} />);
+    }
+  }
+  return <>{list}</>;
+}
 
 function massFractionOf(elem: ProductPart, product: Product) {
   const style: React.CSSProperties = { fontSize: "0.8em" };
@@ -147,22 +175,4 @@ function massFractionOf(elem: ProductPart, product: Product) {
   );
 }
 
-function parentOf(
-  comp: Component,
-  root: Component
-): [Component, number] | null {
-  if (!comp || !root || !root.components) {
-    return null;
-  }
-  for (let i = 0; i < root.components.length; i++) {
-    const child = root.components[i];
-    if (child.id === comp.id) {
-      return [root, i];
-    }
-    const sub = parentOf(comp, child);
-    if (sub) {
-      return sub;
-    }
-  }
-  return null;
-}
+

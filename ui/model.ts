@@ -8,19 +8,13 @@ export interface Credentials {
   password: string;
 }
 
-export interface ProductPart {
+export interface Component {
   id: string;
-  mass: number;
-  materials?: MaterialPart[];
-}
-
-export interface MaterialPart extends ProductPart {
-  material: string;
-}
-
-export interface Component extends ProductPart {
   name: string;
-  components?: Component[];
+  mass: number;
+  isMaterial: boolean;
+  material?: string;
+  parts?: Component[];
 }
 
 export interface Product extends Component {
@@ -41,13 +35,8 @@ export interface Process {
 export interface ProcessStep {
   id: string;
   name: string;
-  energyDemand?: number;
-  input?: Flow;
-  output?: Flow;
+  energyDemand: number;
+  input?: Component[];
+  output?: Component[];
   steps?: ProcessStep[];
-}
-
-export interface Flow {
-  materials?: MaterialPart[];
-  components?: Component[];
 }

@@ -23,6 +23,7 @@ export const ProductEditor = () => {
           id: uuid.v4(),
           name: "New product",
           mass: 1.0,
+          isMaterial: false,
         })
       }
       const mats = await api.getMaterials();
