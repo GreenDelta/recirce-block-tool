@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Treatment, TreatmentStep } from '../model';
-import { ExpandLessIcon, ExpandMoreIcon } from '../icons';
+import { AddIcon, ExpandLessIcon, ExpandMoreIcon } from '../icons';
 import * as util from "./util";
 
 interface Props {
   step: TreatmentStep;
-  process: Treatment;
+  treatment: Treatment;
   onChanged: () => void;
 }
 
@@ -18,7 +18,7 @@ export const ProcessStepPanel: React.FC<Props> = (props) => {
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
 
   const onDelete = () => {
-    const t = util.parentOf(props.step, props.process);
+    const t = util.parentOf(props.step, props.treatment);
     if (!t) {
       return;
     }
@@ -39,30 +39,13 @@ export const ProcessStepPanel: React.FC<Props> = (props) => {
               {!collapsed && <Menu {...props} /> || <></>}
             </div>
             <input
-        list="processes"
-        className="re-panel-input"
-        value={c.name}
-        onChange={e => {
-          c.name = e.target.value
-          props.onChanged();
-        }} />
-          </div>
-          <div className="re-flex-div">
-            <input
-              type="number"
+              list="processes"
               className="re-panel-input"
-              value={props.step.energyDemand}
-              onChange={(e) => util.numOf(e, num => {
-                // Implement energy demand change logic
-                props.step.energyDemand = num;
+              value={props.step.process}
+              onChange={e => {
+                props.step.process = e.target.value
                 props.onChanged();
-              })}
-            />
-            {!props.isRoot && (
-              <label>
-                <DeleteIcon tooltip="Delete step" onClick={onDelete} />
-              </label>
-            )}
+              }} />
           </div>
         </div>
         {collapsed ? <></> : <StepList {...props} />}
@@ -75,8 +58,6 @@ const Menu = (props: Props) => {
   const onAdd = () => {
     const sub: TreatmentStep = {
       id: uuid(),
-      name: 'New step',
-      energyDemand: 0,
     };
     if (props.step.steps) {
       props.step.steps.push(sub);

@@ -20,6 +20,12 @@ export async function putMaterial(m: Material): Promise<void> {
   }
 }
 
+export async function getProcesses(): Promise<string[]> {
+  const r = await fetch("/api/processes");
+  const json = await r.json();
+  return !json ? [] : json;
+}
+
 export async function getProducts(): Promise<Product[]> {
   const r = await fetch("/api/products");
   const json = await r.json();

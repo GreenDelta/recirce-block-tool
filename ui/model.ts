@@ -39,7 +39,6 @@ export interface Treatment {
 
 export interface TreatmentStep {
   id: string;
-  name: string;
   process?: string;
   input?: Component[];
   output?: Component[];

@@ -15,7 +15,7 @@ def main():
     r.raise_for_status()
     admin: dict[str, Any] = s.get(f"{url}/users/current").json()
 
-     # change password of admin
+    # change password of admin
     admin_data = admin.copy()
     admin_data["password"] = "eaef390de73a"
     s.post(f"{url}/users", json=admin_data).raise_for_status()
@@ -35,8 +35,7 @@ def main():
     with open(processes_json, "r", encoding="utf-8") as f:
         processes: list = json.load(f)
         for process in processes:
-            s.put("f{url}/processes", json=process).raise_for_status()
-
+            s.put(f"{url}/processes", json=process).raise_for_status()
 
 
 if __name__ == "__main__":

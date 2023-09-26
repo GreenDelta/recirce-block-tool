@@ -9,7 +9,7 @@ import { MaterialsPage } from "./materials";
 import { User } from "./model";
 import * as api from "./api";
 import { ProcessOverview } from "./processes";
-import { ProcessEditor } from "./process-editor/editor";
+import { TreatmentEditor } from "./process-editor/editor";
 
 const ErrorPage = () => {
   return (
@@ -110,7 +110,7 @@ function main() {
         },
         {
           path: "/ui/processes/edit/:id?",
-          element: <ProcessEditor />,
+          element: <TreatmentEditor />,
         },
         {
           path: "/ui/products",

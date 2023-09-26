@@ -4,36 +4,40 @@ import * as api from "../api";
 import * as uuid from "uuid";
 import { PanelLink, ProgressPanel } from "../components";
 
-export const ProcessEditor = () => {
+export const TreatmentEditor = () => {
 
-  const [process, setProcess] = useState<Treatment | null>();
+  const [processes, setProcesses] = useState<string[] | null>();
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [treatment, setTreatment] = useState<Treatment | null>(null)
 
   useEffect(() => {
     (async () => {
       const prods = await api.getProducts();
       setProducts(prods);
+      const procs = await api.getProcesses();
+      procs.sort();
+      setProcesses(procs)
       // TODO: optional loading per ID for
       // editing of existing processes; just
       // like in the product editor
-      setProcess({
+      setTreatment({
         id: uuid.v4(),
-        name: "New waste treatment process",
+        name: "New waste treatment",
       });
     })();
   }, []);
 
-  if (!products || !process) {
+  if (!products || !processes || !treatment) {
     return <ProgressPanel />;
   }
 
   const onSave = () => { };
-  const onChange = () => setProcess({ ...process });
+  const onChange = () => setTreatment({ ...treatment });
 
   return (<>
     <nav>
       <ul>
-        <li><strong>{process.name}</strong></li>
+        <li><strong>{treatment.name}</strong></li>
       </ul>
       <ul>
         <li><a onClick={onSave}>Upload process</a></li>
@@ -41,22 +45,25 @@ export const ProcessEditor = () => {
         <li><a>Delete process</a></li>
       </ul>
     </nav>
+    <datalist id="processes">
+      {processes.map(p => <option value={p} />)}
+    </datalist>
     <article className="re-panel">
       <div className="grid">
         <div>
           <label>
             Name
             <input type="text" className="re-panel-input"
-              value={process.name}
+              value={treatment.name}
               onChange={e => {
-                process.name = e.target.value;
+                treatment.name = e.target.value;
                 onChange();
               }} />
           </label>
         </div>
         <div>
           <ProductCombo
-            process={process}
+            treatment={treatment}
             products={products}
             onChange={onChange} />
         </div>
@@ -67,12 +74,11 @@ export const ProcessEditor = () => {
           <PanelLink label="Add treatment step" onClick={() => {
             const step: TreatmentStep = {
               id: uuid.v4(),
-              name: "New treatment step",
             };
-            if (process.steps) {
-              process.steps.push(step);
+            if (treatment.steps) {
+              treatment.steps.push(step);
             } else {
-              process.steps = [step];
+              treatment.steps = [step];
             }
             onChange();
           }} />
@@ -83,15 +89,15 @@ export const ProcessEditor = () => {
   );
 }
 
-const ProductCombo = ({ process, products, onChange }: {
-  process: Treatment,
+const ProductCombo = ({ treatment, products, onChange }: {
+  treatment: Treatment,
   products: Product[],
   onChange: () => void,
 }) => {
   const options = [];
   options.push(<option value=""></option>);
   for (const p of products) {
-    const isSelected = process.product?.id === p.id || false;
+    const isSelected = treatment.product?.id === p.id || false;
     options.push(
       <option value={p.id} selected={isSelected}>
         {p.name}
@@ -101,11 +107,11 @@ const ProductCombo = ({ process, products, onChange }: {
 
   const handleChange = (id: string) => {
     if (!id) {
-      delete process.product;
+      delete treatment.product;
     } else {
       for (const p of products) {
         if (p.id === id) {
-          process.product = p;
+          treatment.product = p;
           break;
         }
       }
