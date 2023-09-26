@@ -23,15 +23,6 @@ export const ComponentPanel = (props: Props) => {
 
   const [collapsed, setCollapsed] = useState(false);
 
-  const comp = props.component;
-  const subComps = [];
-  if (comp.parts) {
-    for (const c of comp.parts) {
-      const subProps = { ...props, component: c, isRoot: false };
-      subComps.push(<ComponentPanel key={c.id} {...subProps} />);
-    }
-  }
-
   const expander = collapsed
     ? <ExpandLessIcon tooltip="Collapse" onClick={() => setCollapsed(false)} />
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
@@ -61,13 +52,13 @@ export const ComponentPanel = (props: Props) => {
           </div>
           <div className="re-flex-div">
             <input type="number" className="re-panel-input"
-              value={comp.mass}
+              value={props.component.mass}
               onChange={(e) => util.numOf(e, num => {
-                comp.mass = num;
+                props.component.mass = num;
                 props.onChanged();
               })}
             />
-            <label>g</label>
+            <MassFraction {...props} />
             {!props.isRoot &&
               <label>
                 <DeleteIcon tooltip="Delete component" onClick={onDelete} />
@@ -75,7 +66,7 @@ export const ComponentPanel = (props: Props) => {
             }
           </div>
         </div>
-        {<PartList collapsed={collapsed} {...props} />}
+        {collapsed ? <></> : <PartList {...props} />}
       </article>
     </>
   );
@@ -143,10 +134,7 @@ const NameInput = (props: Props) => {
   );
 }
 
-const PartList = (props: Props & { collapsed: boolean }) => {
-  if (props.collapsed) {
-    return <></>;
-  }
+const PartList = (props: Props) => {
   const list = [];
   const c = props.component;
   if (c.parts) {
@@ -159,3 +147,30 @@ const PartList = (props: Props & { collapsed: boolean }) => {
   }
   return <>{list}</>;
 }
+
+const MassFraction = (props: Props) => {
+  if (props.isRoot) {
+    return <label>g</label>;
+  }
+  const calc = (mass: number) => {
+    if (mass === 0) {
+      return 0;
+    }
+    const productMass = props.product.mass;
+    if (!mass || !productMass) {
+      return NaN;
+    }
+    return 100 * mass / productMass;
+  };
+
+  const f = calc(props.component.mass);
+  const isInvalid = isNaN(f) || f < 0 || f > 100;
+  return (
+    <label style={{ whiteSpace: "nowrap" }}>
+      g &asymp; {" "}
+      <span style={isInvalid ? { color: "red" } : {}}>
+        {isNaN(f) ? "NaN" : `${f.toFixed(2)}%`}
+      </span>
+    </label>
+  );
+};

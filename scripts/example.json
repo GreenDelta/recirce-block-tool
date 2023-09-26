@@ -2,7 +2,7 @@
   "id": "fdedd371-8d69-4b19-9658-96cde3d6a19b",
   "name": "Smartphone",
   "mass": 129.51,
-  "components": [
+  "parts": [
     {
       "id": "5fec291a-55fe-4e65-8ccc-8d49930be9f5",
       "name": "Akkumulator",
