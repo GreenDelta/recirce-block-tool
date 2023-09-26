@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Treatment, TreatmentStep, Product } from "../model";
+import { Treatment, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
 import { PanelLink, ProgressPanel } from "../components";
+import { ProcessStepPanel } from "./step-panel";
 
 export const TreatmentEditor = () => {
 
@@ -32,7 +33,31 @@ export const TreatmentEditor = () => {
   }
 
   const onSave = () => { };
-  const onChange = () => setTreatment({ ...treatment });
+  const onChanged = () => setTreatment({ ...treatment });
+
+  const onAddStep = () => {
+    const step = {
+      id: uuid.v4()
+    };
+    if (treatment.steps) {
+      treatment.steps.push(step);
+    } else {
+      treatment.steps = [step];
+    }
+    onChanged();
+  }
+
+  const stepPanels = [];
+  if (treatment.steps) {
+    for (const step of treatment.steps) {
+      stepPanels.push(
+        <ProcessStepPanel
+          key={step.id}
+          treatment={treatment}
+          step={step}
+          onChanged={onChanged} />);
+    }
+  }
 
   return (<>
     <nav>
@@ -57,7 +82,7 @@ export const TreatmentEditor = () => {
               value={treatment.name}
               onChange={e => {
                 treatment.name = e.target.value;
-                onChange();
+                onChanged();
               }} />
           </label>
         </div>
@@ -65,25 +90,16 @@ export const TreatmentEditor = () => {
           <ProductCombo
             treatment={treatment}
             products={products}
-            onChange={onChange} />
+            onChange={onChanged} />
         </div>
       </div>
       <nav>
         <ul />
         <ul>
-          <PanelLink label="Add treatment step" onClick={() => {
-            const step: TreatmentStep = {
-              id: uuid.v4(),
-            };
-            if (treatment.steps) {
-              treatment.steps.push(step);
-            } else {
-              treatment.steps = [step];
-            }
-            onChange();
-          }} />
+          <PanelLink label="Add treatment step" onClick={onAddStep} />
         </ul>
       </nav>
+      {stepPanels}
     </article>
   </>
   );
