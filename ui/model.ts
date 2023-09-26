@@ -27,15 +27,21 @@ export interface Material {
 export interface Process {
   id: string;
   name: string;
-  product?: Product;
-  steps?: ProcessStep[];
+  emissionFactor: number;
 }
 
-export interface ProcessStep {
+export interface Treatment {
   id: string;
   name: string;
-  energyDemand: number;
+  product?: Product;
+  steps?: TreatmentStep[];
+}
+
+export interface TreatmentStep {
+  id: string;
+  name: string;
+  process?: string;
   input?: Component[];
   output?: Component[];
-  steps?: ProcessStep[];
+  steps?: TreatmentStep[];
 }

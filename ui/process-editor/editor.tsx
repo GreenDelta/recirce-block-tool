@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Process, ProcessStep, Product } from "../model";
+import { Treatment, TreatmentStep, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
 import { PanelLink, ProgressPanel } from "../components";
 
 export const ProcessEditor = () => {
 
-  const [process, setProcess] = useState<Process | null>();
+  const [process, setProcess] = useState<Treatment | null>();
   const [products, setProducts] = useState<Product[] | null>(null);
 
   useEffect(() => {
@@ -65,10 +65,9 @@ export const ProcessEditor = () => {
         <ul />
         <ul>
           <PanelLink label="Add treatment step" onClick={() => {
-            const step: ProcessStep = {
+            const step: TreatmentStep = {
               id: uuid.v4(),
               name: "New treatment step",
-              energyDemand: 0,
             };
             if (process.steps) {
               process.steps.push(step);
@@ -85,7 +84,7 @@ export const ProcessEditor = () => {
 }
 
 const ProductCombo = ({ process, products, onChange }: {
-  process: Process,
+  process: Treatment,
   products: Product[],
   onChange: () => void,
 }) => {
