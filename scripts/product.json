@@ -1,151 +1,184 @@
 {
-  "id": "fdedd371-8d69-4b19-9658-96cde3d6a19b",
-  "name": "Smartphone",
-  "mass": 129.51,
+  "id": "bfb9f19a-bbd7-478e-9af1-d4c30355f9bb",
+  "name": "Tablet",
+  "mass": 491.9,
+  "isMaterial": false,
   "parts": [
     {
-      "id": "5fec291a-55fe-4e65-8ccc-8d49930be9f5",
-      "name": "Akkumulator",
-      "mass": 27.59,
+      "id": "d74aa99b-f1bc-4e21-850f-559d517ff86a",
+      "name": "Casing",
+      "mass": 66,
+      "isMaterial": false,
       "parts": [
         {
-          "id": "652d7941-d750-4f8f-9870-04ddcb3fefb7",
-          "name": "Reststoffe",
+          "id": "f036059f-9209-4ef7-a479-cb78c01a7b7f",
+          "name": "Plastic",
+          "mass": 65,
           "isMaterial": true,
-          "mass": 17.49
-        },
-        {
-          "id": "5878888a-a613-42c9-93d1-e196974fefce",
-          "name": "Metalle",
-          "isMaterial": true,
-          "mass": 10.1,
           "parts": [
             {
-              "id": "2f01bdd4-919e-44e8-b283-ef5dd2d6855d",
-              "name": "Lithium",
-              "isMaterial": true,
-              "mass": 6.3
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "ec5ffd96-e59d-4a0c-89c1-a277d3845e4f",
-      "name": "Leiterplatte",
-      "mass": 13.72806,
-      "parts": [
-        {
-          "id": "6071a710-5fc7-4072-9ae6-9e0c8b03fd7a",
-          "name": "Metalle",
-          "isMaterial": true,
-          "mass": 8.365,
-          "parts": [
-            {
-              "id": "d3fb127d-422c-4563-90e7-873a5a44837b",
-              "name": "Kupfer (Cu)",
-              "isMaterial": true,
-              "mass": 6.946
-            },
-            {
-              "id": "1461751c-0d11-414b-9f71-55cb609e56ac",
-              "name": "Eisen (Fe)",
-              "isMaterial": true,
-              "mass": 0.198
-            },
-            {
-              "id": "efda3288-c619-4b41-8a6c-8e876c71ee59",
-              "name": "Zink (Zn)",
-              "isMaterial": true,
-              "mass": 0.016
-            },
-            {
-              "id": "ba3d0192-1b62-4bd2-8e12-54bc28a6ae9c",
-              "name": "Nickel (Ni)",
-              "isMaterial": true,
-              "mass": 0.246
-            },
-            {
-              "id": "60ecbc54-db7b-4457-b263-2250e21a950d",
-              "name": "Chrom (Cr)",
-              "isMaterial": true,
-              "mass": 0.026
-            },
-            {
-              "id": "50626356-9b45-4420-8463-c69db94e6da6",
-              "name": "Silber (Ag)",
-              "isMaterial": true,
-              "mass": 0.04
-            },
-            {
-              "id": "526eeb93-2a48-4e21-bec8-7bc9b1a3d4ea",
-              "name": "Gold (Au)",
-              "isMaterial": true,
-              "mass": 0.01
-            },
-            {
-              "id": "fba9a2a5-ec7e-4cc7-aa47-a6d2d98dc0f8",
-              "name": "Cobalt (Co)",
-              "isMaterial": true,
-              "mass": 0.002
-            },
-            {
-              "id": "c02e6d0b-ae89-4563-8cbc-7390d2ef8d05",
-              "name": "Aluminium (Al)",
-              "isMaterial": true,
-              "mass": 0.262
-            },
-            {
-              "id": "a962ecb0-626b-4d2c-9435-89fba41b8a82",
-              "name": "Blei (Pb)",
-              "isMaterial": true,
-              "mass": 0.001
-            },
-            {
-              "id": "f948b33b-ecba-4bb4-9093-6eb84475b22f",
-              "name": "Zinn (Sn)",
-              "isMaterial": true,
-              "mass": 0.585
-            },
-            {
-              "id": "4c8b3e27-745c-4d87-b19f-8037c0a14757",
-              "name": "Magnesium (Mg)",
-              "isMaterial": true,
-              "mass": 0.034
+              "id": "fd55164a-75d9-4c15-aeae-84cff520fc41",
+              "name": "Polycarbonate",
+              "mass": 65,
+              "isMaterial": true
             }
           ]
         },
         {
-          "id": "6fc599d6-b6c6-4d5d-9f52-c58cfe3d13b6",
-          "name": "Silica",
-          "isMaterial": true,
-          "mass": 2.372
-        },
-        {
-          "id": "61c19ccb-33b8-46cb-8b43-2d0211247e00",
-          "name": "Organic Part",
-          "isMaterial": true,
-          "mass": 0.001
+          "id": "459269f6-f015-477c-9741-38e1e7ad0575",
+          "name": "Others",
+          "mass": 1,
+          "isMaterial": true
         }
       ]
     },
     {
-      "id": "7b4f17e3-182e-48fa-9db0-609a0502a045",
+      "id": "f5f8024a-cbbe-4d65-8959-f43b134a00de",
       "name": "Display",
-      "mass": 24.86592,
+      "mass": 222.2,
+      "isMaterial": false,
       "parts": [
         {
-          "id": "01c852be-b291-43a8-84fd-4a27085423a0",
-          "name": "Indiumzinnoxid (ITO) (Touch)",
+          "id": "8412dc74-a1c7-4c76-bb38-8cc603b0b086",
+          "name": "Metals",
+          "mass": 20,
           "isMaterial": true,
-          "mass": 0.01
+          "parts": [
+            {
+              "id": "e82c329f-75f2-43a9-85e8-cc2be826f8aa",
+              "name": "Steel",
+              "mass": 20,
+              "isMaterial": true
+            }
+          ]
+        },
+        {
+          "id": "8f274ed0-814a-4611-a388-fea959c7f376",
+          "name": "Plastic",
+          "mass": 43.5,
+          "isMaterial": true
+        },
+        {
+          "id": "ee8943cc-dd8d-4382-8873-d82dfabab213",
+          "name": "PCB",
+          "mass": 7.3,
+          "isMaterial": false
+        },
+        {
+          "id": "6768198e-093a-47e8-bfe1-5510a70cc87b",
+          "name": "Glass",
+          "mass": 150,
+          "isMaterial": true,
+          "parts": [
+            {
+              "id": "7318519d-544c-45d1-adab-a3923836ee73",
+              "name": "Flat panel glass",
+              "mass": 60,
+              "isMaterial": true
+            },
+            {
+              "id": "12f40c3d-1f83-486e-804f-2afa61cefee9",
+              "name": "Other glass",
+              "mass": 90,
+              "isMaterial": true
+            }
+          ]
+        },
+        {
+          "id": "a3455cd8-d5ff-4e2b-83bd-ee26f563f6b7",
+          "name": "Others",
+          "mass": 1.4,
+          "isMaterial": true
         }
       ]
     },
     {
-      "id": "983a7999-0d24-45c7-b059-8a3424972077",
-      "name": "Gehäuse",
-      "mass": 10.0
+      "id": "8e0187fe-8f1c-4c0e-ab05-e8e92cefb5d2",
+      "name": "Battery",
+      "mass": 125.3,
+      "isMaterial": false,
+      "parts": [
+        {
+          "id": "fbf49ca7-5dd2-48b7-befd-2373be531895",
+          "name": "Li-ion battery",
+          "mass": 125,
+          "isMaterial": false
+        },
+        {
+          "id": "71a201e4-017e-4723-bb7d-0474f73cf2ce",
+          "name": "Metals",
+          "mass": 0.3,
+          "isMaterial": true,
+          "parts": [
+            {
+              "id": "25331b58-a52d-4f25-ab65-9e43b56fe3c4",
+              "name": "Steel",
+              "mass": 0.3,
+              "isMaterial": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0864289b-d0f2-4f10-8969-9b3631f2f152",
+      "name": "Interior parts",
+      "mass": 52.2,
+      "isMaterial": false,
+      "parts": [
+        {
+          "id": "16007ffc-2000-4613-937f-abba8322ff6b",
+          "name": "Metals",
+          "mass": 8.3,
+          "isMaterial": true,
+          "parts": [
+            {
+              "id": "98c4e799-9e3b-41be-a6d6-9935c530d9a6",
+              "name": "Copper",
+              "mass": 2.2,
+              "isMaterial": true
+            },
+            {
+              "id": "d6cdcd1a-e90c-4439-a929-520370fdbc0f",
+              "name": "Steel",
+              "mass": 6.1,
+              "isMaterial": true
+            }
+          ]
+        },
+        {
+          "id": "287a8f80-7c47-4b88-b68e-83f4d6d503ea",
+          "name": "Plastic",
+          "mass": 41.3,
+          "isMaterial": true
+        },
+        {
+          "id": "96747d35-c33f-4980-9954-2ef7b9221335",
+          "name": "PCB",
+          "mass": 2.4,
+          "isMaterial": false
+        },
+        {
+          "id": "8b2a9399-dc9f-46fc-8ad6-de6e66788001",
+          "name": "Others",
+          "mass": 0.2,
+          "isMaterial": true
+        }
+      ]
+    },
+    {
+      "id": "9d598689-4117-41e8-bec7-760f06017a6f",
+      "name": "Motherboard",
+      "mass": 26.2,
+      "isMaterial": false,
+      "parts": [
+        {
+          "id": "d98efd90-fc37-4085-b808-48019a91c81b",
+          "name": "PCB",
+          "mass": 26.2,
+          "isMaterial": false
+        }
+      ]
     }
   ]
 }

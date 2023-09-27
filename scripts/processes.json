@@ -1,72 +1,97 @@
 [
   {
-    "id": "incineration",
-    "name": "Incineration",
+    "id": "hydrometallurgical_treatment",
+    "name": "Hydrometallurgical Treatment",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "pyrometallurgical_treatment",
+    "name": "Pyrometallurgical Treatment",
+    "emissionFactor": 0.4
+  },
+  {
+    "id": "municipal_waste_incineration",
+    "name": "Municipal Waste Incineration",
     "emissionFactor": 0.6
   },
   {
-    "id": "landfill",
-    "name": "Landfill",
+    "id": "manual_dismantling",
+    "name": "Manual Dismantling",
     "emissionFactor": 0.2
   },
   {
-    "id": "composting",
-    "name": "Composting",
-    "emissionFactor": 0.1
-  },
-  {
-    "id": "recycling",
-    "name": "Recycling",
-    "emissionFactor": 0.3
-  },
-  {
-    "id": "waste-to-energy",
-    "name": "Waste-to-Energy",
-    "emissionFactor": 0.4
-  },
-  {
-    "id": "metals-recycling",
-    "name": "Metals Recycling",
-    "emissionFactor": 0.2
-  },
-  {
-    "id": "plastics-recycling",
-    "name": "Plastics Recycling",
-    "emissionFactor": 0.3
-  },
-  {
-    "id": "electronics-recycling",
-    "name": "Electronics Recycling",
-    "emissionFactor": 0.25
-  },
-  {
-    "id": "metals-incineration",
-    "name": "Metals Incineration",
+    "id": "electronic_refining",
+    "name": "Electronic Refining",
     "emissionFactor": 0.5
   },
   {
-    "id": "plastics-incineration",
-    "name": "Plastics Incineration",
+    "id": "refining_cast_alloy",
+    "name": "Refining, Cast Alloy",
     "emissionFactor": 0.4
   },
   {
-    "id": "electronics-incineration",
-    "name": "Electronics Incineration",
-    "emissionFactor": 0.45
+    "id": "copper_smelter",
+    "name": "Copper Smelter",
+    "emissionFactor": 0.8
   },
   {
-    "id": "metals-landfill",
-    "name": "Metals Landfill",
-    "emissionFactor": 0.3
-  },
-  {
-    "id": "plastics-landfill",
-    "name": "Plastics Landfill",
+    "id": "electro_hydraulic_shredding",
+    "name": "Electro-Hydraulic Shredding",
     "emissionFactor": 0.2
   },
   {
-    "id": "electronics-landfill",
-    "name": "Electronics Landfill",
-    "emissionFactor": 0.35
+    "id": "impact_crusher",
+    "name": "Impact Crusher",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "conveyor_belt",
+    "name": "Conveyor Belt",
+    "emissionFactor": 0.1
+  },
+  {
+    "id": "large_vibrating_chute",
+    "name": "Large Vibrating Chute",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "eddy_current_separator",
+    "name": "Eddy Current Separator",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "screen",
+    "name": "Screen",
+    "emissionFactor": 0.1
+  },
+  {
+    "id": "small_vibrating_chute",
+    "name": "Small Vibrating Chute",
+    "emissionFactor": 0.1
+  },
+  {
+    "id": "wind_sifter",
+    "name": "Wind Sifter",
+    "emissionFactor": 0.3
+  },
+  {
+    "id": "magnetic_separator",
+    "name": "Magnetic Separator",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "multi_sensor_color_detection",
+    "name": "Multi-Sensor System for Color Detection",
+    "emissionFactor": 0.1
+  },
+  {
+    "id": "multi_sensor_metal_detection",
+    "name": "Multi-Sensor System for Metal Detection",
+    "emissionFactor": 0.2
+  },
+  {
+    "id": "multi_sensor_NIR_detection",
+    "name": "Multi-Sensor System for NIR Detection",
+    "emissionFactor": 0.2
   }
 ]
