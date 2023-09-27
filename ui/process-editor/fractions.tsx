@@ -81,12 +81,11 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
       const fi = fractions.find(f => f.component?.id === id);
       if (!fi) {
         delete frac.component;
-        props.onChanged();
-        return;
+      } else {
+        frac.component = fi.component;
+        frac.value = fi.value;
       }
-      frac.component = fi.component;
-      frac.value = fi.value;
-
+      props.onChanged();
     }}>
     {components}
   </select>;
@@ -99,15 +98,44 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
     <tr>
       <td>{selector}</td>
       <td>
-        <input type="number"
-          min={0}
-          max={100}
-          value={frac.value}
-          onChange={e => numOf(e, num => frac.value = num)}
-        /> %</td>
+        <div className="re-flex-div">
+          <input type="number"
+            min={0}
+            max={100}
+            value={frac.value}
+            onChange={e => numOf(e, num => {
+              frac.value = num;
+              props.onChanged();
+            })}
+          />
+          <label> %</label>
+        </div>
+      </td>
       <td>{`${mass.toFixed(3)} g`}</td>
-      <td>{frac.state}</td>
+      <td><StateCombo state={frac.state} onChange={s => {
+        frac.state = s;
+        props.onChanged();
+      }} />
+      </td>
       <td><DeleteIcon /></td>
     </tr>
+  );
+}
+
+const StateCombo = ({ state, onChange }: {
+  state: TreatmentState,
+  onChange: (s: TreatmentState) => void,
+}) => {
+  const states = [
+    TreatmentState.Disposed,
+    TreatmentState.PassThrough,
+    TreatmentState.Recycled,
+  ];
+  return (
+    <select
+      value={state}
+      onChange={e => onChange(e.target.value as TreatmentState)}>
+      {states.map(s => <option value={s}>{s}</option>)}
+    </select>
   );
 }
