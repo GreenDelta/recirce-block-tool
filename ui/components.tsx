@@ -28,3 +28,18 @@ export const PanelLink = ({ onClick, label, sep }: {
     ? <>{link} <li className="re-panel-link">|</li></>
     : link;
 };
+
+export function numOf(
+  e: React.ChangeEvent<HTMLInputElement>, f: (n: number) => void
+) {
+  const s = e?.target?.value;
+  if (!s) {
+    return;
+  }
+  try {
+    const num = Number.parseFloat(s);
+    f(num)
+  } catch {
+    // nothing
+  }
+}

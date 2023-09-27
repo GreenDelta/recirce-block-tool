@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Component, Product, findParentComponent } from "../model";
+import { Component, Product, findParentComponent, nextPartMassOf } from "../model";
 import * as uuid from "uuid";
-import * as util from "./util";
+import { numOf } from "../components";
 
 import {
   AddComponentIcon,
@@ -53,7 +53,7 @@ export const ComponentPanel = (props: Props) => {
           <div className="re-flex-div">
             <input type="number" className="re-panel-input"
               value={props.component.mass}
-              onChange={(e) => util.numOf(e, num => {
+              onChange={(e) => numOf(e, num => {
                 props.component.mass = num;
                 props.onChanged();
               })}
@@ -79,7 +79,7 @@ const Menu = (props: Props) => {
     const sub: Component = {
       id: uuid.v4(),
       name: isMaterial ? "New component" : "New material",
-      mass: util.nextPartMassOf(c),
+      mass: nextPartMassOf(c),
       isMaterial,
     };
     if (c.parts) {

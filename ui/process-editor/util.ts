@@ -1,4 +1,13 @@
-import { Component, Fraction, Product, Treatment, TreatmentState, TreatmentStep, findParentComponent } from "../model";
+import * as uuid from "uuid";
+import {
+  Component,
+  Fraction,
+  Product,
+  Treatment,
+  TreatmentState,
+  TreatmentStep,
+  findParentComponent,
+} from "../model";
 
 type StepHolder = {
   id: string;
@@ -53,6 +62,7 @@ export function listFractions(t: Treatment, step: TreatmentStep): Fraction[] {
   const fractions: Fraction[] = [];
   function collect(component: Component) {
     fractions.push({
+      id: uuid.v4(),
       component,
       state: TreatmentState.PassThrough,
       value: 100,
@@ -61,8 +71,8 @@ export function listFractions(t: Treatment, step: TreatmentStep): Fraction[] {
   }
   collect(product);
   fractions.sort((f1, f2) => {
-    const n1 = f1.component.name || "";
-    const n2 = f2.component.name || "";
+    const n1 = f1.component?.name || "";
+    const n2 = f2.component?.name || "";
     return n1.localeCompare(n2);
   });
 
