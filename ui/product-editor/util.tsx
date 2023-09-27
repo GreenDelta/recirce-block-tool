@@ -29,20 +29,3 @@ export function nextPartMassOf(comp: Component): number {
   }
   return mass <= 0 ? 0 : mass;
 }
-
-export function parentOf(comp: Component, root: Component): [Component, number] | null {
-  if (!comp || !root || !root.parts) {
-    return null;
-  }
-  for (let i = 0; i < root.parts.length; i++) {
-    const child = root.parts[i];
-    if (child.id === comp.id) {
-      return [root, i];
-    }
-    const sub = parentOf(comp, child);
-    if (sub) {
-      return sub;
-    }
-  }
-  return null;
-}

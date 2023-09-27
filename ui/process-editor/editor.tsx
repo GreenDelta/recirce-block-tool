@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Treatment, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
-import { PanelLink, ProgressPanel } from "../components";
+import { ProgressPanel } from "../components";
 import { ProcessStepPanel } from "./step-panel";
 import { AddIcon } from "../icons";
 
@@ -54,6 +54,7 @@ export const TreatmentEditor = () => {
       stepPanels.push(
         <ProcessStepPanel
           key={step.id}
+          processes={processes}
           treatment={treatment}
           step={step}
           onChanged={onChanged} />);
@@ -71,9 +72,6 @@ export const TreatmentEditor = () => {
         <li><a>Delete process</a></li>
       </ul>
     </nav>
-    <datalist id="processes">
-      {processes.map(p => <option value={p} />)}
-    </datalist>
     <article className="re-panel">
       <div className="grid">
         <div className="re-flex-div">

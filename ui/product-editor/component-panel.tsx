@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Component, Product } from "../model";
+import { Component, Product, findParentComponent } from "../model";
 import * as uuid from "uuid";
 import * as util from "./util";
 
@@ -28,7 +28,7 @@ export const ComponentPanel = (props: Props) => {
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
 
   const onDelete = () => {
-    const t = util.parentOf(props.component, props.product);
+    const t = findParentComponent(props.component, props.product);
     if (!t) {
       return;
     }
@@ -78,7 +78,7 @@ const Menu = (props: Props) => {
   const onAdd = (isMaterial: boolean) => {
     const sub: Component = {
       id: uuid.v4(),
-      name: isMaterial ? "New component" : "",
+      name: isMaterial ? "New component" : "New material",
       mass: util.nextPartMassOf(c),
       isMaterial,
     };

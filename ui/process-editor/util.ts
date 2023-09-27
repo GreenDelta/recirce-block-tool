@@ -1,4 +1,4 @@
-import { TreatmentStep } from "../model";
+import { Component, Fraction, Product, Treatment, TreatmentState, TreatmentStep, findParentComponent } from "../model";
 
 type StepHolder = {
   id: string;
@@ -22,4 +22,49 @@ export function parentOf(
     }
   }
   return null;
+}
+
+export function labelOf(comp: Component, product: Product): string {
+  if (!comp.isMaterial) {
+    const p = findParentComponent(comp, product);
+    return p
+      ? `${comp.name} (${p[0].name})`
+      : comp.name || "";
+  }
+  let p: [Component, number] | null = [comp, -1];
+  while (p && p[0].isMaterial) {
+    p = findParentComponent(p[0], product)
+  }
+  if (!p) {
+    return comp.name || "";
+  }
+  return `${comp.name} (${p[0].name})`;
+}
+
+export function listFractions(t: Treatment, step: TreatmentStep): Fraction[] {
+
+  // TODO: filter only fractions that are still available in this step using
+  // parent and sibling relations
+  const product = t.product;
+  if (!product) {
+    return [];
+  }
+
+  const fractions: Fraction[] = [];
+  function collect(component: Component) {
+    fractions.push({
+      component,
+      state: TreatmentState.PassThrough,
+      value: 100,
+    })
+    component.parts?.forEach(collect);
+  }
+  collect(product);
+  fractions.sort((f1, f2) => {
+    const n1 = f1.component.name || "";
+    const n2 = f2.component.name || "";
+    return n1.localeCompare(n2);
+  });
+
+  return fractions;
 }

@@ -3,10 +3,12 @@ import { v4 as uuid } from 'uuid';
 import { Treatment, TreatmentStep } from '../model';
 import { AddIcon, DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from '../icons';
 import * as util from "./util";
+import { FractionTable } from './fractions';
 
 interface Props {
   step: TreatmentStep;
   treatment: Treatment;
+  processes: string[];
   onChanged: () => void;
 }
 
@@ -38,37 +40,18 @@ export const ProcessStepPanel: React.FC<Props> = (props) => {
               {expander}
               {!collapsed && <Menu {...props} /> || <></>}
             </div>
-            <input
-              list="processes"
-              className="re-panel-input"
-              value={props.step.process}
-              onChange={e => {
-                props.step.process = e.target.value
-                props.onChanged();
-              }} />
+            <ProcessSelector {...props} />
+            <label>
+              <DeleteIcon tooltip="Delete process step" onClick={onDelete} />
+            </label>
           </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Component</th>
-              <th scope="col">Faction</th>
-              <th scope="col">Mass</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><select></select></td>
-              <td><input type="number" /></td>
-              <td>5 g</td>
-              <td><DeleteIcon /></td>
-            </tr>
-          </tbody>
-        </table>
-        {collapsed ? <></> : <StepList {...props} />}
+        {collapsed
+          ? <></>
+          : <>
+            <FractionTable {...props} />
+            <StepList {...props} />
+          </>}
       </article>
     </>
   );
@@ -108,3 +91,24 @@ const StepList = (props: Props) => {
   }
   return <>{list}</>;
 };
+
+const ProcessSelector = (props: Props) => {
+  const options = [
+    <option value="" placeholder="Select a process" />
+  ];
+  for (const p of props.processes) {
+    options.push(
+      <option value={p}>{p}</option>
+    );
+  }
+  return (
+    <select
+      value={props.step.process}
+      onChange={e => {
+        props.step.process = e.target.value
+        props.onChanged();
+      }}>
+      {options}
+    </select>
+  );
+}
