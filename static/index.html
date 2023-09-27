@@ -62,11 +62,47 @@
     div.re-flex-div label {
       padding: 15px 5px !important;
     }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer.container {
+      min-height: 50px;
+      padding: 10px 0px;
+    }
+
+    main {
+      flex: 1;
+    }
   </style>
 </head>
 
 <body>
   <main id="app" class="container"></main>
+  <footer class="container">
+    <nav>
+      <ul>
+        <li>
+          <a href="https://www.greendelta.com/" target="_blank">
+            <img src="/images/gdlogo-edit.png" style="height: 75px">
+          </a>
+        </li>
+        <li>|</li>
+        <li>
+          <a href="https://www.recirce.de/" target="_blank">
+            The ReCircE Project 2023
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li><a href="/ui/about">About</a></li>
+      </ul>
+    </nav>
+  </footer>
   <script src="/main.js"></script>
 </body>
 
