@@ -118,10 +118,18 @@ func (s *Server) PostLogin() http.HandlerFunc {
 func (s *Server) PostLogout() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ses := s.Session(r)
-		if ses != nil {
-			ses.Values["user"] = ""
-			ses.Save(r, w)
+		if ses == nil {
+			return
 		}
+		// clear session data
+		ses.Values = make(map[any]any)
+		// expire the cookie
+		ses.Options.MaxAge = -1
+		if err := ses.Save(r, w); err != nil {
+			SendError(w, "failed to logout", err)
+			return
+		}
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
 
