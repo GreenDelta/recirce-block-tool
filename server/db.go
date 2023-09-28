@@ -8,16 +8,16 @@ import (
 	"go.etcd.io/bbolt"
 )
 
-// BucketName describes a defined name of a bucket in the database.
-type BucketName string
+// Bucket describes a defined name of a bucket in the database.
+type Bucket string
 
 // Enumeration of the database buckets
 const (
-	AccountBucket  BucketName = "accounts"
-	MaterialBucket BucketName = "materials"
-	ProductBucket  BucketName = "products"
-	ProcessBucket  BucketName = "processes"
-	ScenarioBucket BucketName = "scenarios"
+	AccountBucket  Bucket = "accounts"
+	MaterialBucket Bucket = "materials"
+	ProductBucket  Bucket = "products"
+	ProcessBucket  Bucket = "processes"
+	ScenarioBucket Bucket = "scenarios"
 )
 
 // DB provides the database methods of the application.
@@ -33,7 +33,7 @@ func OpenDB(path string) (*DB, error) {
 	}
 
 	// initialize the data buckets
-	buckets := []BucketName{
+	buckets := []Bucket{
 		AccountBucket,
 		MaterialBucket,
 		ProductBucket,
@@ -61,7 +61,7 @@ func (db *DB) Close() error {
 }
 
 // Put stores the given entity into the given bucket.
-func (db *DB) Put(bucket BucketName, e Entity) error {
+func (db *DB) Put(bucket Bucket, e Entity) error {
 	if e == nil {
 		return errors.New("db.put:: entity is nil")
 	}
@@ -76,7 +76,7 @@ func (db *DB) Put(bucket BucketName, e Entity) error {
 }
 
 // Get returns the data of the entity with the given ID from the given bucket.
-func (db *DB) Get(bucket BucketName, id string) ([]byte, error) {
+func (db *DB) Get(bucket Bucket, id string) ([]byte, error) {
 	var data []byte
 	err := db.db.View(func(tx *bbolt.Tx) error {
 		b := tx.Bucket([]byte(bucket))
@@ -87,7 +87,7 @@ func (db *DB) Get(bucket BucketName, id string) ([]byte, error) {
 }
 
 // Delete deletes the entity with the given ID from the bucket.
-func (db *DB) Delete(bucket BucketName, id string) error {
+func (db *DB) Delete(bucket Bucket, id string) error {
 	return db.db.Update(func(tx *bbolt.Tx) error {
 		bucket := tx.Bucket([]byte(bucket))
 		return bucket.Delete([]byte(id))
@@ -95,7 +95,7 @@ func (db *DB) Delete(bucket BucketName, id string) error {
 }
 
 // Load gets the data from the database (via Get) and unmarshals them.
-func (db *DB) Load(bucket BucketName, id string, e interface{}) error {
+func (db *DB) Load(bucket Bucket, id string, e interface{}) error {
 	data, err := db.Get(bucket, id)
 	if err != nil {
 		return err
@@ -108,7 +108,7 @@ func (db *DB) Load(bucket BucketName, id string, e interface{}) error {
 
 // Each iterates over each entity in the given bucket and calls the given
 // function.
-func (db *DB) Each(bucket BucketName,
+func (db *DB) Each(bucket Bucket,
 	fn func(key string, data []byte) error) error {
 	return db.db.View(func(tx *bbolt.Tx) error {
 		b := tx.Bucket([]byte(bucket))
@@ -120,7 +120,7 @@ func (db *DB) Each(bucket BucketName,
 
 // EachWhile does the same as Each but only as long as the given function returns
 // true.
-func (db *DB) EachWhile(bucket BucketName,
+func (db *DB) EachWhile(bucket Bucket,
 	fn func(key string, data []byte) bool) error {
 	return db.db.View(func(tx *bbolt.Tx) error {
 		b := tx.Bucket([]byte(bucket))

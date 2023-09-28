@@ -11,6 +11,7 @@ type Entity interface {
 type UserEntity interface {
 	Entity
 	UserID() string
+	SetUserID(string)
 }
 
 type BaseInfo struct {
@@ -35,6 +36,10 @@ type UserInfo struct {
 
 func (i *UserInfo) UserID() string {
 	return i.User
+}
+
+func (i *UserInfo) SetUserID(id string) {
+	i.User = id
 }
 
 type Material struct {

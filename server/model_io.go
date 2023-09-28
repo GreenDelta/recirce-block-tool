@@ -14,37 +14,48 @@ func ParseEntity[T Entity](data []byte, f func() T) (T, error) {
 	return t, nil
 }
 
-/*
 func ReadUserEntities[T UserEntity](
-	db *DB, bucket BucketName, user *User, f func() T,
+	db *DB, bucket Bucket, user *User, f func() T,
 ) ([]T, error) {
 
-	err := db.Each(bucket, func(key string, data []byte) error {
-
-	})
-
-}
-*/
-
-func (db *DB) GetMaterials(user *User) ([]*Material, error) {
 	if user == nil {
 		return nil, ErrNoUser
 	}
-	var materials []*Material
-	err := db.Each(MaterialBucket, func(key string, data []byte) error {
-		m, err := ParseEntity(data, NewMaterial)
+
+	ts := make([]T, 0)
+	err := db.Each(bucket, func(_ string, data []byte) error {
+		t, err := ParseEntity[T](data, f)
 		if err != nil {
 			return err
 		}
-		if m.User == user.ID {
-			materials = append(materials, m)
+		if t.UserID() == user.ID {
+			ts = append(ts, t)
 		}
 		return nil
 	})
 	if err != nil {
 		return nil, err
 	}
-	return materials, nil
+	return ts, nil
+}
+
+func WriteUserEntity(db *DB, bucket Bucket, user *User, e UserEntity) error {
+	if user == nil {
+		return ErrNoUser
+	}
+	if e == nil {
+		return ErrNoData
+	}
+	e.SetUserID(user.ID)
+	return db.Put(bucket, e)
+}
+
+func (db *DB) GetMaterials(user *User) ([]*Material, error) {
+	return ReadUserEntities(db, MaterialBucket, user, NewMaterial)
+}
+
+func (db *DB) PutMaterial(user *User, material *Material) error {
+	return WriteUserEntity(db, MaterialBucket, user, material)
 }
 
 func (db *DB) FindMaterial(user *User, name string) (*Material, error) {
@@ -70,17 +81,6 @@ func (db *DB) FindMaterial(user *User, name string) (*Material, error) {
 	return material, err
 }
 
-func (db *DB) PutMaterial(user *User, material *Material) error {
-	if user == nil {
-		return ErrNoUser
-	}
-	if material == nil {
-		return ErrNoData
-	}
-	material.User = user.ID
-	return db.Put(MaterialBucket, material)
-}
-
 func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error) {
 	if user == nil {
 		return nil, ErrNoUser
@@ -95,14 +95,6 @@ func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error)
 		return nil, err
 	}
 	return material, nil
-}
-
-func ReadProduct(data []byte) (*Product, error) {
-	var product Product
-	if err := json.Unmarshal(data, &product); err != nil {
-		return nil, err
-	}
-	return &product, nil
 }
 
 func (db *DB) GetProducts(user *User) ([]*Product, error) {
@@ -191,9 +183,5 @@ func (db *DB) PutProduct(user *User, product *Product) error {
 		}
 	}
 
-	product.User = user.ID
-	if err := db.Put(ProductBucket, product); err != nil {
-		return err
-	}
-	return nil
+	return WriteUserEntity(db, ProductBucket, user, product)
 }
