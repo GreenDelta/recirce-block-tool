@@ -64,7 +64,7 @@ const MainMenu = (props: { user: User | null, onLogout: () => void }) => {
       <ul>
         <li><Link to="/"><img src="/logo.png"></img></Link></li>
         <li></li>
-        <li><Link to="/ui/processes">Waste treatment</Link></li>
+        <li><Link to="/ui/scenarios">Scenarios</Link></li>
         <li><Link to="/ui/products">Products</Link></li>
         <li><Link to="/ui/materials">Materials</Link></li>
       </ul>
@@ -90,11 +90,11 @@ function main() {
           index: true,
         },
         {
-          path: "/ui/processes",
+          path: "/ui/scenarios",
           element: <ScenarioOverview />,
         },
         {
-          path: "/ui/processes/edit/:id?",
+          path: "/ui/scenarios/edit/:id?",
           element: <ScenarioEditor />,
         },
         {

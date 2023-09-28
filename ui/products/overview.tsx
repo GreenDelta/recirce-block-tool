@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Product } from "../model";
 import * as api from "../api";
 import { ProgressPanel } from "../components";
+import { AddIcon, DeleteIcon } from "../icons";
 
 export const ProductsOverview = () => {
 
@@ -16,21 +17,16 @@ export const ProductsOverview = () => {
   products.sort((p1, p2) => p1.name.localeCompare(p2.name));
 
   return <>
-    <nav>
-      <ul>
-        <li><strong>Products</strong></li>
-      </ul>
-      <ul>
-        <li><Link to="/ui/products/edit">Create a new product</Link></li>
-        <li>|</li>
-        <li><Link to="/ui/products/upload">Upload a product pass</Link></li>
-      </ul>
-    </nav>
+    <p>
+      <strong>Products</strong>
+    </p>
     <ProductTable products={products} />
   </>;
 };
 
 const ProductTable = ({ products }: { products: Product[] }) => {
+
+  const navigate = useNavigate();
 
   if (products.length === 0) {
     return <p>No products available yet.</p>;
@@ -46,6 +42,9 @@ const ProductTable = ({ products }: { products: Product[] }) => {
             {product.name}
           </Link>
         </td>
+        <td>
+          <DeleteIcon />
+        </td>
       </tr>
     );
   }
@@ -56,10 +55,22 @@ const ProductTable = ({ products }: { products: Product[] }) => {
         <tr>
           <th scope="col">#</th>
           <th scope="col">Product</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         {rows}
+        <tr>
+          <td>
+            <AddIcon tooltip="Create a new product"
+              onClick={() => {
+                navigate("/ui/products/edit");
+              }} />
+          </td>
+          <td />
+          <td />
+        </tr>
+
       </tbody>
     </table>
   );

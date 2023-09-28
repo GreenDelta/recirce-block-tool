@@ -5,6 +5,7 @@ import * as api from "../api";
 import * as uuid from "uuid";
 import { ComponentPanel } from "./component-panel";
 import { ProgressPanel } from "../components";
+import { DeleteIcon, SaveIcon } from "../icons";
 
 export const ProductEditor = () => {
 
@@ -44,6 +45,15 @@ export const ProductEditor = () => {
     }
   }
 
+  const onDelete = async () => {
+    try {
+      await api.deleteProduct(product.id);
+      navigate("/ui/products");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <>
       <nav>
@@ -51,9 +61,8 @@ export const ProductEditor = () => {
           <li><strong>{product.name}</strong></li>
         </ul>
         <ul>
-          <li><a onClick={onSave}>Upload product</a></li>
-          <li>|</li>
-          <li><a>Delete product</a></li>
+          <li><SaveIcon onClick={onSave} tooltip="Save product"/></li>
+          <li><DeleteIcon onClick={onDelete} tooltip="Delete product"/></li>
         </ul>
       </nav>
       <datalist id="materials">

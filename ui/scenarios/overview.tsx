@@ -12,7 +12,7 @@ export const ScenarioOverview = () => {
           <li><strong>Waste treatment processes</strong></li>
         </ul>
         <ul>
-          <li><Link to="/ui/processes/edit">Create a new process</Link></li>
+          <li><Link to="/ui/scenarios/edit">Create a new process</Link></li>
         </ul>
       </nav>
       <ProcessTable />
