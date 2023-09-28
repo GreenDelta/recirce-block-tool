@@ -51,7 +51,7 @@ func WriteUserEntity(db *DB, bucket Bucket, user *User, e UserEntity) error {
 }
 
 func (db *DB) GetMaterials(user *User) ([]*Material, error) {
-	return ReadUserEntities(db, MaterialBucket, user, NewMaterial)
+	return ReadUserEntities(db, MaterialBucket, user, MaterialFn)
 }
 
 func (db *DB) PutMaterial(user *User, material *Material) error {
@@ -65,7 +65,7 @@ func (db *DB) FindMaterial(user *User, name string) (*Material, error) {
 	matId := LowerTrim(name)
 	var material *Material
 	err := db.EachWhile(MaterialBucket, func(key string, data []byte) bool {
-		m, err := ParseEntity(data, NewMaterial)
+		m, err := ParseEntity(data, MaterialFn)
 		if err != nil || m.User != user.ID {
 			return true
 		}
@@ -98,7 +98,7 @@ func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error)
 }
 
 func (db *DB) GetProducts(user *User) ([]*Product, error) {
-	return ReadUserEntities(db, ProductBucket, user, NewProduct)
+	return ReadUserEntities(db, ProductBucket, user, ProductFn)
 }
 
 func (db *DB) PutProduct(user *User, product *Product) error {

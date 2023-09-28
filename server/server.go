@@ -65,6 +65,7 @@ func (s *Server) mountRoutes() {
 
 	r.HandleFunc("/api/materials", s.GetMaterials()).Methods("GET")
 	r.HandleFunc("/api/materials", s.PutMaterial()).Methods("POST", "PUT")
+
 	r.HandleFunc("/api/products/{id}", s.GetProduct()).Methods("GET")
 	r.HandleFunc("/api/products", s.GetProducts()).Methods("GET")
 	r.HandleFunc("/api/products", s.PutProduct()).Methods("POST", "PUT")
@@ -72,15 +73,12 @@ func (s *Server) mountRoutes() {
 	r.HandleFunc("/api/processes", s.GetProcesses()).Methods("GET")
 	r.HandleFunc("/api/processes", s.PutProcess()).Methods("POST", "PUT")
 
-	// EPD routes
-	/*
-		r.HandleFunc("/api/epds", s.handleGetEPDs()).Methods("GET")
-		r.HandleFunc("/api/epds", s.handlePostEPD()).Methods("POST")
-		r.HandleFunc("/api/epds/{id}", s.handleGetEPD()).Methods("GET")
-		r.HandleFunc("/api/epds/{id}", s.handleDeleteEPD()).Methods("DELETE")
-		r.HandleFunc("/api/epds/export/pdf/{id}", s.handlePdfExport()).Methods("GET")
-		r.HandleFunc("/api/epds/export/docx/{id}", s.handleDocxExport()).Methods("GET")
-	*/
+	r.HandleFunc("/api/scenarios/{id}",
+		GetUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("GET")
+	r.HandleFunc("/api/scenarios",
+		GetUserEntities(s, ScenarioBucket, ScenarioFn)).Methods("GET")
+	r.HandleFunc("/api/scenarios",
+		PutUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("POST", "PUT")
 
 	serveHome := func(w http.ResponseWriter, r *http.Request) {
 		html, err := os.ReadFile(filepath.Join(s.args.staticDir, "index.html"))
@@ -99,54 +97,4 @@ func (s *Server) mountRoutes() {
 	fs := http.FileServer(http.Dir(s.args.staticDir))
 	r.PathPrefix("/").Handler(NoCache(fs)) // TODO: NoCache only in dev-mode
 
-}
-
-func GetUserEntities[T UserEntity](
-	s *Server, bucket Bucket, f func() T,
-) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		user := s.getSessionUser(w, r)
-		if user == nil {
-			return
-		}
-		if ts, err := ReadUserEntities(s.db, bucket, user, f); err != nil {
-			SendError(w, "failed read: "+string(bucket), err)
-		} else {
-			SendAsJson(w, ts)
-		}
-	}
-}
-
-func GetUserEntity[T UserEntity](
-	s *Server, bucket Bucket, f func() T,
-) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		user := s.getSessionUser(w, r)
-		if user == nil {
-			return
-		}
-
-		id := mux.Vars(r)["id"]
-		data, err := s.db.Get(ProductBucket, id)
-		if err != nil {
-			SendError(w,
-				"failed to get id="+id+" from: "+string(bucket), err)
-			return
-		}
-
-		entity, err := ParseEntity[T](data, f)
-		if err != nil {
-			SendError(w,
-				"failed to read id="+id+" from: "+string(bucket), err)
-			return
-		}
-
-		if entity.UserID() != user.ID {
-			http.Error(w, "not allowed", http.StatusUnauthorized)
-			return
-		}
-
-		entity.SetUserID("")
-		SendAsJson(w, entity)
-	}
 }

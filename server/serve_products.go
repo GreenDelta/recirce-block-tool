@@ -5,11 +5,11 @@ import (
 )
 
 func (s *Server) GetProducts() http.HandlerFunc {
-	return GetUserEntities(s, ProductBucket, NewProduct)
+	return GetUserEntities(s, ProductBucket, ProductFn)
 }
 
 func (s *Server) GetProduct() http.HandlerFunc {
-	return GetUserEntity(s, ProductBucket, NewProduct)
+	return GetUserEntity(s, ProductBucket, ProductFn)
 }
 
 func (s *Server) PutProduct() http.HandlerFunc {
@@ -25,6 +25,7 @@ func (s *Server) PutProduct() http.HandlerFunc {
 		}
 		if err := s.db.PutProduct(user, &product); err != nil {
 			SendError(w, "failed to store product", err)
+			return
 		}
 		w.Write([]byte("ok"))
 	}

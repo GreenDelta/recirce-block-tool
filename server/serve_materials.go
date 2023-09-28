@@ -24,6 +24,7 @@ func (s *Server) PutMaterial() http.HandlerFunc {
 			SendBadRequest(w, "material name is empty")
 			return
 		}
+
 		material, err := s.db.FindMaterial(user, req.Name)
 		if err != nil {
 			SendError(w, "failed to search materials", err)

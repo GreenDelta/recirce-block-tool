@@ -96,14 +96,14 @@ const (
 	DisposedState    FractionState = "Disposed"
 )
 
-func NewMaterial() *Material {
+func MaterialFn() *Material {
 	return &Material{}
 }
 
-func NewProduct() *Product {
+func ProductFn() *Product {
 	return &Product{}
 }
 
-func NewScenario() *Scenario {
+func ScenarioFn() *Scenario {
 	return &Scenario{}
 }
