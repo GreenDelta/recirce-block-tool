@@ -6,13 +6,25 @@ import (
 	"github.com/rs/xid"
 )
 
-func ReadMaterial(data []byte) (*Material, error) {
-	var material Material
-	if err := json.Unmarshal(data, &material); err != nil {
-		return nil, err
+func ParseEntity[T Entity](data []byte, f func() T) (T, error) {
+	t := f()
+	if err := json.Unmarshal(data, t); err != nil {
+		return t, err
 	}
-	return &material, nil
+	return t, nil
 }
+
+/*
+func ReadUserEntities[T UserEntity](
+	db *DB, bucket BucketName, user *User, f func() T,
+) ([]T, error) {
+
+	err := db.Each(bucket, func(key string, data []byte) error {
+
+	})
+
+}
+*/
 
 func (db *DB) GetMaterials(user *User) ([]*Material, error) {
 	if user == nil {
@@ -20,7 +32,7 @@ func (db *DB) GetMaterials(user *User) ([]*Material, error) {
 	}
 	var materials []*Material
 	err := db.Each(MaterialBucket, func(key string, data []byte) error {
-		m, err := ReadMaterial(data)
+		m, err := ParseEntity(data, NewMaterial)
 		if err != nil {
 			return err
 		}
@@ -42,7 +54,7 @@ func (db *DB) FindMaterial(user *User, name string) (*Material, error) {
 	matId := LowerTrim(name)
 	var material *Material
 	err := db.EachWhile(MaterialBucket, func(key string, data []byte) bool {
-		m, err := ReadMaterial(data)
+		m, err := ParseEntity(data, NewMaterial)
 		if err != nil || m.User != user.ID {
 			return true
 		}
@@ -73,12 +85,12 @@ func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error)
 	if user == nil {
 		return nil, ErrNoUser
 	}
-	material := &Material{
-		ID:     xid.New().String(),
-		User:   user.ID,
-		Name:   name,
-		Parent: parent,
-	}
+	material := &Material{}
+	material.ID = xid.New().String()
+	material.User = user.ID
+	material.Name = name
+	material.Parent = parent
+
 	if err := db.PutMaterial(user, material); err != nil {
 		return nil, err
 	}
@@ -172,8 +184,11 @@ func (db *DB) PutProduct(user *User, product *Product) error {
 		return nil
 	}
 
-	if err := visit(&product.Component); err != nil {
-		return err
+	for i := range product.Parts {
+		comp := &product.Parts[i]
+		if err := visit(comp); err != nil {
+			return err
+		}
 	}
 
 	product.User = user.ID

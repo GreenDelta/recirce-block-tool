@@ -57,10 +57,9 @@ func (dir *DataDir) initDatabase() error {
 	db := dir.db
 
 	// create an admin
-	account := &User{
-		Name:    "admin",
-		IsAdmin: true,
-	}
+	account := &User{}
+	account.Name = "admin"
+	account.IsAdmin = true
 	account.ID = xid.New().String()
 	hash, err := hashPassword("admin")
 	if err != nil {

@@ -288,10 +288,10 @@ func (s *Server) PostUser() http.HandlerFunc {
 
 		user := &User{
 			Hash:    hash,
-			Name:    req.Name,
 			IsAdmin: req.IsAdmin,
 		}
 		user.ID = xid.New().String()
+		user.Name = req.Name
 		if err := s.db.Put(AccountBucket, user); err != nil {
 			SendError(w, "failed to save user", err)
 			return

@@ -90,3 +90,11 @@ const (
 	RecycledState    FractionState = "Recycled"
 	DisposedState    FractionState = "Disposed"
 )
+
+func NewMaterial() *Material {
+	return &Material{}
+}
+
+func NewScenario() *Scenario {
+	return &Scenario{}
+}

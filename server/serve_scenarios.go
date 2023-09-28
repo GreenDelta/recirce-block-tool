@@ -1,11 +1,6 @@
 package main
 
-import (
-	"encoding/json"
-	"net/http"
-
-	"github.com/gorilla/mux"
-)
+/*
 
 func (s *Server) GetScenarios() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -70,3 +65,5 @@ func (s *Server) PutScenario() http.HandlerFunc {
 		w.Write([]byte("ok"))
 	}
 }
+
+*/
