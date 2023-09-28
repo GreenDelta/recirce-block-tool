@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Product } from "./model";
-import * as api from "./api";
-import { ProgressPanel } from "./components";
+import { Product } from "../model";
+import * as api from "../api";
+import { ProgressPanel } from "../components";
 
 export const ProductsOverview = () => {
 

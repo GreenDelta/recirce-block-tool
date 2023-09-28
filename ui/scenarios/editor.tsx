@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Treatment, Product } from "../model";
+import { Scenario, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
 import { ProgressPanel } from "../components";
-import { ProcessStepPanel } from "./step-panel";
+import { ScenarioStepPanel } from "./step-panel";
 import { AddIcon } from "../icons";
 
-export const TreatmentEditor = () => {
+export const ScenarioEditor = () => {
 
   const [processes, setProcesses] = useState<string[] | null>();
   const [products, setProducts] = useState<Product[] | null>(null);
-  const [treatment, setTreatment] = useState<Treatment | null>(null)
+  const [scenario, setScenario] = useState<Scenario | null>(null)
 
   useEffect(() => {
     (async () => {
@@ -22,40 +22,40 @@ export const TreatmentEditor = () => {
       // TODO: optional loading per ID for
       // editing of existing processes; just
       // like in the product editor
-      setTreatment({
+      setScenario({
         id: uuid.v4(),
         name: "New waste treatment",
       });
     })();
   }, []);
 
-  if (!products || !processes || !treatment) {
+  if (!products || !processes || !scenario) {
     return <ProgressPanel />;
   }
 
   const onSave = () => { };
-  const onChanged = () => setTreatment({ ...treatment });
+  const onChanged = () => setScenario({ ...scenario });
 
   const onAddStep = () => {
     const step = {
       id: uuid.v4()
     };
-    if (treatment.steps) {
-      treatment.steps.push(step);
+    if (scenario.steps) {
+      scenario.steps.push(step);
     } else {
-      treatment.steps = [step];
+      scenario.steps = [step];
     }
     onChanged();
   }
 
   const stepPanels = [];
-  if (treatment.steps) {
-    for (const step of treatment.steps) {
+  if (scenario.steps) {
+    for (const step of scenario.steps) {
       stepPanels.push(
-        <ProcessStepPanel
+        <ScenarioStepPanel
           key={step.id}
           processes={processes}
-          treatment={treatment}
+          scenario={scenario}
           step={step}
           onChanged={onChanged} />);
     }
@@ -64,7 +64,7 @@ export const TreatmentEditor = () => {
   return (<>
     <nav>
       <ul>
-        <li><strong>{treatment.name}</strong></li>
+        <li><strong>{scenario.name}</strong></li>
       </ul>
       <ul>
         <li><a onClick={onSave}>Upload process</a></li>
@@ -76,23 +76,23 @@ export const TreatmentEditor = () => {
       <div className="grid">
         <div className="re-flex-div">
           <div className="re-panel-toolbar">
-            {treatment.product
+            {scenario.product
               ? <AddIcon onClick={onAddStep} />
               : <></>
             }
           </div>
           <input type="text" className="re-panel-input"
-            value={treatment.name}
+            value={scenario.name}
             onChange={e => {
-              treatment.name = e.target.value;
+              scenario.name = e.target.value;
               onChanged();
             }} />
         </div>
         <div>
-          {treatment.product
-            ? <input value={treatment.product.name} readOnly />
+          {scenario.product
+            ? <input value={scenario.product.name} readOnly />
             : <ProductCombo
-              treatment={treatment}
+              treatment={scenario}
               products={products}
               onChange={onChanged} />
           }
@@ -105,7 +105,7 @@ export const TreatmentEditor = () => {
 }
 
 const ProductCombo = ({ treatment, products, onChange }: {
-  treatment: Treatment,
+  treatment: Scenario,
   products: Product[],
   onChange: () => void,
 }) => {

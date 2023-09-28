@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const ProcessOverview = () => {
+export const ScenarioOverview = () => {
 
   // TODO: fetch process list from server
 

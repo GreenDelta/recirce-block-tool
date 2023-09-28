@@ -3,13 +3,13 @@ import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Link, Outlet, useNavigate, RouterProvider } from "react-router-dom";
 import { HomePage } from "./home";
 import { LoginPage } from "./login";
-import { ProductsOverview } from "./products";
-import { ProductEditor } from "./product-editor/editor";
+import { ProductsOverview } from "./products/overview";
+import { ProductEditor } from "./products/editor";
 import { MaterialsPage } from "./materials";
 import { User } from "./model";
 import * as api from "./api";
-import { ProcessOverview } from "./processes";
-import { TreatmentEditor } from "./process-editor/editor";
+import { ScenarioOverview } from "./scenarios/overview";
+import { ScenarioEditor } from "./scenarios/editor";
 
 const ErrorPage = () => {
   return (
@@ -91,11 +91,11 @@ function main() {
         },
         {
           path: "/ui/processes",
-          element: <ProcessOverview />,
+          element: <ScenarioOverview />,
         },
         {
           path: "/ui/processes/edit/:id?",
-          element: <TreatmentEditor />,
+          element: <ScenarioEditor />,
         },
         {
           path: "/ui/products",

@@ -1,13 +1,13 @@
 import React from 'react';
 import { AddIcon, DeleteIcon } from '../icons';
-import { Fraction, Treatment, TreatmentState, TreatmentStep } from '../model';
+import { Fraction, Scenario, FractionState, ScenarioStep } from '../model';
 import * as util from "./util";
 import { numOf } from "../components";
 import * as uuid from "uuid";
 
 interface Props {
-  step: TreatmentStep
-  treatment: Treatment;
+  step: ScenarioStep
+  scenario: Scenario;
   onChanged: () => void;
 }
 
@@ -26,7 +26,7 @@ export const FractionTable = (props: Props) => {
     const f = {
       id: uuid.v4(),
       value: 100,
-      state: TreatmentState.PassThrough
+      state: FractionState.PassThrough
     };
     if (props.step.fractions) {
       props.step.fractions.push(f);
@@ -61,7 +61,7 @@ export const FractionTable = (props: Props) => {
 const FractionRow = (props: Props & { fraction: Fraction }) => {
 
   const frac = props.fraction;
-  const fractions = util.listFractions(props.treatment, props.step);
+  const fractions = util.listFractions(props.scenario, props.step);
 
   const components = [
     <option value=""></option>
@@ -70,7 +70,7 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
     if (!f.component) {
       continue;
     }
-    const label = util.labelOf(f.component, props.treatment.product!);
+    const label = util.labelOf(f.component, props.scenario.product!);
     components.push(<option value={f.component.id}>{label}</option>)
   }
 
@@ -123,18 +123,18 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
 }
 
 const StateCombo = ({ state, onChange }: {
-  state: TreatmentState,
-  onChange: (s: TreatmentState) => void,
+  state: FractionState,
+  onChange: (s: FractionState) => void,
 }) => {
   const states = [
-    TreatmentState.Disposed,
-    TreatmentState.PassThrough,
-    TreatmentState.Recycled,
+    FractionState.Disposed,
+    FractionState.PassThrough,
+    FractionState.Recycled,
   ];
   return (
     <select
       value={state}
-      onChange={e => onChange(e.target.value as TreatmentState)}>
+      onChange={e => onChange(e.target.value as FractionState)}>
       {states.map(s => <option value={s}>{s}</option>)}
     </select>
   );

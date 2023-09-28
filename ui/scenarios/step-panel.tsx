@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Treatment, TreatmentStep } from '../model';
+import { Scenario, ScenarioStep } from '../model';
 import { AddIcon, DeleteIcon, ExpandLessIcon, ExpandMoreIcon } from '../icons';
 import * as util from "./util";
 import { FractionTable } from './fractions';
 
 interface Props {
-  step: TreatmentStep;
-  treatment: Treatment;
+  step: ScenarioStep;
+  scenario: Scenario;
   processes: string[];
   onChanged: () => void;
 }
 
-export const ProcessStepPanel: React.FC<Props> = (props) => {
+export const ScenarioStepPanel: React.FC<Props> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const expander = collapsed
@@ -20,7 +20,7 @@ export const ProcessStepPanel: React.FC<Props> = (props) => {
     : <ExpandMoreIcon tooltip="Expand" onClick={() => setCollapsed(true)} />;
 
   const onDelete = () => {
-    const t = util.parentOf(props.step, props.treatment);
+    const t = util.parentOf(props.step, props.scenario);
     if (!t) {
       return;
     }
@@ -59,7 +59,7 @@ export const ProcessStepPanel: React.FC<Props> = (props) => {
 
 const Menu = (props: Props) => {
   const onAdd = () => {
-    const sub: TreatmentStep = {
+    const sub: ScenarioStep = {
       id: uuid(),
     };
     if (props.step.steps) {
@@ -86,7 +86,7 @@ const StepList = (props: Props) => {
         step: step,
         isRoot: false,
       };
-      list.push(<ProcessStepPanel key={step.id} {...subProps} />);
+      list.push(<ScenarioStepPanel key={step.id} {...subProps} />);
     }
   }
   return <>{list}</>;

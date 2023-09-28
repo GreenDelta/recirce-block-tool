@@ -30,24 +30,24 @@ export interface Process {
   emissionFactor: number;
 }
 
-export interface Treatment {
+export interface Scenario {
   id: string;
   name: string;
   product?: Product;
-  steps?: TreatmentStep[];
+  steps?: ScenarioStep[];
 }
 
-export interface TreatmentStep {
+export interface ScenarioStep {
   id: string;
   process?: string;
   fractions?: Fraction[];
-  steps?: TreatmentStep[];
+  steps?: ScenarioStep[];
 }
 
 export interface Fraction {
   id: string;
   component?: Component;
-  state: TreatmentState;
+  state: FractionState;
   value: number;
 }
 
@@ -57,7 +57,7 @@ export interface Fraction {
   * Recycled represents the state where the material is recycled for further use.
   * Disposed represents the state where the material is disposed of or discarded.
  */
-export enum TreatmentState {
+export enum FractionState {
   PassThrough = "Pass through",
   Recycled = "Recycled",
   Disposed = "Disposed",

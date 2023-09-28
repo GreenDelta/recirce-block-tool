@@ -3,19 +3,19 @@ import {
   Component,
   Fraction,
   Product,
-  Treatment,
-  TreatmentState,
-  TreatmentStep,
+  Scenario,
+  FractionState,
+  ScenarioStep,
   findParentComponent,
 } from "../model";
 
 type StepHolder = {
   id: string;
-  steps?: TreatmentStep[];
+  steps?: ScenarioStep[];
 }
 
 export function parentOf(
-  step: TreatmentStep, parent: StepHolder
+  step: ScenarioStep, parent: StepHolder
 ): [StepHolder, number] | null {
   if (!step || !parent || !parent.steps) {
     return null;
@@ -50,7 +50,7 @@ export function labelOf(comp: Component, product: Product): string {
   return `${comp.name} (${p[0].name})`;
 }
 
-export function listFractions(t: Treatment, step: TreatmentStep): Fraction[] {
+export function listFractions(t: Scenario, step: ScenarioStep): Fraction[] {
 
   // TODO: filter only fractions that are still available in this step using
   // parent and sibling relations
@@ -64,7 +64,7 @@ export function listFractions(t: Treatment, step: TreatmentStep): Fraction[] {
     fractions.push({
       id: uuid.v4(),
       component,
-      state: TreatmentState.PassThrough,
+      state: FractionState.PassThrough,
       value: 100,
     })
     component.parts?.forEach(collect);
