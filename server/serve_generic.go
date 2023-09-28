@@ -71,7 +71,43 @@ func PutUserEntity[T UserEntity](
 		if err := WriteUserEntity(s.db, bucket, user, t); err != nil {
 			SendError(w, "failed to write to: "+string(bucket), err)
 		} else {
-			w.Write([]byte("ok"))
+			w.WriteHeader(http.StatusOK)
 		}
+	}
+}
+
+func DeleteUserEntity[T UserEntity](
+	s *Server, bucket Bucket, f func() T,
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		user := s.getSessionUser(w, r)
+		if user == nil {
+			return
+		}
+
+		id := mux.Vars(r)["id"]
+		data, err := s.db.Get(bucket, id)
+		if err != nil {
+			SendError(w, "failed to read entity: "+id+" from: "+string(bucket), err)
+			return
+		}
+
+		t, err := ParseEntity(data, f)
+		if err != nil {
+			SendError(w, "failed to parse entity: "+id+" from: "+string(bucket), err)
+			return
+		}
+
+		if t.UserID() != user.ID {
+			http.Error(w, "not allowed", http.StatusUnauthorized)
+			return
+		}
+
+		if err := s.db.Delete(bucket, id); err != nil {
+			SendError(w, "failed to delete entity: "+id+" from: "+string(bucket), err)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
 	}
 }

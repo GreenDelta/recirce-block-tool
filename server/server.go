@@ -65,13 +65,21 @@ func (s *Server) mountRoutes() {
 
 	r.HandleFunc("/api/materials", s.GetMaterials()).Methods("GET")
 	r.HandleFunc("/api/materials", s.PutMaterial()).Methods("POST", "PUT")
+	r.HandleFunc("/api/materials/{id}",
+		DeleteUserEntity(s, MaterialBucket, MaterialFn)).Methods("DELETE")
 
-	r.HandleFunc("/api/products/{id}", s.GetProduct()).Methods("GET")
-	r.HandleFunc("/api/products", s.GetProducts()).Methods("GET")
+	r.HandleFunc("/api/products/{id}",
+		GetUserEntity(s, ProductBucket, ProductFn)).Methods("GET")
+	r.HandleFunc("/api/products",
+		GetUserEntities(s, ProductBucket, ProductFn)).Methods("GET")
 	r.HandleFunc("/api/products", s.PutProduct()).Methods("POST", "PUT")
+	r.HandleFunc("/api/products/{id}",
+		DeleteUserEntity(s, ProductBucket, ProductFn)).Methods("DELETE")
 
 	r.HandleFunc("/api/processes", s.GetProcesses()).Methods("GET")
 	r.HandleFunc("/api/processes", s.PutProcess()).Methods("POST", "PUT")
+	r.HandleFunc("/api/processes/{id}",
+		DeleteUserEntity(s, ProcessBucket, ProcessFn)).Methods("DELETE")
 
 	r.HandleFunc("/api/scenarios/{id}",
 		GetUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("GET")
@@ -79,6 +87,8 @@ func (s *Server) mountRoutes() {
 		GetUserEntities(s, ScenarioBucket, ScenarioFn)).Methods("GET")
 	r.HandleFunc("/api/scenarios",
 		PutUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("POST", "PUT")
+	r.HandleFunc("/api/scenarios/{id}",
+		DeleteUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("DELETE")
 
 	serveHome := func(w http.ResponseWriter, r *http.Request) {
 		html, err := os.ReadFile(filepath.Join(s.args.staticDir, "index.html"))
@@ -97,4 +107,23 @@ func (s *Server) mountRoutes() {
 	fs := http.FileServer(http.Dir(s.args.staticDir))
 	r.PathPrefix("/").Handler(NoCache(fs)) // TODO: NoCache only in dev-mode
 
+}
+
+func (s *Server) PutProduct() http.HandlerFunc {
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		user := s.getSessionUser(w, r)
+		if user == nil {
+			return
+		}
+		var product Product
+		if !ReadAsJson(w, r, &product) {
+			return
+		}
+		if err := s.db.PutProduct(user, &product); err != nil {
+			SendError(w, "failed to store product", err)
+			return
+		}
+		w.Write([]byte("ok"))
+	}
 }

@@ -107,3 +107,7 @@ func ProductFn() *Product {
 func ScenarioFn() *Scenario {
 	return &Scenario{}
 }
+
+func ProcessFn() *Process {
+	return &Process{}
+}
