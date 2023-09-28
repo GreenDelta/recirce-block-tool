@@ -100,6 +100,10 @@ func NewMaterial() *Material {
 	return &Material{}
 }
 
+func NewProduct() *Product {
+	return &Product{}
+}
+
 func NewScenario() *Scenario {
 	return &Scenario{}
 }

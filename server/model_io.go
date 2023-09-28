@@ -98,24 +98,7 @@ func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error)
 }
 
 func (db *DB) GetProducts(user *User) ([]*Product, error) {
-	if user == nil {
-		return nil, ErrNoUser
-	}
-	var products []*Product
-	err := db.Each(ProductBucket, func(key string, data []byte) error {
-		var p Product
-		if err := json.Unmarshal(data, &p); err != nil {
-			return err
-		}
-		if p.User == user.ID {
-			products = append(products, &p)
-		}
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return products, nil
+	return ReadUserEntities(db, ProductBucket, user, NewProduct)
 }
 
 func (db *DB) PutProduct(user *User, product *Product) error {
