@@ -1,58 +1,92 @@
 package main
 
-// Entity is a thing that can be stored in the database. It just
-// needs to provide a unique key for the storage and needs to
-// be serializable as Json object.
+// Entity represents an object that can be stored in the database.
+// It is required to provide a unique key for storage and to be serializable
+// as a JSON object.
 type Entity interface {
 	Key() []byte
 }
 
-type User struct {
+// UserEntity represents an entity that is associated with a specific user.
+type UserEntity interface {
+	Entity
+	UserID() string
+}
+
+type BaseInfo struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
+}
 
-	// the password hash should be never sent to the client
+func (i *BaseInfo) Key() []byte {
+	return []byte(i.ID)
+}
+
+type User struct {
+	BaseInfo
 	Hash    string `json:"hash,omitempty"`
 	IsAdmin bool   `json:"isAdmin"`
 }
 
-func (u *User) Key() []byte {
-	return []byte(u.ID)
-}
-
-type Material struct {
-	ID     string `json:"id"`
-	User   string `json:"user"`
-	Name   string `json:"name"`
-	Parent string `json:"parent"`
-}
-
-func (m *Material) Key() []byte {
-	return []byte(m.ID)
-}
-
-type Component struct {
-	ID         string      `json:"id"`
-	Name       string      `json:"name"`
-	Mass       float64     `json:"mass"`
-	IsMaterial bool        `json:"isMaterial"`
-	Parts      []Component `json:"parts,omitempty"`
-}
-
-type Product struct {
-	Component
+type UserInfo struct {
+	BaseInfo
 	User string `json:"user,omitempty"`
 }
 
-func (p *Product) Key() []byte {
-	return []byte(p.ID)
+func (i *UserInfo) UserID() string {
+	return i.User
+}
+
+type Material struct {
+	UserInfo
+	Parent string `json:"parent"`
+}
+
+type ProductPart struct {
+	Mass  float64     `json:"mass"`
+	Parts []Component `json:"parts,omitempty"`
+}
+
+type Component struct {
+	BaseInfo
+	ProductPart
+	IsMaterial bool `json:"isMaterial"`
+}
+
+type Product struct {
+	UserInfo
+	ProductPart
 }
 
 type Process struct {
-	Name           string  `json:"name"`
+	UserInfo
 	EmissionFactor float64 `json:"emissionFactor"`
 }
 
-func (p *Process) Key() []byte {
-	return []byte(LowerTrim(p.Name))
+type Scenario struct {
+	UserInfo
+	Product Product        `json:"product,omitempty"`
+	Steps   []ScenarioStep `json:"steps,omitempty"`
 }
+
+type ScenarioStep struct {
+	ID        string         `json:"id"`
+	Process   string         `json:"process,omitempty"`
+	Fractions []Fraction     `json:"fractions,omitempty"`
+	Steps     []ScenarioStep `json:"steps,omitempty"`
+}
+
+type Fraction struct {
+	ID        string        `json:"id"`
+	Component Component     `json:"component,omitempty"`
+	State     FractionState `json:"state"`
+	Value     float64       `json:"value"`
+}
+
+type FractionState string
+
+const (
+	PassThroughState FractionState = "Pass through"
+	RecycledState    FractionState = "Recycled"
+	DisposedState    FractionState = "Disposed"
+)
