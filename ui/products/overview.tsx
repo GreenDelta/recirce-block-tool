@@ -74,12 +74,15 @@ const ProductTable = ({ products, onCopy, onDelete }: {
           </Link>
         </td>
         <td>
-          <CopyIcon
-            onClick={() => onCopy(product)}
-            tooltip="Copy this product" />
-          <DeleteIcon
-            onClick={() => onDelete(product)}
-            tooltip="Delete this product" />
+          <div>
+            <CopyIcon
+              onClick={() => onCopy(product)}
+              tooltip="Copy this product" />
+            {" | "}
+            <DeleteIcon
+              onClick={() => onDelete(product)}
+              tooltip="Delete this product" />
+          </div>
         </td>
       </tr>
     );

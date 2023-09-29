@@ -1,40 +1,69 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Scenario, Product } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
 import { ProgressPanel } from "../components";
 import { ScenarioStepPanel } from "./step-panel";
-import { AddIcon } from "../icons";
+import { AddIcon, DeleteIcon, SaveIcon } from "../icons";
 
 export const ScenarioEditor = () => {
 
-  const [processes, setProcesses] = useState<string[] | null>();
-  const [products, setProducts] = useState<Product[] | null>(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [isLoading, setLoading] = useState(false);
+  const [processes, setProcesses] = useState<string[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [scenario, setScenario] = useState<Scenario | null>(null)
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
+      if (typeof id === "string") {
+        const s = await api.getScenario(id);
+        setScenario(s);
+      } else {
+        setScenario({
+          id: uuid.NIL,
+          name: "New waste treatment scenario",
+        });
+      }
       const prods = await api.getProducts();
       setProducts(prods);
       const procs = await api.getProcesses();
       procs.sort();
-      setProcesses(procs)
-      // TODO: optional loading per ID for
-      // editing of existing processes; just
-      // like in the product editor
-      setScenario({
-        id: uuid.v4(),
-        name: "New waste treatment",
-      });
+      setProcesses(procs);
+      setLoading(false);
     })();
   }, []);
 
-  if (!products || !processes || !scenario) {
+  if (isLoading || !scenario) {
     return <ProgressPanel />;
   }
 
-  const onSave = () => { };
   const onChanged = () => setScenario({ ...scenario });
+
+  const onSave = async () => {
+    setLoading(true);
+    const created = scenario.id === uuid.NIL;
+    if (created) {
+      scenario.id = uuid.v4();
+    }
+    await api.putScenario(scenario);
+    if (created) {
+      setScenario({ ...scenario });
+    }
+    setLoading(false);
+  };
+
+  const onDelete = async () => {
+    if (scenario.id === uuid.NIL) {
+      return;
+    }
+    setLoading(true);
+    await api.deleteScenario(scenario.id);
+    navigate('/ui/scenarios');
+  };
 
   const onAddStep = () => {
     const step = {
@@ -67,9 +96,11 @@ export const ScenarioEditor = () => {
         <li><strong>{scenario.name}</strong></li>
       </ul>
       <ul>
-        <li><a onClick={onSave}>Upload process</a></li>
-        <li>|</li>
-        <li><a>Delete process</a></li>
+        <li><SaveIcon onClick={onSave} tooltip="Save scenario" /></li>
+        {scenario.id !== uuid.NIL
+          ? <li><DeleteIcon onClick={onDelete} tooltip="Delete scenario" /></li>
+          : <></>
+        }
       </ul>
     </nav>
     <article className="re-panel">
