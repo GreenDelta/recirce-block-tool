@@ -1,52 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Product } from "../model";
+import { Copy, Product } from "../model";
 import * as api from "../api";
 import { ProgressPanel } from "../components";
-import { AddIcon, DeleteIcon } from "../icons";
+import { AddIcon, CopyIcon, DeleteIcon } from "../icons";
 
 export const ProductsOverview = () => {
 
   const [isLoading, setLoading] = useState(false);
-  const [products, setProducts] = useState<Product[] | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
-    setLoading(true);
-    api.getProducts()
-      .then(setProducts)
-      .finally(() => setLoading(false));
-  }, []);
-  if (!products) {
-    return <ProgressPanel message="Loading products" />;
-  }
-  products.sort((p1, p2) => p1.name.localeCompare(p2.name));
-
-  const onDelete = async (productId: string) => {
-    setLoading(true); // Show loading indicator
+  const loadProducts = async () => {
     try {
-      await api.deleteProduct(productId);
-      const nextProducts = await api.getProducts();
-      setProducts(nextProducts);
+      const ps = await api.getProducts();
+      setProducts(ps);
     } finally {
       setLoading(false);
     }
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    loadProducts();
+  }, []);
+
+  const onDelete = async (product: Product) => {
+    setLoading(true);
+    await api.deleteProduct(product.id);
+    loadProducts();
   };
+
+  const onCopy = async (product: Product) => {
+    setLoading(true);
+    const copy = Copy.ofProduct(product);
+    copy.name = `${copy.name} - Copy`;
+    await api.putProduct(copy);
+    loadProducts();
+  }
 
   if (isLoading) {
     return <ProgressPanel />;
   }
 
+  products.sort((p1, p2) => p1.name.localeCompare(p2.name));
   return <>
     <p>
       <strong>Products</strong>
     </p>
-    <ProductTable products={products} onDelete={onDelete}/>
+    <ProductTable products={products} onCopy={onCopy} onDelete={onDelete} />
   </>;
 };
 
-const ProductTable = ({ products, onDelete }: {
+const ProductTable = ({ products, onCopy, onDelete }: {
   products: Product[],
-  onDelete: (productId: string) => void,
+  onCopy: (product: Product) => void,
+  onDelete: (product: Product) => void,
 }) => {
 
   const navigate = useNavigate();
@@ -66,8 +74,11 @@ const ProductTable = ({ products, onDelete }: {
           </Link>
         </td>
         <td>
+          <CopyIcon
+            onClick={() => onCopy(product)}
+            tooltip="Copy this product" />
           <DeleteIcon
-            onClick={() => onDelete(product.id)}
+            onClick={() => onDelete(product)}
             tooltip="Delete this product" />
         </td>
       </tr>
