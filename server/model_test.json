@@ -2,7 +2,7 @@
   "id": "123",
   "name": "Example product",
   "mass": 1.5,
-  "components": [
+  "parts": [
     {
       "id": "456",
       "name": "Component B",

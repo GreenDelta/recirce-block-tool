@@ -7,24 +7,47 @@ import { AddIcon, DeleteIcon } from "../icons";
 
 export const ProductsOverview = () => {
 
+  const [isLoading, setLoading] = useState(false);
   const [products, setProducts] = useState<Product[] | null>(null);
+
   useEffect(() => {
-    api.getProducts().then(setProducts);
+    setLoading(true);
+    api.getProducts()
+      .then(setProducts)
+      .finally(() => setLoading(false));
   }, []);
   if (!products) {
     return <ProgressPanel message="Loading products" />;
   }
   products.sort((p1, p2) => p1.name.localeCompare(p2.name));
 
+  const onDelete = async (productId: string) => {
+    setLoading(true); // Show loading indicator
+    try {
+      await api.deleteProduct(productId);
+      const nextProducts = await api.getProducts();
+      setProducts(nextProducts);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return <ProgressPanel />;
+  }
+
   return <>
     <p>
       <strong>Products</strong>
     </p>
-    <ProductTable products={products} />
+    <ProductTable products={products} onDelete={onDelete}/>
   </>;
 };
 
-const ProductTable = ({ products }: { products: Product[] }) => {
+const ProductTable = ({ products, onDelete }: {
+  products: Product[],
+  onDelete: (productId: string) => void,
+}) => {
 
   const navigate = useNavigate();
 
@@ -43,7 +66,9 @@ const ProductTable = ({ products }: { products: Product[] }) => {
           </Link>
         </td>
         <td>
-          <DeleteIcon />
+          <DeleteIcon
+            onClick={() => onDelete(product.id)}
+            tooltip="Delete this product" />
         </td>
       </tr>
     );
@@ -70,7 +95,6 @@ const ProductTable = ({ products }: { products: Product[] }) => {
           <td />
           <td />
         </tr>
-
       </tbody>
     </table>
   );

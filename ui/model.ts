@@ -1,3 +1,5 @@
+import * as uuid from "uuid";
+
 export interface User {
   id: string;
   name: string;
@@ -94,4 +96,66 @@ export function nextPartMassOf(comp: Component): number {
     }
   }
   return mass <= 0 ? 0 : mass;
+}
+
+export class Copy {
+
+  static ofProduct(p: Product): Product {
+    return Copy.ofComponent(p)
+  }
+
+  private static ofComponent(c: Component): Component {
+    const copy: Component = {
+      id: uuid.v4(),
+      name: c.name,
+      mass: c.mass,
+      isMaterial: c.isMaterial,
+    };
+    if (c.parts) {
+      copy.parts = c.parts.map(Copy.ofComponent);
+    }
+    return copy;
+  }
+
+  static ofScenario(s: Scenario): Scenario {
+    const copy: Scenario = {
+      id: uuid.v4(),
+      name: s.name,
+    };
+    if (s.product) {
+      copy.product = Copy.ofProduct(s.product);
+    }
+    if (s.steps) {
+      copy.steps = s.steps.map(Copy.ofScenarioStep);
+    }
+    return copy;
+  }
+
+  private static ofScenarioStep(step: ScenarioStep): ScenarioStep {
+    const copy: ScenarioStep = {
+      id: uuid.v4(),
+    };
+    if (step.process) {
+      copy.process = step.process;
+    }
+    if (step.fractions) {
+      copy.fractions = step.fractions.map(Copy.ofFraction);
+    }
+    if (step.steps) {
+      copy.steps = step.steps.map(Copy.ofScenarioStep);
+    }
+    return copy;
+  }
+
+  private static ofFraction(fraction: Fraction): Fraction {
+    const copy: Fraction = {
+      id: uuid.v4(),
+      state: fraction.state,
+      value: fraction.value,
+    };
+    if (fraction.component) {
+      copy.component = Copy.ofComponent(fraction.component);
+    }
+    return copy;
+  }
 }

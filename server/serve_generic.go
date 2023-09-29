@@ -9,6 +9,7 @@ import (
 func GetUserEntities[T UserEntity](
 	s *Server, bucket Bucket, f func() T,
 ) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(w, r)
 		if user == nil {
@@ -25,6 +26,7 @@ func GetUserEntities[T UserEntity](
 func GetUserEntity[T UserEntity](
 	s *Server, bucket Bucket, f func() T,
 ) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(w, r)
 		if user == nil {
@@ -59,6 +61,7 @@ func GetUserEntity[T UserEntity](
 func PutUserEntity[T UserEntity](
 	s *Server, bucket Bucket, f func() T,
 ) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(w, r)
 		if user == nil {
@@ -79,6 +82,7 @@ func PutUserEntity[T UserEntity](
 func DeleteUserEntity[T UserEntity](
 	s *Server, bucket Bucket, f func() T,
 ) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		user := s.getSessionUser(w, r)
 		if user == nil {
