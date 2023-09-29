@@ -34,7 +34,7 @@ func GetUserEntity[T UserEntity](
 		}
 
 		id := mux.Vars(r)["id"]
-		data, err := s.db.Get(ProductBucket, id)
+		data, err := s.db.Get(bucket, id)
 		if err != nil {
 			SendError(w,
 				"failed to get id="+id+" from: "+string(bucket), err)

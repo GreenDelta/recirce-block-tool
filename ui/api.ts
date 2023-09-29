@@ -1,4 +1,4 @@
-import { Credentials, Material, Product, Scenario, User } from "./model";
+import { Analysis, Credentials, Material, Product, Scenario, User } from "./model";
 
 export async function getMaterials(): Promise<Material[]> {
   const r = await fetch("/api/materials");
@@ -96,6 +96,43 @@ export async function deleteScenario(id: string): Promise<void> {
   if (response.status !== 200) {
     const message = await response.text();
     throw new Error(`Failed to delete scenario: ${message}`);
+  }
+}
+
+export async function getAnalyses(): Promise<Analysis[]> {
+  const response = await fetch("/api/analyses");
+  const json = await response.json();
+  return !json ? [] : json;
+}
+
+export async function getAnalysis(id: string): Promise<Analysis> {
+  const response = await fetch(`/api/analyses/${id}`);
+  return response.json();
+}
+
+export async function putAnalysis(analysis: Analysis): Promise<void> {
+  const response = await fetch("/api/analyses", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(analysis),
+  });
+
+  if (response.status !== 200) {
+    const message = await response.text();
+    throw new Error(`Failed to post analysis: ${message}`);
+  }
+}
+
+export async function deleteAnalysis(id: string): Promise<void> {
+  const response = await fetch(`/api/analyses/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.status !== 200) {
+    const message = await response.text();
+    throw new Error(`Failed to delete analysis: ${message}`);
   }
 }
 

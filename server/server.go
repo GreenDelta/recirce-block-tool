@@ -90,6 +90,15 @@ func (s *Server) mountRoutes() {
 	r.HandleFunc("/api/scenarios/{id}",
 		DeleteUserEntity(s, ScenarioBucket, ScenarioFn)).Methods("DELETE")
 
+	r.HandleFunc("/api/analyses/{id}",
+		GetUserEntity(s, AnalysisBucket, AnalysisFn)).Methods("GET")
+	r.HandleFunc("/api/analyses",
+		GetUserEntities(s, AnalysisBucket, AnalysisFn)).Methods("GET")
+	r.HandleFunc("/api/analyses",
+		PutUserEntity(s, AnalysisBucket, AnalysisFn)).Methods("POST", "PUT")
+	r.HandleFunc("/api/analyses/{id}",
+		DeleteUserEntity(s, AnalysisBucket, AnalysisFn)).Methods("DELETE")
+
 	serveHome := func(w http.ResponseWriter, r *http.Request) {
 		html, err := os.ReadFile(filepath.Join(s.args.staticDir, "index.html"))
 		if err != nil {

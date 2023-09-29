@@ -18,6 +18,7 @@ const (
 	ProductBucket  Bucket = "products"
 	ProcessBucket  Bucket = "processes"
 	ScenarioBucket Bucket = "scenarios"
+	AnalysisBucket Bucket = "analysis"
 )
 
 // DB provides the database methods of the application.

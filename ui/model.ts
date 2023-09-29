@@ -53,6 +53,13 @@ export interface Fraction {
   value: number;
 }
 
+export interface Analysis {
+  id: string;
+  name: string;
+  baseline?: string;
+  scenarios?: Scenario[];
+}
+
 /**
   * PassThrough represents the state where the material is passed through to the
   * next step without being recycled or disposed of.
@@ -101,12 +108,14 @@ export function nextPartMassOf(comp: Component): number {
 export class Copy {
 
   static ofProduct(p: Product): Product {
-    return Copy.ofComponent(p)
+    const copy =  Copy.ofComponent(p);
+    copy.id = uuid.v4();
+    return copy;
   }
 
   private static ofComponent(c: Component): Component {
     const copy: Component = {
-      id: uuid.v4(),
+      id: c.id,
       name: c.name,
       mass: c.mass,
       isMaterial: c.isMaterial,
@@ -123,7 +132,7 @@ export class Copy {
       name: s.name,
     };
     if (s.product) {
-      copy.product = Copy.ofProduct(s.product);
+      copy.product = Copy.ofComponent(s.product);
     }
     if (s.steps) {
       copy.steps = s.steps.map(Copy.ofScenarioStep);
@@ -133,7 +142,7 @@ export class Copy {
 
   private static ofScenarioStep(step: ScenarioStep): ScenarioStep {
     const copy: ScenarioStep = {
-      id: uuid.v4(),
+      id: step.id,
     };
     if (step.process) {
       copy.process = step.process;
@@ -155,6 +164,18 @@ export class Copy {
     };
     if (fraction.component) {
       copy.component = Copy.ofComponent(fraction.component);
+    }
+    return copy;
+  }
+
+  static ofAnalysis(a: Analysis): Analysis {
+    const copy: Analysis = {
+      id: uuid.v4(),
+      name: a.name,
+      baseline: a.baseline,
+    };
+    if (a.scenarios) {
+      copy.scenarios = a.scenarios.map(Copy.ofScenario);
     }
     return copy;
   }

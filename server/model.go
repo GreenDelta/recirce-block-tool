@@ -96,6 +96,12 @@ const (
 	DisposedState    FractionState = "Disposed"
 )
 
+type Analysis struct {
+	UserInfo
+	Baseline  string     `json:"baseline,omitempty"`
+	Scenarios []Scenario `json:"scenarios,omitempty"`
+}
+
 func MaterialFn() *Material {
 	return &Material{}
 }
@@ -110,4 +116,8 @@ func ScenarioFn() *Scenario {
 
 func ProcessFn() *Process {
 	return &Process{}
+}
+
+func AnalysisFn() *Analysis {
+	return &Analysis{}
 }
