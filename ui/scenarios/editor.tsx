@@ -51,7 +51,7 @@ export const ScenarioEditor = () => {
     }
     await api.putScenario(scenario);
     if (created) {
-      setScenario({ ...scenario });
+      onChanged();
     }
     setLoading(false);
   };
