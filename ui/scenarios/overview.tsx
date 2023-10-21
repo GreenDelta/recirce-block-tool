@@ -81,6 +81,14 @@ const ScenarioTable = ({
         </Link>
       </td>
       <td>
+        { scenario?.product
+          ? <Link to={`/ui/products/edit/${scenario.product.id}`}>
+              {scenario.product.name}
+            </Link>
+          : <></>
+        }
+      </td>
+      <td>
         <div>
           <CopyIcon
             onClick={() => onCopy(scenario)}
@@ -102,6 +110,7 @@ const ScenarioTable = ({
         <tr>
           <th scope="col">#</th>
           <th scope="col">Scenario</th>
+          <th scope="col">Product</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -115,6 +124,7 @@ const ScenarioTable = ({
             }}
           />
         </td>
+        <td />
         <td />
         <td />
       </tr>

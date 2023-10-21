@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Material } from "./model";
 import * as api from "./api";
 import { ProgressPanel } from "./components";
+import { AddIcon, DeleteIcon } from "./icons";
 
 export const MaterialsPage = () => {
 
@@ -36,7 +37,9 @@ export const MaterialsPage = () => {
         <td>{i + 1}</td>
         <td>{mat.name}</td>
         <td>{mat.parent || "Material"}</td>
-        <td><a style={{ cursor: "pointer" }}>Delete</a></td>
+        <td>
+          <DeleteIcon tooltip="Delete this material" />
+        </td>
       </tr>
     );
   }
@@ -64,31 +67,33 @@ export const MaterialsPage = () => {
 const AddRow = ({ onAdd }: { onAdd: (material: Material) => void }) => {
   const [name, setName] = useState("");
   const [parent, setParent] = useState("");
-  return <tr>
-    <td>
-      <button onClick={() => {
-        if (!name) {
-          return;
-        }
-        onAdd({ name, parent });
-        setName("");
-        setParent("");
-      }}>
-        Add
-      </button>
-    </td>
-    <td>
-      <input type="text"
-        placeholder="Material name"
-        required
-        value={name}
-        onChange={e => setName(e.target.value)} />
-    </td>
-    <td>
-      <input type="text"
-        placeholder="More generic material"
-        value={parent}
-        onChange={e => setParent(e.target.value)} />
-    </td>
-  </tr>
+  const inputStyle = { marginBottom: 0 };
+  return (
+    <tr>
+      <td>
+        <AddIcon tooltip="Add a material"
+          onClick={() => {
+            if (!name) {
+              return;
+            }
+            onAdd({ name, parent });
+            setName("");
+            setParent("");
+          }} />
+      </td>
+      <td>
+        <input type="text" style={inputStyle} required
+          placeholder="Material name"
+          value={name}
+          onChange={e => setName(e.target.value)} />
+      </td>
+      <td>
+        <input type="text" style={inputStyle}
+          placeholder="More generic material"
+          value={parent}
+          onChange={e => setParent(e.target.value)} />
+      </td>
+      <td></td>
+    </tr>
+  );
 };
