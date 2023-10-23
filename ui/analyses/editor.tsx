@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Analysis, Scenario } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
@@ -108,12 +108,27 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
   if (analysis.scenarios) {
     let i = 0;
     for (const s of analysis.scenarios) {
+      const isBaseline = analysis.baseline === s.name;
       i++;
       rows.push(
         <tr>
           <td>{i}</td>
-          <td>{s.name}</td>
-          <td>{s.product?.name}</td>
+          <td><Link to={`/ui/scenarios/edit/${s.id}`}>{s.name}</Link></td>
+          <td>
+            <Link to={`/ui/products/edit/${s.product?.id}`}>
+              {s.product?.name}
+            </Link>
+          </td>
+          <td>
+            <input type="checkbox" checked={isBaseline}
+              onChange={() => {
+                if (isBaseline) {
+                  return;
+                }
+                analysis.baseline = s.name;
+                onChanged();
+              }} />
+          </td>
           <td>
             <DeleteIcon tooltip="Remove scenario from analysis"
               onClick={() => {
@@ -151,7 +166,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
       comboRows.push(option);
     });
   const scenarioCombo = (
-    <select
+    <select className="re-table-control"
       onChange={e => onSelectNext(e.target.value)}
       value={nextScenario ? nextScenario.id : ""}>
       {comboRows}
@@ -163,10 +178,12 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
       return;
     }
     if (!analysis.scenarios) {
+      analysis.baseline = nextScenario.name;
       analysis.scenarios = [nextScenario];
     } else {
       analysis.scenarios.push(nextScenario);
     }
+    setNextScenario(null);
     onChanged();
   };
 
@@ -177,6 +194,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
           <th scope="col">#</th>
           <th scope="col">Scenario</th>
           <th scope="col">Product</th>
+          <th scope="col">Is baseline</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -192,6 +210,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
           <td>
             {scenarioCombo}
           </td>
+          <td />
           <td />
           <td />
         </tr>

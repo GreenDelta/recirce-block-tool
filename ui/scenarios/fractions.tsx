@@ -50,7 +50,11 @@ export const FractionTable = (props: Props) => {
       <tbody>
         {rows}
         <tr>
-          <td><AddIcon onClick={onAdd} /></td>
+          <td><AddIcon onClick={onAdd} tooltip="Add fraction"/></td>
+          <td />
+          <td />
+          <td />
+          <td />
         </tr>
       </tbody>
     </table>
@@ -74,7 +78,7 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
     components.push(<option value={f.component.id}>{label}</option>)
   }
 
-  const selector = <select
+  const selector = <select className="re-table-control"
     value={props.fraction.component?.id}
     onChange={e => {
       const id = e.target.value;
@@ -94,12 +98,31 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
     ? 0
     : frac.value * frac.component.mass / 100;
 
+  const onDelete = () => {
+    const step = props.step;
+    if (!step.fractions) {
+      return;
+    }
+    const id = frac.id;
+    let idx = -1;
+    for (let i = 0; i < step.fractions.length; i++) {
+      if (id === step.fractions[i].id) {
+        idx = i;
+        break;
+      }
+    }
+    if (idx >= 0) {
+      step.fractions.splice(idx, 1);
+      props.onChanged();
+    }
+  };
+
   return (
     <tr>
       <td>{selector}</td>
       <td>
         <div className="re-flex-div">
-          <input type="number"
+          <input type="number" className="re-table-control"
             min={0}
             max={100}
             value={frac.value}
@@ -117,7 +140,9 @@ const FractionRow = (props: Props & { fraction: Fraction }) => {
         props.onChanged();
       }} />
       </td>
-      <td><DeleteIcon /></td>
+      <td>
+        <DeleteIcon tooltip="Delete fraction" onClick={onDelete} />
+      </td>
     </tr>
   );
 }
@@ -132,7 +157,7 @@ const StateCombo = ({ state, onChange }: {
     FractionState.Recycled,
   ];
   return (
-    <select
+    <select className="re-table-control"
       value={state}
       onChange={e => onChange(e.target.value as FractionState)}>
       {states.map(s => <option value={s}>{s}</option>)}
