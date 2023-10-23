@@ -60,7 +60,7 @@ func (s *Server) GetResults() http.HandlerFunc {
 			res.WasteResults = append(res.WasteResults, waste)
 			res.EmissionResults = append(res.EmissionResults, emission)
 		}
-		SendAsJson(w, &r)
+		SendAsJson(w, &res)
 	}
 }
 

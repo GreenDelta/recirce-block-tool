@@ -36,6 +36,7 @@ func OpenDB(path string) (*DB, error) {
 	// initialize the data buckets
 	buckets := []Bucket{
 		AccountBucket,
+		AnalysisBucket,
 		MaterialBucket,
 		ProductBucket,
 		ProcessBucket,

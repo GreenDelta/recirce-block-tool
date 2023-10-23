@@ -145,7 +145,7 @@ export async function deleteAnalysis(id: string): Promise<void> {
 }
 
 export async function getResult(id: string): Promise<Result> {
-  const r = await fetch(`/api/result/${id}`);
+  const r = await fetch(`/api/results/${id}`);
   return r.json();
 }
 
