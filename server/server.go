@@ -99,6 +99,8 @@ func (s *Server) mountRoutes() {
 	r.HandleFunc("/api/analyses/{id}",
 		DeleteUserEntity(s, AnalysisBucket, AnalysisFn)).Methods("DELETE")
 
+	r.HandleFunc("/api/results/{id}", s.GetResults()).Methods("GET")
+
 	serveHome := func(w http.ResponseWriter, r *http.Request) {
 		html, err := os.ReadFile(filepath.Join(s.args.staticDir, "index.html"))
 		if err != nil {

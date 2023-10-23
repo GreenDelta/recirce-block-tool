@@ -104,7 +104,7 @@ type Analysis struct {
 }
 
 type Result struct {
-	Analysis        Analysis         `json:"analysis"`
+	Analysis        *Analysis        `json:"analysis"`
 	WasteResults    []WasteResult    `json:"wasteResults"`
 	EmissionResults []EmissionResult `json:"emissionResults"`
 }
