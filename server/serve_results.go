@@ -2,14 +2,16 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func (s *Server) GetResults() http.HandlerFunc {
 
-	return func (w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 
 		// get the analysis
-		user := s.getSessionUser(w, r);
+		user := s.getSessionUser(w, r)
 		if user == nil {
 			return
 		}
@@ -24,19 +26,19 @@ func (s *Server) GetResults() http.HandlerFunc {
 			SendError(w, "failed to parse analysis id="+id, err)
 			return
 		}
-		if analyis.UserID() != user.ID {
+		if analysis.UserID() != user.ID {
 			http.Error(w, "not allowed", http.StatusUnauthorized)
 			return
 		}
 
 		// fetch processes
 		processes := make(map[string]*Process)
-		err := s.db.Each(ProcessBucket, func(key string, data []byte) error {
+		err = s.db.Each(ProcessBucket, func(key string, data []byte) error {
 			p, err := ParseEntity(data, ProcessFn)
 			if err != nil {
 				return err
 			}
-			processes[LowerTrim(p.name)] = &p
+			processes[LowerTrim(p.Name)] = p
 			return nil
 		})
 		if err != nil {
@@ -45,18 +47,18 @@ func (s *Server) GetResults() http.HandlerFunc {
 		}
 
 		// construct the result
-		r := Result {
-			Analyis: &analysis,
+		res := Result{
+			Analysis: analysis,
 		}
-		for i := range analyis.scenarios {
-			s := analysis.scenarions[i]
-			waste := WasteResult { Scenario: s.Name	}
-			emission := EmissionResult { Scenario: s.Name }
+		for i := range analysis.Scenarios {
+			s := analysis.Scenarios[i]
+			waste := WasteResult{Scenario: s.Name}
+			emission := EmissionResult{Scenario: s.Name}
 			for step := range s.Steps {
 				addResults(&s.Steps[step], &waste, &emission, processes)
 			}
-			r.WasteResults = append(r.WasteResults, waste)
-			r.EmissionResults = append(r.EmissionResults, emission)
+			res.WasteResults = append(res.WasteResults, waste)
+			res.EmissionResults = append(res.EmissionResults, emission)
 		}
 		SendAsJson(w, &r)
 	}
@@ -69,7 +71,7 @@ func addResults(
 	processes map[string]*Process,
 ) {
 
-	process := processes[LowerTrim(step.process)]
+	process := processes[LowerTrim(step.Process)]
 	for _, f := range step.Fractions {
 		mass := f.Component.Mass * f.Value / 100.0
 		switch f.State {
@@ -85,7 +87,7 @@ func addResults(
 		}
 	}
 
-	for i := range step.steps {
-		addResults(&step.steps[i], waste, emission, processes)
+	for i := range step.Steps {
+		addResults(&step.Steps[i], waste, emission, processes)
 	}
 }

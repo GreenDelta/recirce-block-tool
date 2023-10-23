@@ -16,8 +16,8 @@ import { User } from "./model";
 import * as api from "./api";
 import { ScenarioOverview } from "./scenarios/overview";
 import { ScenarioEditor } from "./scenarios/editor";
-import { AnalysesOverview } from "./anaylses/overview";
-import { AnalysesEditor } from "./analyses/editor";
+import { AnalysesOverview } from "./analyses/overview";
+import { AnalysisEditor } from "./analyses/editor";
 import { ResultView } from "./results/view";
 
 const ErrorPage = () => {
@@ -73,7 +73,7 @@ const MainMenu = (props: { user: User | null, onLogout: () => void }) => {
       <ul>
         <li><Link to="/"><img src="/logo.png"></img></Link></li>
         <li></li>
-        <li><Link to="/ui/analysis">Analysis</Link></li>
+        <li><Link to="/ui/analyses">Analysis</Link></li>
         <li><Link to="/ui/scenarios">Scenarios</Link></li>
         <li><Link to="/ui/products">Products</Link></li>
         <li><Link to="/ui/materials">Materials</Link></li>
@@ -100,11 +100,11 @@ function main() {
           index: true,
         },
         {
-          path: "/ui/analysis",
+          path: "/ui/analyses",
           element: <AnalysesOverview />,
         },
         {
-          path: "/ui/analysis/edit/:id?",
+          path: "/ui/analyses/edit/:id?",
           element: <AnalysisEditor />,
         },
         {

@@ -11,7 +11,6 @@ export const EditorHeader = (props: {
 }) => {
 
   const a = props.analysis;
-  const isNew = a.id == uuid.NIL;
   const icons = [
     <li>
       <SaveIcon tooltip="Save analysis"

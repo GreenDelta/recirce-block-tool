@@ -64,7 +64,7 @@ export function listFractions(t: Scenario, step: ScenarioStep): Fraction[] {
     fractions.push({
       id: uuid.v4(),
       component,
-      state: FractionState.PassThrough,
+      state: FractionState.PassedThrough,
       value: 100,
     })
     component.parts?.forEach(collect);

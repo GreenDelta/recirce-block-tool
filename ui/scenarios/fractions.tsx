@@ -26,7 +26,7 @@ export const FractionTable = (props: Props) => {
     const f = {
       id: uuid.v4(),
       value: 100,
-      state: FractionState.PassThrough
+      state: FractionState.PassedThrough
     };
     if (props.step.fractions) {
       props.step.fractions.push(f);
@@ -128,7 +128,7 @@ const StateCombo = ({ state, onChange }: {
 }) => {
   const states = [
     FractionState.Disposed,
-    FractionState.PassThrough,
+    FractionState.PassedThrough,
     FractionState.Recycled,
   ];
   return (

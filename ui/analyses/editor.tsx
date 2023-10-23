@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Analysis, Scenario, Product } from "../model";
+import { Analysis, Scenario } from "../model";
 import * as api from "../api";
 import * as uuid from "uuid";
 import { ProgressPanel } from "../components";
-import { ScenarioStepPanel } from "./step-panel";
 import { AddIcon, DeleteIcon } from "../icons";
 import { EditorHeader } from "./editor-header";
 
@@ -21,7 +20,7 @@ export const AnalysisEditor = () => {
       setLoading(true);
       if (typeof id === "string") {
         const a = await api.getAnalysis(id);
-        setAnalysis(s);
+        setAnalysis(a);
       } else {
         setAnalysis({
           id: uuid.NIL,
@@ -46,7 +45,7 @@ export const AnalysisEditor = () => {
     if (created) {
       analysis.id = uuid.v4();
     }
-    await api.putAnaylsis(analysis);
+    await api.putAnalysis(analysis);
     if (created) {
       onChanged();
     }
@@ -67,7 +66,7 @@ export const AnalysisEditor = () => {
     if (analysis.id === uuid.NIL) {
       return;
     }
-    navigate(`/ui/results/${analysis.id}`;
+    navigate(`/ui/results/${analysis.id}`);
   };
 
   return (
@@ -83,7 +82,7 @@ export const AnalysisEditor = () => {
             <input type="text" className="re-panel-input"
               value={analysis.name}
               onChange={e => {
-                scenario.name = e.target.value;
+                analysis.name = e.target.value;
                 onChanged();
               }} />
           </div>
@@ -103,7 +102,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
   onChanged: () => void,
 }) => {
 
-  const [ nextScenario, setNextScenario ]  = useState<Scenario | null>(null);
+  const [nextScenario, setNextScenario] = useState<Scenario | null>(null);
 
   const rows = [];
   if (analysis.scenarios) {
@@ -132,7 +131,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
       setNextScenario(null);
       return;
     }
-    for(const s of scenarios) {
+    for (const s of scenarios) {
       if (id === s.id) {
         setNextScenario(s);
         break;
@@ -141,7 +140,7 @@ const ScenarioTable = ({ analysis, scenarios, onChanged }: {
   };
 
   // combo-box
-  const comboRows = [ <option value="" /> ];
+  const comboRows = [<option value="" />];
   scenarios.filter(s => canAdd(s, analysis))
     .forEach(s => {
       const selected = nextScenario?.id === s.id || false;
@@ -226,6 +225,6 @@ function remove(scenario: Scenario, analysis: Analysis) {
     }
   }
   if (idx >= 0) {
-    analysis.splice(idx, 1);
+    analysis.scenarios.splice(idx, 1);
   }
 }

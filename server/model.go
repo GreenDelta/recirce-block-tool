@@ -112,13 +112,13 @@ type Result struct {
 type WasteResult struct {
 	Scenario       string  `json:"scenario"`
 	AmountDisposed float64 `json:"amountDisposed"`
-  AmountRecycled float64 `json:"amountRecycled"`
-  AmountReused   float64 `json:"amountReused"`
+	AmountRecycled float64 `json:"amountRecycled"`
+	AmountReused   float64 `json:"amountReused"`
 }
 
 type EmissionResult struct {
-  Scenario string  `json:"scenario"`
-  value    float64 `json:"value"`
+	Scenario string  `json:"scenario"`
+	Value    float64 `json:"value"`
 }
 
 func MaterialFn() *Material {
