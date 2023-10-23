@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Result } from "../model";
 import * as api from "../api";
 import { ProgressPanel } from "../components";
+import { CircleRow } from "./circles";
 
 type Order = Record<string, number>;
 
@@ -23,6 +24,7 @@ export const ResultView = () => {
   }
 
   const order = scenarioOrderOf(result);
+  const props = { result, order };
   return (
     <>
       <nav>
@@ -31,8 +33,10 @@ export const ResultView = () => {
         </ul>
       </nav>
       <article className="re-panel">
-        <Header result={result} />
-        <EmissionRow result={result} order={order} />
+        <Header {...props} />
+        <EmissionRow {...props} />
+        <WasteRow state="reused" {...props} />
+        <WasteRow state="recycled" {...props} />
       </article>
     </>
   );
@@ -66,77 +70,62 @@ const Header = ({ result }: {result: Result}) => {
   );
 };
 
-const EmissionRow = ({ result, order }: {
+const EmissionRow = (props: {
   result: Result,
   order: Order,
 }) => {
-
-  if (!result.emissionResults) {
+  if (!props.result.emissionResults) {
     return <></>;
   }
-
-  // map the values
-  let baseline = 0;
-  const values: number[] = [];
-  for (const e of result.emissionResults) {
-    const i = order[e.scenario];
-    if (i !== 0 && !i) {
-      continue;
-    }
-    values[i] = e.value;
-    if (result.analysis?.baseline === e.scenario) {
-      baseline = e.value;
-    }
-  }
-
-  // make the values relative
-  for (let i = 0; i < values.length; i++) {
-    const v = values[i];
-    if (baseline === 0) {
-      values[i] = v > 0 ? 10 : 0;
-      continue;
-    }
-    // make it a share between 0..1
-    values[i] = (
-      Math.min(Math.max(Math.log10(v / baseline), -1), 1) + 2) / 2;
-  }
-
-  // create the circles
-  const circles = [];
-  for (const v of values) {
-    const r = 5 + 45 * v;
-    circles.push(
-      <div style={{textAlign: "center"}}>
-        <div style={{margin: 15, display: "inline-block"}}>
-          <svg
-            width="100"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            fill={colorOf(v)}>
-            <circle cx="50" cy="50" r={r} />
-          </svg>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="grid">
       <div>Carbon footprint</div>
-      {circles}
+      <CircleRow
+        items={props.result.emissionResults}
+        {...props} />
     </div>
-  )
+  );
 };
 
-function colorOf(share: number): string {
-  if (share <= 0.1) return "#fce4ec";
-  if (share <= 0.2) return "#f8bbd0";
-  if (share <= 0.3) return "#f48fb1";
-  if (share <= 0.4) return "#f06292";
-  if (share <= 0.5) return "#ec407a";
-  if (share <= 0.6) return "#e91e63";
-  if (share <= 0.7) return "#d81b60";
-  if (share <= 0.8) return "#c2185b";
-  if (share <= 0.9) return "#ad1457";
-  return "#880e4f";
-}
+const WasteRow = (props: {
+  result: Result,
+  order: Order,
+  state: "reused" | "recycled",
+}) => {
+
+  if (!props.result.wasteResults) {
+    return <></>;
+  }
+
+  const title = props.state === "reused"
+    ? "Reused materials"
+    : "Recycled materials";
+  const values = [];
+  const circleItems = [];
+  for (const wr of props.result.wasteResults) {
+    const value = props.state == "reused"
+      ? wr.amountReused
+      : wr.amountRecycled;
+    values.push(
+      <div style={{textAlign: "center"}}>
+        {`${value.toFixed(4)} g`}
+      </div>);
+    circleItems.push({
+      scenario: wr.scenario,
+      value
+    });
+  }
+
+  return (
+    <>
+      <div className="grid">
+        <div>{title}</div>
+        {values}
+      </div>
+      <div className="grid">
+        <div />
+        <CircleRow items={circleItems} {...props} />
+      </div>
+    </>
+  );
+};
