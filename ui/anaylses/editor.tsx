@@ -5,7 +5,8 @@ import * as api from "../api";
 import * as uuid from "uuid";
 import { ProgressPanel } from "../components";
 import { ScenarioStepPanel } from "./step-panel";
-import { AddIcon, DeleteIcon, SaveIcon } from "../icons";
+import { AddIcon, DeleteIcon } from "../icons";
+import { EditorHeader } from "./editor-header";
 
 export const AnalysisEditor = () => {
 
@@ -59,22 +60,23 @@ export const AnalysisEditor = () => {
     setLoading(true);
     await api.deleteAnalysis(analysis.id);
     navigate('/ui/analysis');
+    setLoading(false);
+  };
+
+  const onCalculate = async () => {
+    if (analysis.id === uuid.NIL) {
+      return;
+    }
+    navigate(`/ui/results/${analysis.id}`;
   };
 
   return (
     <>
-      <nav>
-        <ul>
-          <li><strong>{analysis.name}</strong></li>
-        </ul>
-        <ul>
-          <li><SaveIcon onClick={onSave} tooltip="Save analysis" /></li>
-          {analysis.id !== uuid.NIL
-            ? <li><DeleteIcon onClick={onDelete} tooltip="Delete analysis" /></li>
-            : <></>
-          }
-        </ul>
-      </nav>
+      <EditorHeader
+        analysis={analysis}
+        onSave={onSave}
+        onDelete={onDelete}
+        onCalculate={onCalculate} />
       <article className="re-panel">
         <div className="grid">
           <div className="re-flex-div">

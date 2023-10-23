@@ -1,4 +1,12 @@
-import { Analysis, Credentials, Material, Product, Scenario, User } from "./model";
+import {
+  Analysis,
+  Credentials,
+  Material,
+  Product,
+  Result,
+  Scenario,
+  User,
+} from "./model";
 
 export async function getMaterials(): Promise<Material[]> {
   const r = await fetch("/api/materials");
@@ -134,6 +142,11 @@ export async function deleteAnalysis(id: string): Promise<void> {
     const message = await response.text();
     throw new Error(`Failed to delete analysis: ${message}`);
   }
+}
+
+export async function getResult(id: string): Promise<Result> {
+  const r = await fetch(`/api/result/${id}`);
+  return r.json();
 }
 
 export async function postLogin(credentials: Credentials): Promise<User> {

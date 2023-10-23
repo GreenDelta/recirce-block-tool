@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
-import { createBrowserRouter, Link, Outlet, useNavigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Link,
+  Outlet,
+  useNavigate,
+  RouterProvider }
+from "react-router-dom";
 import { HomePage } from "./home";
 import { LoginPage } from "./login";
 import { ProductsOverview } from "./products/overview";
@@ -11,6 +17,8 @@ import * as api from "./api";
 import { ScenarioOverview } from "./scenarios/overview";
 import { ScenarioEditor } from "./scenarios/editor";
 import { AnalysesOverview } from "./anaylses/overview";
+import { AnalysesEditor } from "./analyses/editor";
+import { ResultView } from "./results/view";
 
 const ErrorPage = () => {
   return (
@@ -94,6 +102,14 @@ function main() {
         {
           path: "/ui/analysis",
           element: <AnalysesOverview />,
+        },
+        {
+          path: "/ui/analysis/edit/:id?",
+          element: <AnalysisEditor />,
+        },
+        {
+          path: "/ui/results/:id",
+          element: <ResultView />,
         },
         {
           path: "/ui/scenarios",

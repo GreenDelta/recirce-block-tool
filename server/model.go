@@ -91,15 +91,34 @@ type Fraction struct {
 type FractionState string
 
 const (
-	PassThroughState FractionState = "Pass through"
-	RecycledState    FractionState = "Recycled"
-	DisposedState    FractionState = "Disposed"
+	DisposedState      FractionState = "Disposed"
+	PassedThroughState FractionState = "Passed through"
+	RecycledState      FractionState = "Recycled"
+	ReusedState        FractionState = "Reused"
 )
 
 type Analysis struct {
 	UserInfo
 	Baseline  string     `json:"baseline,omitempty"`
 	Scenarios []Scenario `json:"scenarios,omitempty"`
+}
+
+type Result struct {
+	Analysis        Analysis         `json:"analysis"`
+	WasteResults    []WasteResult    `json:"wasteResults"`
+	EmissionResults []EmissionResult `json:"emissionResults"`
+}
+
+type WasteResult struct {
+	Scenario       string  `json:"scenario"`
+	AmountDisposed float64 `json:"amountDisposed"`
+  AmountRecycled float64 `json:"amountRecycled"`
+  AmountReused   float64 `json:"amountReused"`
+}
+
+type EmissionResult struct {
+  Scenario string  `json:"scenario"`
+  value    float64 `json:"value"`
 }
 
 func MaterialFn() *Material {

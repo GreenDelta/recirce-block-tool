@@ -53,6 +53,13 @@ export interface Fraction {
   value: number;
 }
 
+export enum FractionState {
+  Disposed = "Disposed",
+  PassedThrough = "Passed through",
+  Recycled = "Recycled",
+  Reused = "Reused",
+}
+
 export interface Analysis {
   id: string;
   name: string;
@@ -60,16 +67,22 @@ export interface Analysis {
   scenarios?: Scenario[];
 }
 
-/**
-  * PassThrough represents the state where the material is passed through to the
-  * next step without being recycled or disposed of.
-  * Recycled represents the state where the material is recycled for further use.
-  * Disposed represents the state where the material is disposed of or discarded.
- */
-export enum FractionState {
-  PassThrough = "Pass through",
-  Recycled = "Recycled",
-  Disposed = "Disposed",
+export interface Result {
+  analysis: Analysis;
+  wasteResults: WasteResult[];
+  emissionResults: EmissionResult[];
+}
+
+export interface WasteResult {
+  scenario: string;
+  amountDisposed: number;
+  amountRecycled: number;
+  amountReused: number;
+}
+
+export interface EmissionResult {
+  scenario: string;
+  value: number;
 }
 
 export function findParentComponent(

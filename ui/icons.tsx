@@ -1,3 +1,8 @@
+// The SVG paths of the icons in this folder were directly taken from the
+// respective Google material icons: https://fonts.google.com/icons
+// These icons are licensed under the Apache License, Version 2; see
+// https://www.apache.org/licenses/LICENSE-2.0.html
+
 import React from "react"
 
 interface Props {
@@ -5,10 +10,17 @@ interface Props {
   onClick?: () => void;
 }
 
+export const CalcIcon = (props: Props) => {
+ return (
+   <Icon {...props}
+     path={<path  d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z" />} />
+ );
+};
+
 export const CopyIcon = (props: Props) => {
   return <Icon {...props}
     path={<path d="M760-200H320q-33 0-56.5-23.5T240-280v-560q0-33 23.5-56.5T320-920h280l240 240v400q0 33-23.5 56.5T760-200ZM560-640v-200H320v560h440v-360H560ZM160-40q-33 0-56.5-23.5T80-120v-560h80v560h440v80H160Zm160-800v200-200 560-560Z" />} />;
-}
+};
 
 export const SaveIcon = (props: Props) => {
   return <Icon {...props}
