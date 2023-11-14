@@ -7,10 +7,11 @@ type Item = {
   value: number,
 };
 
-export const CircleRow = ({result, order, items }: {
+export const CircleRow = ({result, order, items, impact }: {
   result: Result,
   order: Order,
   items: Item[],
+  impact: "negative" | "positive",
 }) => {
 
   // map the values
@@ -42,15 +43,18 @@ export const CircleRow = ({result, order, items }: {
   // create the circles
   const circles = [];
   for (const v of values) {
-    const r = 5 + Math.sqrt(45 * v);
+    const r = 5 + 35 * Math.sqrt(v);
+    const color = impact === "positive"
+      ? posColorOf(v)
+      : negColorOf(v);
     circles.push(
       <div style={{textAlign: "center"}}>
         <div style={{margin: 15, display: "inline-block"}}>
           <svg
-            width="100"
+            width="50"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
-            fill={colorOf(v)}>
+            fill={color}>
             <circle cx="50" cy="50" r={r} />
           </svg>
         </div>
@@ -61,15 +65,28 @@ export const CircleRow = ({result, order, items }: {
   return <>{circles}</>;
 };
 
-function colorOf(share: number): string {
-  if (share <= 0.1) return "#fce4ec";
-  if (share <= 0.2) return "#f8bbd0";
-  if (share <= 0.3) return "#f48fb1";
-  if (share <= 0.4) return "#f06292";
-  if (share <= 0.5) return "#ec407a";
-  if (share <= 0.6) return "#e91e63";
-  if (share <= 0.7) return "#d81b60";
-  if (share <= 0.8) return "#c2185b";
-  if (share <= 0.9) return "#ad1457";
-  return "#880e4f";
+function posColorOf(share: number): string {
+  if (share <= 0.1) return "#e91e63";
+  if (share <= 0.2) return "#ec407a";
+  if (share <= 0.3) return "#f06292";
+  if (share <= 0.4) return "#f48fb1";
+  if (share <= 0.5) return "#f8bbd0";
+  if (share <= 0.6) return "#c8e6c9";
+  if (share <= 0.7) return "#a5d6a7";
+  if (share <= 0.8) return "#81c784";
+  if (share <= 0.9) return "#66bb6a";
+  return "#4caf50";
+}
+
+function negColorOf(share: number): string {
+  if (share <= 0.1) return "#4caf50";
+  if (share <= 0.2) return "#66bb6a";
+  if (share <= 0.3) return "#81c784";
+  if (share <= 0.4) return "#a5d6a7";
+  if (share <= 0.5) return "#c8e6c9";
+  if (share <= 0.6) return "#f8bbd0";
+  if (share <= 0.7) return "#f48fb1";
+  if (share <= 0.8) return "#f06292";
+  if (share <= 0.9) return "#ec407a";
+  return "#e91e63";
 }

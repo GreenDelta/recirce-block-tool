@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Result } from "../model";
+import { Result, WasteResult } from "../model";
 import * as api from "../api";
 import { ProgressPanel } from "../components";
 import { CircleRow } from "./circles";
 
 type Order = Record<string, number>;
+type WasteState = "reused" | "recycled" | "disposed";
+
 
 export const ResultView = () => {
 
@@ -37,6 +39,7 @@ export const ResultView = () => {
         <EmissionRow {...props} />
         <WasteRow state="reused" {...props} />
         <WasteRow state="recycled" {...props} />
+        <WasteRow state="disposed" {...props} />
       </article>
     </>
   );
@@ -82,6 +85,7 @@ const EmissionRow = (props: {
       <div>Carbon footprint</div>
       <CircleRow
         items={props.result.emissionResults}
+        impact="negative"
         {...props} />
     </div>
   );
@@ -90,22 +94,18 @@ const EmissionRow = (props: {
 const WasteRow = (props: {
   result: Result,
   order: Order,
-  state: "reused" | "recycled",
+  state: WasteState,
 }) => {
 
   if (!props.result.wasteResults) {
     return <></>;
   }
 
-  const title = props.state === "reused"
-    ? "Reused materials"
-    : "Recycled materials";
+  const title = wasteTitleOf(props.state);
   const values = [];
   const circleItems = [];
   for (const wr of props.result.wasteResults) {
-    const value = props.state == "reused"
-      ? wr.amountReused
-      : wr.amountRecycled;
+    const value = wasteValueOf(wr, props.state);
     values.push(
       <div style={{textAlign: "center"}}>
         {`${value.toFixed(4)} g`}
@@ -124,8 +124,39 @@ const WasteRow = (props: {
       </div>
       <div className="grid">
         <div />
-        <CircleRow items={circleItems} {...props} />
+        <CircleRow
+          impact={ props.state === "disposed"
+            ? "negative"
+            : "positive" }
+          items={circleItems}
+          {...props} />
       </div>
     </>
   );
 };
+
+function wasteTitleOf(state: WasteState): string {
+  switch (state) {
+  case "reused":
+    return "Reused materials";
+  case "recycled":
+    return "Recycled materials";
+  case "disposed":
+    return "Disposed materials";
+  default:
+    return "error";
+  }
+}
+
+function wasteValueOf(r: WasteResult, state: WasteState): number {
+  switch (state) {
+  case "reused":
+    return r.amountReused;
+  case "recycled":
+    return r.amountRecycled;
+  case "disposed":
+    return r.amountDisposed;
+  default:
+    return 0;
+  }
+}
