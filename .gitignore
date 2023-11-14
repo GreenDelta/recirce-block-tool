@@ -5,10 +5,9 @@ node_modules/
 *.iml
 .vscode
 
+app*
 static/main.js*
 static/pico.min.css
-
-server/recirce*
 
 data/database
 data/cookies.key

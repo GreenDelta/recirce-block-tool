@@ -1,0 +1,34 @@
+#+title: ReCircE - Block Tool
+
+The ReCircE Block-Tool calculates recycling rates and CO2 footprints of waste treatment scenarios of complex products. It is a web-application that was developed in the [[https://www.recirce.de/][ReCircE project]].
+
+* Building from source
+
+The tool is a React application with a back-end written in Go. Thus, in order to build the tool from source you need to have a current version of Node and Go installed. The front-end can be compiled like this (=npx webpack watch= during development):
+
+#+begin_src shell :results output
+npm install
+npx webpack
+#+end_src
+
+This will produce the artifacts for the user interface in the =static= folder. The back-end can be build like this:
+
+#+begin_src shell :results output
+cd server
+go build -o ../app
+#+end_src
+
+The server can be then simply started like this:
+
+#+begin_src shell :results output
+./app
+#+end_src
+
+This will create a database in the =data= folder and start the application at port =8080= serving the files from the =static= folder. Navigating your browser to [[http://localhost:8080][http://localhost:8080]] should bring you to the tool then. You can also specify alternative settings for the tool like this:
+
+#+begin_src shell
+./app -data DATA_DIR -static WEB_DIR -port PORT
+#+end_src
+
+
+* Default data
