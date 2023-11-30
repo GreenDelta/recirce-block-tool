@@ -8,14 +8,15 @@ The tool is a React application with a back-end written in Go. Thus, in order to
 
 #+begin_src shell :results output
 npm install
-npx webpack
+npx webpack  # watch
 #+end_src
 
 This will produce the artifacts for the user interface in the =static= folder. The back-end can be build like this:
 
 #+begin_src shell :results output
-cd server
-go build -o ../app
+cd server && \
+    go build -o ../app && \
+    cd ..
 #+end_src
 
 The server can be then simply started like this:

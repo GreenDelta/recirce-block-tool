@@ -60,7 +60,8 @@ const ProductTable = ({ products, onCopy, onDelete }: {
   const navigate = useNavigate();
 
   if (products.length === 0) {
-    return <p>No products available yet.</p>;
+    return <p>No products available yet. <Link to="/ui/products/edit">
+    Create your first product.</Link></p>;
   }
   const rows = [];
   for (let i = 0; i < products.length; i++) {

@@ -78,7 +78,7 @@ const Menu = (props: Props) => {
   const onAdd = (isMaterial: boolean) => {
     const sub: Component = {
       id: uuid.v4(),
-      name: isMaterial ? "New component" : "New material",
+      name: isMaterial ? "New material" : "New component",
       mass: nextPartMassOf(c),
       isMaterial,
     };

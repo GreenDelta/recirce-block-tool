@@ -1,0 +1,207 @@
+{
+  "id": "c18138f7-4e38-4f70-82ce-0c172fa193db",
+  "name": "Smartphone",
+  "mass": 138.66,
+  "parts": [
+    {
+      "id": "109b054b-4311-4175-9505-2aad9255ba9d",
+      "name": "Akkumulator",
+      "mass": 38.23,
+      "parts": [
+        {
+          "id": "7a80effc-8f1d-4277-838f-0e81e68047bc",
+          "name": "Metalle",
+          "mass": 10.1,
+          "parts": [
+            {
+              "id": "ccca60d4-a9c0-4589-97a7-5127405a16e9",
+              "name": "Lithium",
+              "mass": 3.6,
+              "isMaterial": true
+            },
+            {
+              "id": "d697c27f-012b-48af-be52-9dfe4b3c8b74",
+              "name": "Kupfer",
+              "mass": 3.8,
+              "isMaterial": true
+            }
+          ],
+          "isMaterial": true
+        },
+        {
+          "id": "1bca9598-f113-4bfe-aea2-3c11a5a65b11",
+          "name": "Reststoffe",
+          "mass": 28.13,
+          "isMaterial": true
+        }
+      ],
+      "isMaterial": false
+    },
+    {
+      "id": "3935dcc3-b1ce-4cbb-bb35-8fae413c2d99",
+      "name": "Leiterplatte",
+      "mass": 13.873,
+      "parts": [
+        {
+          "id": "20f9a3fb-c9a1-4d74-9caf-ae3ad31449da",
+          "name": "Metalle",
+          "mass": 8.453,
+          "parts": [
+            {
+              "id": "629e96db-8fcc-46c3-ba21-ae252ba0f68b",
+              "name": "Palladium (Pd)",
+              "mass": 0.002,
+              "isMaterial": true
+            },
+            {
+              "id": "f20707fa-f1ac-4521-ab9e-583bb68e3fff",
+              "name": "Kupfer",
+              "mass": 7.018,
+              "isMaterial": true
+            },
+            {
+              "id": "b33cbd78-ecb1-4c1f-9e16-a55311fe0de2",
+              "name": "Eisen",
+              "mass": 0.2,
+              "isMaterial": true
+            },
+            {
+              "id": "02a816ad-f245-4971-a31d-113d776b67ef",
+              "name": "Zink",
+              "mass": 0.016,
+              "isMaterial": true
+            },
+            {
+              "id": "84f5bb70-681e-4d9a-9317-5201d2e77aef",
+              "name": "Nickel",
+              "mass": 0.248,
+              "isMaterial": true
+            },
+            {
+              "id": "00b586a4-0111-4d70-9dd9-9b50ec12566a",
+              "name": "Chrom",
+              "mass": 0.027,
+              "isMaterial": true
+            },
+            {
+              "id": "4a016afd-6ded-44bc-8859-a697a2c1b820",
+              "name": "Silber",
+              "mass": 0.04,
+              "isMaterial": true
+            },
+            {
+              "id": "baaef3f6-7566-4743-97ef-6f1383242626",
+              "name": "Gold",
+              "mass": 0.01,
+              "isMaterial": true
+            },
+            {
+              "id": "e16f728c-316f-4772-ac10-5a04f197b77c",
+              "name": "Cobalt",
+              "mass": 0.002,
+              "isMaterial": true
+            },
+            {
+              "id": "c6aaebdc-37af-4065-a0d6-5e5d5d63b5a7",
+              "name": "Aluminium",
+              "mass": 0.256,
+              "isMaterial": true
+            },
+            {
+              "id": "56069eaa-83c5-452d-b559-501a2e7e1158",
+              "name": "Blei",
+              "mass": 0.001,
+              "isMaterial": true
+            },
+            {
+              "id": "55ced10f-3a1e-477d-9d0c-b5f5b54fb45f",
+              "name": "Zinn",
+              "mass": 0.59,
+              "isMaterial": true
+            },
+            {
+              "id": "173acf3f-fabd-4c06-8d54-96994a7a4777",
+              "name": "Magnesium",
+              "mass": 0.034,
+              "isMaterial": true
+            }
+          ],
+          "isMaterial": true
+        },
+        {
+          "id": "5ce3add5-6f3f-43c7-98e9-c53ee056d24d",
+          "name": "Organische Stoffe",
+          "mass": 0.684,
+          "isMaterial": false
+        },
+        {
+          "id": "a5b1ff90-1c5d-483b-93cf-db132093492b",
+          "name": "Silica",
+          "mass": 4.735,
+          "isMaterial": true
+        }
+      ],
+      "isMaterial": false
+    },
+    {
+      "id": "493f1fe3-3aa9-41a2-bb5d-d3e15bb751db",
+      "name": "Display",
+      "mass": 22.23,
+      "isMaterial": false
+    },
+    {
+      "id": "f743236b-faed-42d4-96fc-45650ff98cf4",
+      "name": "Gehäuse",
+      "mass": 64.327,
+      "parts": [
+        {
+          "id": "e023dc38-c5f8-49fd-8c65-768fe37fdf64",
+          "name": "Metalle",
+          "mass": 22,
+          "parts": [
+            {
+              "id": "34fde8e9-574e-410d-b070-cea50807e093",
+              "name": "Aluminium",
+              "mass": 22,
+              "isMaterial": true
+            }
+          ],
+          "isMaterial": true
+        },
+        {
+          "id": "e02ff232-08fa-4b5b-a8ce-2dcf91cd1f69",
+          "name": "Kunststoff",
+          "mass": 42.327,
+          "parts": [
+            {
+              "id": "0d0ef19d-63b5-4c4b-a338-8efa8a6fe9ea",
+              "name": "ABS",
+              "mass": 10,
+              "isMaterial": true
+            },
+            {
+              "id": "6dde3240-a6f2-46ac-9c76-ec1db7359424",
+              "name": "Polyamid",
+              "mass": 10,
+              "isMaterial": true
+            },
+            {
+              "id": "3de119df-8278-4223-b99d-f80a7288c07a",
+              "name": "Polycarbonat",
+              "mass": 10,
+              "isMaterial": true
+            },
+            {
+              "id": "e754a7de-0185-4807-9bc1-932073452e11",
+              "name": "Kunstharz",
+              "mass": 12.326999999999998,
+              "isMaterial": true
+            }
+          ],
+          "isMaterial": true
+        }
+      ],
+      "isMaterial": false
+    }
+  ]
+}
