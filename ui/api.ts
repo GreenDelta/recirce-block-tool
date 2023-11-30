@@ -2,6 +2,7 @@ import {
   Analysis,
   Credentials,
   Material,
+  Process,
   Product,
   Result,
   Scenario,
@@ -28,10 +29,34 @@ export async function putMaterial(m: Material): Promise<void> {
   }
 }
 
-export async function getProcesses(): Promise<string[]> {
+export async function getProcesses(): Promise<Process[]> {
   const r = await fetch("/api/processes");
   const json = await r.json();
   return !json ? [] : json;
+}
+
+export async function putProcess(p: Process): Promise<void> {
+  const r = await fetch("/api/processes", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(p),
+  });
+  if (r.status !== 200) {
+    const message = await r.text();
+    throw new Error(`failed to put process: ${message}`);
+  }
+}
+
+export async function deleteProcess(id: string): Promise<void> {
+  const response = await fetch(`/api/process/${id}`, {
+    method: "DELETE",
+  });
+  if (response.status !== 200) {
+    const message = await response.text();
+    throw new Error(`Failed to delete process: ${message}`);
+  }
 }
 
 export async function getProducts(): Promise<Product[]> {

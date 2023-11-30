@@ -12,6 +12,7 @@ import { LoginPage } from "./login";
 import { ProductsOverview } from "./products/overview";
 import { ProductEditor } from "./products/editor";
 import { MaterialsPage } from "./materials";
+import { ProcessesPage } from "./processes";
 import { User } from "./model";
 import * as api from "./api";
 import { ScenarioOverview } from "./scenarios/overview";
@@ -77,6 +78,7 @@ const MainMenu = (props: { user: User | null, onLogout: () => void }) => {
         <li><Link to="/ui/scenarios">Scenarios</Link></li>
         <li><Link to="/ui/products">Products</Link></li>
         <li><Link to="/ui/materials">Materials</Link></li>
+        <li><Link to="/ui/processes">Processes</Link></li>
       </ul>
       <ul>
         <li>
@@ -130,6 +132,10 @@ function main() {
         {
           path: "/ui/materials",
           element: <MaterialsPage />,
+        },
+        {
+          path: "/ui/processes",
+          element: <ProcessesPage />,
         },
         {
           path: "/ui/login",

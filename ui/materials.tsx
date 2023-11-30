@@ -19,7 +19,7 @@ export const MaterialsPage = () => {
   const onAdd = async (mat: Material) => {
     setMaterials(null);
     await api.putMaterial(mat);
-    const next = await api.getMaterials()
+    const next = await api.getMaterials();
     setMaterials(next);
   };
 

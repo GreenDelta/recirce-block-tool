@@ -76,8 +76,12 @@ func (s *Server) mountRoutes() {
 	r.HandleFunc("/api/products/{id}",
 		DeleteUserEntity(s, ProductBucket, ProductFn)).Methods("DELETE")
 
-	r.HandleFunc("/api/processes", s.GetProcesses()).Methods("GET")
-	r.HandleFunc("/api/processes", s.PutProcess()).Methods("POST", "PUT")
+	r.HandleFunc("/api/processes/{id}",
+		GetUserEntity(s, ProcessBucket, ProcessFn)).Methods("GET")
+	r.HandleFunc("/api/processes",
+		GetUserEntities(s, ProcessBucket, ProcessFn)).Methods("GET")
+	r.HandleFunc("/api/processes",
+		PutUserEntity(s, ProcessBucket, ProcessFn)).Methods("POST", "PUT")
 	r.HandleFunc("/api/processes/{id}",
 		DeleteUserEntity(s, ProcessBucket, ProcessFn)).Methods("DELETE")
 

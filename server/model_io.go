@@ -97,6 +97,14 @@ func (db *DB) CreateMaterial(user *User, name, parent string) (*Material, error)
 	return material, nil
 }
 
+func (db *DB) GetProcesses(user *User) ([]*Process, error) {
+	return ReadUserEntities(db, ProcessBucket, user, ProcessFn)
+}
+
+func (db *DB) PutProcess(user *User, process *Process) error {
+	return WriteUserEntity(db, ProcessBucket, user, process)
+}
+
 func (db *DB) GetProducts(user *User) ([]*Product, error) {
 	return ReadUserEntities(db, ProductBucket, user, ProductFn)
 }

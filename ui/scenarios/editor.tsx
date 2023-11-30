@@ -30,7 +30,7 @@ export const ScenarioEditor = () => {
       }
       const prods = await api.getProducts();
       setProducts(prods);
-      const procs = await api.getProcesses();
+      const procs = (await api.getProcesses()).map(p => p.name);
       procs.sort();
       setProcesses(procs);
       setLoading(false);
