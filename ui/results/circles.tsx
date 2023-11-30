@@ -1,5 +1,4 @@
 import React from "react";
-import { Result } from "../model";
 
 type Order = Record<string, number>;
 type Item = {
@@ -7,15 +6,14 @@ type Item = {
   value: number,
 };
 
-export const CircleRow = ({result, order, items, impact }: {
-  result: Result,
+export const CircleRow = ({ order, items, impact }: {
   order: Order,
   items: Item[],
   impact: "negative" | "positive",
 }) => {
 
   // map the values
-  let baseline = 0;
+  let max = 0;
   const values: number[] = [];
   for (const item of items) {
     const i = order[item.scenario];
@@ -23,27 +21,24 @@ export const CircleRow = ({result, order, items, impact }: {
       continue;
     }
     values[i] = item.value;
-    if (result.analysis?.baseline === item.scenario) {
-      baseline = item.value;
-    }
+    max = Math.max(max, item.value);
   }
 
   // make the values relative
   for (let i = 0; i < values.length; i++) {
     const v = values[i];
-    if (baseline === 0) {
-      values[i] = v > 0 ? 10 : 0;
+    if (max === 0) {
+      values[i] = v > 0 ? 1 : 0;
       continue;
     }
     // make it a share between 0..1
-    values[i] = (
-      Math.min(Math.max(Math.log10(v / baseline), -1), 1) + 2) / 2;
+    values[i] /= max;
   }
 
   // create the circles
   const circles = [];
   for (const v of values) {
-    const r = 5 + 20 * Math.sqrt(v);
+    const r = 5 + 35 * Math.sqrt(v);
     const color = impact === "positive"
       ? posColorOf(v)
       : negColorOf(v);

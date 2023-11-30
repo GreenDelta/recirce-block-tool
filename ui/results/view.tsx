@@ -84,7 +84,7 @@ const EmissionRow = (props: {
   for (const er of props.result.emissionResults) {
     values.push(
       <div style={{ textAlign: "center" }}>
-        {`${er.value?.toFixed(4)} kg CO2eq`}
+        {`${er.value?.toFixed(2)} kg CO2eq`}
       </div>);
   }
 
@@ -122,7 +122,7 @@ const WasteRow = (props: {
     const value = wasteValueOf(wr, props.state);
     values.push(
       <div style={{ textAlign: "center" }}>
-        {`${value.toFixed(4)} g`}
+        {`${value.toFixed(2)} g`}
       </div>);
     circleItems.push({
       scenario: wr.scenario,
