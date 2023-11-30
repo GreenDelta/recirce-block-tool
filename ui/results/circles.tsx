@@ -43,7 +43,7 @@ export const CircleRow = ({result, order, items, impact }: {
   // create the circles
   const circles = [];
   for (const v of values) {
-    const r = 5 + 35 * Math.sqrt(v);
+    const r = 5 + 20 * Math.sqrt(v);
     const color = impact === "positive"
       ? posColorOf(v)
       : negColorOf(v);
