@@ -13,7 +13,7 @@ npx webpack  # watch
 
 This will produce the artifacts for the user interface in the =static= folder. The back-end can be build like this:
 
-#+begin_src shell :results output
+#+begin_src shell :results none
 cd server && \
     go build -o ../app && \
     cd ..
@@ -21,7 +21,7 @@ cd server && \
 
 The server can be then simply started like this:
 
-#+begin_src shell :results output
+#+begin_src shell :results none
 ./app
 #+end_src
 
@@ -30,6 +30,3 @@ This will create a database in the =data= folder and start the application at po
 #+begin_src shell
 ./app -data DATA_DIR -static WEB_DIR -port PORT
 #+end_src
-
-
-* Default data
